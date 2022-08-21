@@ -1,0 +1,11 @@
+/_site/
+/build/_siteroot/
+/externals/
+/obj
+en/api/*.yml
+en/api/.manifest
+en/obj/
+jp_tmp/*
+build.log
+.vscode/**
+.vs/**
