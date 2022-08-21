@@ -1,0 +1,7 @@
+template: ../docascode
+template2: https://github.com/docascode/template
+globalMetadata:
+  _appLogoPath: /images/svg/logo.svg
+  docs-tutorial-url: /tutorials/
+  titleSuffix: My Awesome Website
+  menu_path: /menu.json
