@@ -1,7 +1,22 @@
-template: ../docascode
+template: ../template
 template2: https://github.com/docascode/template
 globalMetadata:
+  _appTitle: Learn Stride
   _appLogoPath: /images/svg/logo.svg
-  docs-tutorial-url: /tutorials/
   titleSuffix: My Awesome Website
   menu_path: /menu.json
+  discord-url: https://discord.gg/f6aerfE
+  facebook-url: https://www.facebook.com/stride3d
+  github-url: https://github.com/stride3d/stride
+  github-discussions-url: https://github.com/stride3d/stride/discussions
+  open-collective-url: https://opencollective.com/stride3d
+  twitter-url: https://twitter.com/stridedotnet
+  youtube-url: https://www.youtube.com/c/Stride3D
+  stackexchange-url: https://gamedev.stackexchange.com/questions/tagged/stride
+  docs-api-url: https://doc.stride3d.net/latest/en/api/
+  docs-manual-url: https://doc.stride3d.net/latest/en/manual/
+  docs-manual-jp-url: https://doc.stride3d.net/latest/jp/manual/
+  docs-tutorial-url: /tutorials/
+  docs-requirements-url: https://doc.stride3d.net/latest/en/manual/requirements/
+  docs-release-notes-url: https://doc.stride3d.net/latest/en/releasenotes/
+  dotnet-foundation-url: https://dotnetfoundation.org/
