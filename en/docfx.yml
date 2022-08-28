@@ -1,9 +1,11 @@
-template: ../template
+template: ../../template
 template2: https://github.com/docascode/template
 globalMetadata:
   _appTitle: Learn Stride
   _appLogoPath: /images/svg/logo.svg
+  _enableSearch: true
   titleSuffix: My Awesome Website
+  layout: conceptual
   menu_path: /menu.json
   discord-url: https://discord.gg/f6aerfE
   facebook-url: https://www.facebook.com/stride3d
@@ -20,3 +22,14 @@ globalMetadata:
   docs-requirements-url: https://doc.stride3d.net/latest/en/manual/requirements/
   docs-release-notes-url: https://doc.stride3d.net/latest/en/releasenotes/
   dotnet-foundation-url: https://dotnetfoundation.org/
+files: [
+        "toc.yml",
+        "*.md",
+        "images/*.*",
+        "tutorials/**/*.md",
+        "tutorials/**/media/*.png",
+        "tutorials/**/media/*.jpg",
+        "tutorials/media/*.jpg",
+        "tutorials/media/*.png"
+       ]
+outputPath: "../_site/en"
