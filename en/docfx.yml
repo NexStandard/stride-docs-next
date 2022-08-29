@@ -4,6 +4,7 @@ globalMetadata:
   _appTitle: Learn Stride
   _appLogoPath: /images/svg/logo.svg
   _enableSearch: true
+  _vegetables: ["onion", "carrot", "brocoli"]
   titleSuffix: My Awesome Website
   layout: conceptual
   menu_path: /menu.json
@@ -30,6 +31,10 @@ files: [
         "tutorials/**/media/*.png",
         "tutorials/**/media/*.jpg",
         "tutorials/media/*.jpg",
-        "tutorials/media/*.png"
+        "tutorials/media/*.png",
+        "blog/*.*"
        ]
 outputPath: "../_site/en"
+outputType: Html #Json, PageJson
+outputs:
+  docs/index.json:
