@@ -1,8 +1,0 @@
-#YamlMime:Menu
-items:
-- name: Features
-  href: https://www.stride3d.net/features/
-- name: Home
-  href: index.yml
-- name: Docs
-  href: getting-started.md
