@@ -19,11 +19,17 @@
     }
   ],
   "build": {
+    "globalMetadata": {
+      "_appTitle": "Stride Docs",
+      "_enableSearch": true,
+      "_appLogoPath": "/media/stride-logo-light.svg"
+    },
     "content": [
       {
         "files": [
           "api/**.yml",
           "api/index.md",
+          "tutorials/toc.yml",
           "tutorials/**/*.md"
         ]
       },
@@ -39,8 +45,17 @@
     "resource": [
       {
         "files": [
-          "images/**"
-        ]
+          "images/**",
+          "**/media/**/*.png",
+          "**/media/**/*.jpg",
+          "**/media/**/*.gif",
+          "**/media/**/*.mp4",
+          "**/media/**/*.zip",
+          "**/media/**/*.svg",
+          "**/media/**/*.webp",
+          "**/media/**/*.cs"
+        ],
+        "exclude": [ "_site/**", "obj/**" ]
       }
     ],
     "dest": "_site",
@@ -48,9 +63,10 @@
     "fileMetadataFiles": [],
     "template": [
       "default",
-      "modern"
+      "modern",
+      "template"
     ],
-    "postProcessors": [],
+    "postProcessors": [ "ExtractSearchIndex" ],
     "keepFileLink": false,
     "disableGitFeatures": false
   }

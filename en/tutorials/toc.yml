@@ -1,0 +1,14 @@
+- name: Tutorials
+  href: index.md
+- name: Game studio
+  expanded: false
+  href: gamestudio/index.md
+  items:
+  - name: Stride launcher
+    href: gamestudio/1-launcher.md
+- name: C# Beginner
+  expanded: true
+  href: csharpbeginner/index.md
+  items:
+  - name: Getting the Entity
+    href: csharpbeginner/entity.md
