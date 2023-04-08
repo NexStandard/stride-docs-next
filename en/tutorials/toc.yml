@@ -12,3 +12,8 @@
   items:
   - name: Getting the Entity
     href: csharpbeginner/entity.md
+- name: C# Intermediate [New]
+  href: csharpintermediate/index.md
+  items:
+  - name: UI basics
+    href: csharpintermediate/ui-basics.md
