@@ -1,11 +1,3 @@
----
-_tocPath: tutorials/toc.html
-_tocRel: toc.html
-_navPath: toc.html
-_navRel: ../toc.html
-_tocTitle: 'Tutorials'
----
-
 # Stride Tutorials
 These pages contain tutorials to learn more about the Stride game engine.
 
@@ -15,10 +7,10 @@ These pages contain tutorials to learn more about the Stride game engine.
             <img src="media/gamestudio.jpg" class="card-img-top" alt="Game studio tutorials">
             <div class="card-body">
                 <h5 class="card-title">Game Studio</h5>
-                <p class="card-text">The Stride engine comes with an editor called Game Studio, which is the central tool for game and application production in Stride.</p>
-                <p>Read about Stride launcher, main inteface, scene management, transforming entities, asset pipelines and more.</p>
+                <p class="card-text">The Stride engine comes with an editor called Game Studio 🛠️, which is the central tool for game 🕹️ and application production in Stride.</p>
+                <p>Read about Stride launcher, main interface, scene management, transforming entities, asset pipelines and more.</p>
             </div>
-            <p class="px-3 mb-4">Jump to the <a href="gamestudio/index.md">Game Studio tutorials</a>.</p>
+            <p class="px-3 mb-4">🚀 Jump to the <a href="gamestudio/index.md">Game Studio tutorials</a>.</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -26,10 +18,10 @@ These pages contain tutorials to learn more about the Stride game engine.
             <img src="media/csharp-beginner.png" class="card-img-top" alt="C# beginner tutorials">
             <div class="card-body">
                 <h5 class="card-title">C# Beginner</h5>
-                <p class="card-text">These tutorials cover the beginner principles of using C# when working with the Stride game engine.</p>
+                <p class="card-text">These tutorials cover the beginner principles of using C# 🎓 when working with the Stride game engine 🎮.</p>
                 <p>Read about entities, transform positions, editor properties, components, delta time, cloning, keyboard and mouse input and more.</p>
             </div>
-            <p class="px-3 mb-4">Jump to the <a href="csharpbeginner/index.md">C# beginner tutorials</a>.</p>
+            <p class="px-3 mb-4">🚀 Jump to the <a href="csharpbeginner/index.md">C# beginner tutorials</a>.</p>
         </div>
     </div>
 </div>
@@ -39,11 +31,11 @@ These pages contain tutorials to learn more about the Stride game engine.
             <img src="media/csharp-intermediate.png" class="card-img-top" alt="C# intermediate tutorials">
             <div class="card-body">
                 <h5 class="card-title">C# Intermediate</h5>
-                <p class="card-text">These tutorials cover various intermediate principles of using C# when working with the Stride game engine.</p>
-                <p>Read more about UI basics, collision triggers, raycasting, async scripts, scenes, animations, audio, camera and navigation.</p>
+                <p class="card-text">These tutorials cover various intermediate principles of using C# 🎓 when working with the Stride game engine 🎮.</p>
+                <p>Read more about UI basics, collision triggers, ray-casting, async scripts, scenes, animations, audio, camera and navigation.</p>
                 <p><span class="badge text-bg-success">New</span></p>
             </div>
-            <p class="px-3 mb-4">Jump to the <a href="csharpintermediate/index.md">C# intermediate tutorials</a>.</p>
+            <p class="px-3 mb-4">🚀 Jump to the <a href="csharpintermediate/index.md">C# intermediate tutorials</a>.</p>
         </div>
     </div>
 </div>

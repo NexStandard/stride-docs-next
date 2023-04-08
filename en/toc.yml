@@ -1,6 +1,4 @@
-- name: Articles
-  href: articles/
-- name: Api Documentation
+- name: API
   href: api/
   homepage: api/index.md
 - name: Manual
@@ -10,3 +8,5 @@
   href: tutorials/index.md
 - name: Release Notes
   href: ReleaseNotes/ReleaseNotes.md
+- name: Articles
+  href: articles/
