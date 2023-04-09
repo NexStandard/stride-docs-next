@@ -4,7 +4,7 @@ You can find this sample in the tutorial project: **Menu** &rarr; **Loading cont
 ## Explanation
 This C# Beginner tutorial covers how to load content from code. Assets like models, textures, sound etc can be loaded from during runtime. At that point we no longer speak of assets but of 'content'. This tutorial specifically loads content of the 'Model' type. Loaded content that is no longer required in your scene, should be unloaded again so save up memory. For more information on assets see [Manage assets](../../manual/game-studio/manage-assets.md) 
 
-![Loading content](media/loading-content.png)
+![Loading content](media/loading-content.webp)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_c4Cv4k3YyI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
