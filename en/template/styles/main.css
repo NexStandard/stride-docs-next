@@ -13,6 +13,11 @@ body {
     height: 37px;
 }
 
+.flex-nowrap {
+    flex-wrap: inherit !important
+}
+
+/* ToDo: JavaScipt needs to be hooked to theme selector to switch logo */
 [data-bs-theme=dark] {
     --logo: url(/media/stride-logo-dark-theme.svg) no-repeat;
 }
