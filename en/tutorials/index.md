@@ -14,7 +14,7 @@ New to Stride? Start with these tutorials to get familiar with the basics of the
 1. Platform-specific Development 🎯 - Learn how to target different platforms like PC, consoles, and mobile devices with your Stride projects.
 1. Best Practices & Optimization 🏆 - Master the techniques to optimize your Stride games and follow the best practices for efficient development.
 
-<div class="row g-4 mb-4">
+<div class="row g-4 my-4">
     <div class="col-md-6">
         <div class="card h-100">
             <img src="media/gamestudio.jpg" class="card-img-top" alt="Game studio tutorials">
