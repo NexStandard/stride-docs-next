@@ -23,7 +23,8 @@
       "_appTitle": "Stride Docs",
       "_enableSearch": true,
       "_appLogoPath": "media/stride-logo-red.svg",
-      "_stridePath": ""
+      "_strideLocalPath": "../../../../stride/samples/Tutorials/CSharpBeginner/CSharpBeginner/CSharpBeginner.Game/Code",
+      "_names": [ "vicancy", "yufeih" ]
     },
     "sitemap": {
       "baseUrl": "https://doc.stride3d.net/",
