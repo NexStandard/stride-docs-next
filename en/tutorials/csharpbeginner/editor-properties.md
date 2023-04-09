@@ -11,7 +11,7 @@ By creating a public variable at the top of our script, we can create editor pro
 > [!Video https://www.youtube.com/embed/GPiWbfsG5F0]
 
 ## Code
-[!code-csharp[Entity](../../../../stride/samples/Tutorials/CSharpBeginner/CSharpBeginner/CSharpBeginner.Game/Code/PropertiesDEmo.cs)]
+[!code-csharp[Entity](../../../../stride/samples/Tutorials/CSharpBeginner/CSharpBeginner/CSharpBeginner.Game/Code/PropertiesDemo.cs)]
 
 The code above will result in the following properties inside Stride game studio.
 
