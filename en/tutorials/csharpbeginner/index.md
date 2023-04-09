@@ -1,10 +1,16 @@
 # C# Beginner 🌱
-These tutorials cover the beginner principles of using C# when working with the Stride game engine. Start here if you are new to Stride. Note: these tutorials are not a introduction to C# itself. Although having some coding experience is useful, it is not mandatory to get started with these tutorials. You can create the C# beginner tutorial project by starting the Stride launcher. Create a new project and select the template: Tutorials -> C# beginner. Every single scene is loaded as a child scene and demonstrates a sample script. 
 
-## Youtube Tutorial Series
-All tutorials have a Youtube video. You can watch the entire C# Beginners playlist here: https://www.youtube.com/playlist?list=PLRZx2y7uC8mNySUMfOQf-TLNVnnHkLfPi 
+These tutorials cover the beginner principles of using C# when working with the Stride game engine. Start here if you are new to Stride.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Z2kUQhSmdr0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+Note: These tutorials do not serve as an introduction to C# itself. While having some coding experience is helpful, it is not mandatory to get started with these tutorials.
+
+You can create the C# beginner tutorial project by starting the Stride launcher. Create a new project and select the template: **Tutorials** -> **C# beginner**. Each scene is loaded as a child scene and demonstrates a sample script.
+
+## YouTube Tutorial Series
+
+All tutorials are accompanied by a YouTube video. You can watch the entire C# Beginners playlist here.
+
+> [!Video https://www.youtube.com/embed/videoseries?list=PLRZx2y7uC8mNySUMfOQf-TLNVnnHkLfPi]
 
 # All tutorials 
 <div class='tutorial'>
