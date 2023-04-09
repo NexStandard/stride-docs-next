@@ -6,7 +6,5 @@
 #  homepage: manual/index.md
 - name: Tutorials
   href: tutorials/index.md
-#- name: Release Notes
-#  href: ReleaseNotes/ReleaseNotes.md
-- name: Articles
-  href: articles/
+- name: Release Notes
+  href: ReleaseNotes/ReleaseNotes.md
