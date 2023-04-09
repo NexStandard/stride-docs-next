@@ -51,7 +51,10 @@
     "resource": [
       {
         "files": [
+          ".nojekyll",
+          "CNAME",
           "favicon.ico",
+          "favicon.png",
           "images/**",
           "**/media/**/*.png",
           "**/media/**/*.jpg",
