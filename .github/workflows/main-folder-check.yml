@@ -6,21 +6,31 @@ jobs:
   publish-docs:
     runs-on: ubuntu-latest
     steps:
+    - name: Dotnet Setup
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.x    
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        path: main
+        path: stride-docs
     - name: Checkout Stride
       uses: actions/checkout@v3
       with:
         repository: stride3d/stride
         token: ${{ secrets.GITHUB_TOKEN }}
         path: stride
-    - name: Check the content of the folder
-      run: |
-        echo "Content of folder:"
-        ls -la
-    - name: Check the content of the parent folder
-      run: |
-        echo "Content of the parent folder:"
-        ls -la ..
+#    - name: Check the content of the folder
+#      run: |
+#        echo "Content of folder:"
+#        ls -la
+
+    - run: dotnet tool update -g docfx
+#    - run: dotnet tool install -g docfx --version 2.65.1
+    - run: docfx stride-docs/en/docfx.json
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: stride-docs/en/_site
