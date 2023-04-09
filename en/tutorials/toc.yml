@@ -32,6 +32,8 @@
   expanded: true
   href: csharpbeginner/index.md
   items:
+  - name: Introduction
+    href: csharpbeginner/introduction.md
   - name: Getting the Entity
     href: csharpbeginner/entity.md
   - name: Child entities
