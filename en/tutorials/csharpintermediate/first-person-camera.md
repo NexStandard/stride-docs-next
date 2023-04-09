@@ -10,4 +10,4 @@ This C# Intermediate tutorial covers the implementation of first person camera. 
 [!code-csharp[firstpersoncamera](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/09_FirstPersonCamera/FirstPersonCamera.cs)]
 
 ### Character movement
-[!code-csharp[charactermovement](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/10_ThirdPersonCamera\CharacterMovement.cs)]
+[!code-csharp[charactermovement](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/10_ThirdPersonCamera/CharacterMovement.cs)]
