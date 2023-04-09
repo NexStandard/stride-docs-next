@@ -11,14 +11,11 @@ jobs:
       with:
         repository: stride3d/stride
         token: ${{ secrets.GITHUB_TOKEN }}
+        path: stride
     - name: Check the content of the folder
       run: |
         echo "Content of folder:"
         ls -la
-    - name: Check the content of the parent folder
-      run: |
-        echo "Content of the parent folder:"
-        ls -la ..
     - name: Checkout
       uses: actions/checkout@v3
     - name: Check the content of the folder
