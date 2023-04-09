@@ -1,7 +1,6 @@
 /* Copyright (c) Microsoft Corporation. All Rights Reserved. Licensed under the MIT License. See License.txt in the project root for license information. */
 
 /* Checkout https://getbootstrap.com/docs/5.3/customize/color/ for more customization options */
-@import url("bootstrap-grid.min.css");
 
 body {
     --bs-link-color-rgb: 66, 184, 131 !important;
@@ -11,10 +10,6 @@ body {
 .navbar-brand #logo {
     width: 124px;
     height: 37px;
-}
-
-.flex-nowrap {
-    flex-wrap: inherit !important
 }
 
 /* ToDo: JavaScipt needs to be hooked to theme selector to switch logo */
