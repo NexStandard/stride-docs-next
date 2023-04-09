@@ -20,6 +20,12 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}    
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Check the content of the folder
+      run: |
+        echo "Content of stride folder:"
+        ls -la stride
+        echo "Content of stride-web-docs folder:"
+        ls -la stride-web-docs      
     - name: Dotnet Setup
       uses: actions/setup-dotnet@v3
       with:
