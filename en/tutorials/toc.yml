@@ -34,12 +34,12 @@
   items:
   - name: Introduction
     href: csharpbeginner/introduction.md
-  - name: Getting the Entity
+  - name: Getting the entity
     href: csharpbeginner/entity.md
   - name: Child entities
     href: csharpbeginner/child-entities.md
-  - name: Transform Position
-    href: csharpbeginner/transform-Position.md
+  - name: Transform position
+    href: csharpbeginner/transform-position.md
   - name: Editor properties
     href: csharpbeginner/editor-properties.md
   - name: Getting a component
