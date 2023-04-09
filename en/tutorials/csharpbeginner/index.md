@@ -16,136 +16,75 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
 <div class="row g-4 mb-4">
     <div class="col-md-6">
         <div class="card h-100">
-            <img src="media/getting-the-entity_thumb.png" class="card-img-top" alt="Introduction">
+            <img src="media/introduction.webp" class="card-img-top" alt="Introduction">
             <div class="card-body">
                 <h2 class="card-title h5">Introduction</h2>
-                <p class="card-text">Learn about C# beginners project template, how entities and components work, types of scripts and more.</p>
+                <p class="card-text">Learn about the C# beginners project template, how entities and components work, different types of scripts, and more.</p>
             </div>
             <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="introduction.md">Introduction</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card h-100">
-            <img src="media/getting-the-entity_thumb.png" class="card-img-top" alt="Getting the Entity">
+            <img src="media/getting-the-entity_thumb.webp" class="card-img-top" alt="Getting the Entity">
             <div class="card-body">
                 <h2 class="card-title h5">Getting the Entity</h2>
-                <p class="card-text">Learn about how to retrieve the entity, retrieve the parent, pring debug text and more.</p>
+                <p class="card-text">Learn how to retrieve the entity, retrieve the parent entity, print debug text, and more.</p>
             </div>
             <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="entity.md">Getting the Entity</a> tutorial</p>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/child-entities_thumb.webp" class="card-img-top" alt="Child entities">
+            <div class="card-body">
+                <h2 class="card-title h5">Child entities</h2>
+                <p class="card-text">Learn how to get a specific child entity, retrieve children in a list, and access children of children.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="child-entities.md">Child entities</a> tutorial</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/transform-position_thumb.webp" class="card-img-top" alt="The transform">
+            <div class="card-body">
+                <h2 class="card-title h5">The transform</h2>
+                <p class="card-text">Learn how to access the Transform component, get the local position, and get the world position.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="transform-position.md">transform</a> tutorial</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/editor-properties_thumb.webp" class="card-img-top" alt="Editor properties">
+            <div class="card-body">
+                <h2 class="card-title h5">Editor properties</h2>
+                <p class="card-text">Discover how to define various editor properties, create lists, and hide public properties.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="editor-properties.md">Editor properties</a> tutorial</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/getting-a-component_thumb.webp" class="card-img-top" alt="Getting a component">
+            <div class="card-body">
+                <h2 class="card-title h5">Getting a component</h2>
+                <p class="card-text">Understand how to get a component, remove a component, and access methods of other components.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="get-component.md">Getting a component</a> tutorial</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/adding-a-component_thumb.webp" class="card-img-top" alt="Adding a component">
+            <div class="card-body">
+                <h2 class="card-title h5">Adding a component</h2>
+                <p class="card-text">Explore adding a component, removing all components of one type, and creating a component if it doesn't exist.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="add-component.md">Adding a component</a> tutorial</p>
+        </div>
+    </div>
 </div>
-
-<div class='tutorial'>
-    [
-    <div class='tutorial_title'>
-       <h2>Getting the Entity</h2>
-    </div>
-    <div class='stride-documentation-image'>
-        ![Getting the Entity tutorial](media/getting-the-entity_thumb.png "Getting the Entity") 
-    </div>
-    <div class='tutorial_description'>
-
-        <ul>
-            <li>Retrieve the entity</li> 
-            <li>Retrieve the parent</li> 
-            <li>Print debug text</li> 
-        </ul>
-    </div>
-    ](entity.md) 
-</div>
-
-<div class='tutorial'>
-    [
-    <div class='tutorial_title'>
-       <h2>Child entities</h2>
-    </div>
-    <div class='stride-documentation-image'>
-        ![Child entities tutorial](media/child-entities_thumb.png "Child entities") 
-    </div>
-    <div class='tutorial_description'>
-        <ul>
-            <li>Get a specific child entity</li> 
-            <li>Get children in a list</li> 
-            <li>Get children of children</li> 
-        </ul>
-    </div>
-    ](child-entities.md) 
-</div>
-
-<div class='tutorial'>
-    [
-    <div class='tutorial_title'>
-       <h2>The transform</h2>
-    </div>
-    <div class='stride-documentation-image'>
-        ![The transform tutorial](media/transform-position_thumb.png "The transform") 
-    </div>
-    <div class='tutorial_description'>
-        <ul>
-            <li>Accessing the Transform component</li> 
-            <li>Get the local position</li> 
-            <li>Get the world position</li> 
-        </ul>
-    </div>
-    ](transform-position.md) 
-</div>
-
-
-<div class='tutorial'> 
-    [
-    <div class='tutorial_title'>
-       <h2>Editor properties</h2>
-    </div>
-    <div class='stride-documentation-image'>
-        ![Editor properties tutorial](media/editor-properties_thumb.png "Editor properties")  
-    </div>
-    <div class='tutorial_description'>
-        <ul>
-            <li>Defining various editor properties</li> 
-            <li>Defining lists</li> 
-            <li>Hiding public properties</li> 
-        </ul>
-    </div>
-    ](editor-properties.md) 
-</div>
-
-<div class='tutorial'>
-    [
-    <div class='tutorial_title'>
-       <h2>Getting a component</h2>
-    </div>
-    <div class='stride-documentation-image'>   
-        ![Get a component tutorial](media/getting-a-component_thumb.png "Get a component")
-    </div>
-    <div class='tutorial_description'>
-        <ul>
-            <li>Getting a component</li> 
-            <li>Remove a component</li> 
-            <li>Access methods of other components</li> 
-        </ul>
-    </div>
-    ](get-component.md) 
-</div>
-
-<div class='tutorial'>
-    [
-    <div class='tutorial_title'>
-       <h2>Adding a component</h2>
-    </div>
-    <div class='stride-documentation-image'>
-        ![Add a component tutorial](media/adding-a-component_thumb.png "Add a component")
-    </div>
-    <div class='tutorial_description'>
-        <ul>
-            <li>Adding a component</li> 
-            <li>Removing all components of 1 type</li> 
-            <li>Create a component if it doesn't exists</li> 
-        </ul>
-    </div>
-    ](add-component.md) 
-</div>
-
 
 <div class='tutorial'> 
     [

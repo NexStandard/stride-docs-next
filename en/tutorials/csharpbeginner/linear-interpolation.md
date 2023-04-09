@@ -4,7 +4,7 @@ You can find this sample in the tutorial project: **Menu** &rarr; **Linear Iterp
 ## Explanation
 This C# Beginner tutorial covers linear interpolation which is often shortened to 'Lerp'. Sometimes you want to gradually change a value from a start value to a target value. This process is called linear interpolation. Stride exposes several Lerp functions for various types. Among them are Vector2, Vector3 and Vector4.
 
-![Linear interpolation](media/lerp.png)
+![Linear interpolation](media/lerp.webp)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/jBXGvLBwXqI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
