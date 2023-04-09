@@ -7,7 +7,7 @@ This tutorial teaches about how to use raycasting to position the camera behind 
 
 ## Code
 ### Third person camera
-[!code-csharp[firstpersoncamera](..\..\..\..\stride\samples\Tutorials\CSharpIntermediate\CSharpIntermediate\CSharpIntermediate.Game\10_ThirdPersonCamera\ThirdPersonCamera.cs)]
+[!code-csharp[firstpersoncamera](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/10_ThirdPersonCamera/ThirdPersonCamera.cs)]
 
 ### Character movement
-[!code-csharp[firstpersoncamera](..\..\..\..\stride\samples\Tutorials\CSharpIntermediate\CSharpIntermediate\CSharpIntermediate.Game\10_ThirdPersonCamera\CharacterMovement.cs)]
+[!code-csharp[firstpersoncamera](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/10_ThirdPersonCamera/CharacterMovement.cs)]

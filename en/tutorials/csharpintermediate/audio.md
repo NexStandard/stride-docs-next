@@ -7,7 +7,7 @@ This C# Intermediate tutorial covers the basics of audio in your game. We learn 
 
 ## Code
 ### Audio sounds and spatial sounds
-[!code-csharp[audio](..\..\..\..\stride\samples\Tutorials\CSharpIntermediate\CSharpIntermediate\CSharpIntermediate.Game\08_Audio\AudioDemo.cs)]
+[!code-csharp[audio](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/08_Audio/AudioDemo.cs)]
 
 ### Streaming sounds
-[!code-csharp[streamingaudio](..\..\..\..\stride\samples\Tutorials\CSharpIntermediate\CSharpIntermediate\CSharpIntermediate.Game\08_Audio\LoadMusic.cs)]
+[!code-csharp[streamingaudio](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/08_Audio/LoadMusic.cs)]

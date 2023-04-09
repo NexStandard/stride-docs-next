@@ -13,4 +13,4 @@ The code below looks for the rigidbody component that is attached to our entity.
 We spawn a sphere which also has a rigidbody. This sphere has a mass and is affected by gravity. The sphere will fall down and eventually roll through our collider box. In our update loop we check if there are collisions happening. If there are collisions, we get the colliding object and print out some text on screen. Once the sphere leaves the trigger box, our update loop sees that we no longer have collisions.
 
 Instead of using our update loop, we can also use collision events. 
-[!code-csharp[collisiontriggerdemo](..\..\..\..\stride\samples\Tutorials\CSharpIntermediate\CSharpIntermediate\CSharpIntermediate.Game\02_Collision-Triggers\CollisionTriggerDemo.cs)]
+[!code-csharp[collisiontriggerdemo](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/02_Collision-Triggers/CollisionTriggerDemo.cs)]
