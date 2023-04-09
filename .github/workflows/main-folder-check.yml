@@ -17,3 +17,7 @@ jobs:
       run: |
         echo "Content of folder:"
         ls -la
+    - name: Check the content of the parent folder
+      run: |
+        echo "Content of the parent folder:"
+        ls -la ..        
