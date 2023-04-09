@@ -5,4 +5,4 @@ This C# Intermediate tutorial covers the basics of animation with Stride. All an
 <iframe width="560" height="315" src="https://www.youtube.com/embed/o924grDYDjU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Code
-[!code-csharp[AnimationBasics](..\..\..\..\stride\samples\Tutorials\CSharpIntermediate\CSharpIntermediate\CSharpIntermediate.Game\07_Animation\AnimationBasics.cs)]
+[!code-csharp[AnimationBasics](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/07_Animation/AnimationBasics.cs)]

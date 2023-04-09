@@ -11,7 +11,7 @@ From 2D to 3D is often used to convert a mouse coordinate into the looking direc
 
 ## Code
 ### Project
-[!code-csharp[project](..\..\..\..\stride\samples\Tutorials\CSharpIntermediate\CSharpIntermediate\CSharpIntermediate.Game\04_Project-UnProject\ProjectDemo.cs)]
+[!code-csharp[project](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/04_Project-UnProject/ProjectDemo.cs)]
 
 ## Unproject
-[!code-csharp[unproject](..\..\..\..\stride\samples\Tutorials\CSharpIntermediate\CSharpIntermediate\CSharpIntermediate.Game\04_Project-UnProject\UnprojectDemo.cs)]
+[!code-csharp[unproject](../../../../stride/samples/Tutorials/CSharpIntermediate/CSharpIntermediate/CSharpIntermediate.Game/04_Project-UnProject/UnprojectDemo.cs)]
