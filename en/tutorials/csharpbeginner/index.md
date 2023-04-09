@@ -12,7 +12,30 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
 
 > [!Video https://www.youtube.com/embed/videoseries?list=PLRZx2y7uC8mNySUMfOQf-TLNVnnHkLfPi]
 
-# All tutorials 
+## All tutorials
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/getting-the-entity_thumb.png" class="card-img-top" alt="Introduction">
+            <div class="card-body">
+                <h2 class="card-title h5">Introduction</h2>
+                <p class="card-text">Learn about C# beginners project template, how entities and components work, types of scripts and more.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="introduction.md">Introduction</a> tutorial</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/getting-the-entity_thumb.png" class="card-img-top" alt="Getting the Entity">
+            <div class="card-body">
+                <h2 class="card-title h5">Getting the Entity</h2>
+                <p class="card-text">Learn about how to retrieve the entity, retrieve the parent, pring debug text and more.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="entity.md">Getting the Entity</a> tutorial</p>
+        </div>
+    </div>
+</div>
+
 <div class='tutorial'>
     [
     <div class='tutorial_title'>

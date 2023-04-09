@@ -37,7 +37,9 @@
           "api/**.yml",
           "api/index.md",
           "tutorials/toc.yml",
-          "tutorials/**/*.md"
+          "tutorials/**/*.md",
+          "ReleaseNotes/toc.yml",
+          "ReleaseNotes/**/*.md"
         ]
       },
       {
