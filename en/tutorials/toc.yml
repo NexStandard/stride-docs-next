@@ -67,6 +67,8 @@
 - name: 🎓 C# Intermediate ⭐New
   href: csharpintermediate/index.md
   items:
+  - name: Introduction
+    href: csharpintermediate/introduction.md
   - name: UI basics
     href: csharpintermediate/ui-basics.md
   - name: Collision triggers

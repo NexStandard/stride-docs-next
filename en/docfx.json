@@ -74,6 +74,11 @@
     ],
     "dest": "_site",
     "globalMetadataFiles": [],
+    "markdownEngineProperties": {
+      "toc": {
+        "levels": "1,2,3"
+      }
+    },
     "fileMetadataFiles": [],
     "template": [
       "default",
