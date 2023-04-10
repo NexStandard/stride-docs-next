@@ -2,9 +2,7 @@
 
 July 16th, 2022
 
-Stride 4.1 is here and ready for the future!
-
-Stride contributors are proud to announce a new release now running on .NET 6 supporting the latest C# 10. That means you can now head to the download page and start developing your games using the latest .NET technologies.
+Stride contributors are proud to announce a new release now running on **.NET 6** supporting the latest **C# 10**. That means you can now head to the download page and start developing your games using the latest .NET technologies.
 
 ## Improvements Summary
 
