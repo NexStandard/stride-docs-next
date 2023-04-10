@@ -17,60 +17,48 @@ You can view the Completed scenes to see what the end result of each tutorial wi
 
 > [!Video https://www.youtube.com/embed/videoseries?list=PLRZx2y7uC8mOE6_L0ZiFxNBE7HmzU2dP7]
 
-# All tutorials 
-<div class='tutorial'>
-    [
-    <div class='tutorial_title'>
-       <h2>UI Basics</h2>
+# All tutorials
+<div class="row g-4 mb-4">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/introduction.webp" class="card-img-top" alt="Introduction">
+            <div class="card-body">
+                <h2 class="card-title h5">Introduction</h2>
+                <p class="card-text">A brief introduction to the C# intermediate tutorials for the Stride game engine.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="introduction.md">Introduction</a> tutorial</p>
+        </div>
     </div>
-    <div class='stride-documentation-image'>
-        ![UI Basics](media/ui-basics_thumb.png "UI basics") 
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/ui-basics_thumb.webp" class="card-img-top" alt="UI Basics">
+            <div class="card-body">
+                <h2 class="card-title h5">UI Basics</h2>
+                <p class="card-text">Learn about the UI editor, hooking up events, and creating UI by code.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="ui-basics.md">UI Basics</a> tutorial</p>
+        </div>
     </div>
-    <div class='tutorial_description'>
-
-        <ul>
-            <li>UI editor</li> 
-            <li>Hooking up events</li> 
-            <li>UI by code</li> 
-        </ul>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/collision-triggers_thumb.webp" class="card-img-top" alt="Collision triggers">
+            <div class="card-body">
+                <h2 class="card-title h5">Collision triggers</h2>
+                <p class="card-text">Explore colliders, trigger events, and colliding entities.</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="collision-triggers.md">Collision triggers</a> tutorial</p>
+        </div>
     </div>
-    ](ui-basics.md) 
-</div>
-
-<div class='tutorial'>
-    [
-    <div class='tutorial_title'>
-       <h2>Collision triggers</h2>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <img src="media/raycasting_thumb.webp" class="card-img-top" alt="Raycasting">
+            <div class="card-body">
+                <h2 class="card-title h5">Raycasting</h2>
+                <p class="card-text">Understand raycasting, collision groups, and penetrative raycasting..</p>
+            </div>
+            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="raycasting.md">Raycasting</a> tutorial</p>
+        </div>
     </div>
-    <div class='stride-documentation-image'>
-        ![Collision triggers](media/collision-triggers_thumb.png "Collision triggers") 
-    </div>
-    <div class='tutorial_description'>
-        <ul>
-            <li>Colliders</li> 
-            <li>Trigger events</li> 
-            <li>Colliding entities</li> 
-        </ul>
-    </div>
-    ](collision-triggers.md) 
-</div>
-
-<div class='tutorial'>
-    [
-    <div class='tutorial_title'>
-       <h2>Raycasting</h2>
-    </div>
-    <div class='stride-documentation-image'>
-        ![Raycasting](media/raycasting_thumb.png "Raycasting") 
-    </div>
-    <div class='tutorial_description'>
-        <ul>
-            <li>Raycasting</li> 
-            <li>Collision groups</li> 
-            <li>Pentrative raycasting</li> 
-        </ul>
-    </div>
-    ](raycasting.md) 
 </div>
 
 

@@ -26,7 +26,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Introduction</h2>
                 <p class="card-text">Learn about the C# beginners project template, how entities and components work, different types of scripts, and more.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="introduction.md">Introduction</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="introduction.md">Introduction</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -36,7 +36,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Getting the Entity</h2>
                 <p class="card-text">Learn how to retrieve the entity, retrieve the parent entity, print debug text, and more.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="entity.md">Getting the Entity</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="entity.md">Getting the Entity</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -46,7 +46,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Child entities</h2>
                 <p class="card-text">Learn how to get a specific child entity, retrieve children in a list, and access children of children.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="child-entities.md">Child entities</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="child-entities.md">Child entities</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -56,7 +56,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">The transform</h2>
                 <p class="card-text">Learn how to access the Transform component, get the local position, and get the world position.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="transform-position.md">transform</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="transform-position.md">transform</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -66,7 +66,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Editor properties</h2>
                 <p class="card-text">Discover how to define various editor properties, create lists, and hide public properties.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="editor-properties.md">Editor properties</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="editor-properties.md">Editor properties</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -76,7 +76,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Getting a component</h2>
                 <p class="card-text">Understand how to get a component, remove a component, and access methods of other components.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="get-component.md">Getting a component</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="get-component.md">Getting a component</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -86,7 +86,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Adding a component</h2>
                 <p class="card-text">Explore adding a component, removing all components of one type, and creating a component if it doesn't exist.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="add-component.md">Adding a component</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="add-component.md">Adding a component</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -96,7 +96,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Delta time</h2>
                 <p class="card-text">Learn how to retrieve delta time, create a simple timer, and make a simple countdown timer.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="delta-time.md">Delta time</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="delta-time.md">Delta time</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -106,7 +106,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Cloning an entity</h2>
                 <p class="card-text">Learn how to clone an entity, add an entity to the current scene, and add an entity as a child to a parent entity.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="cloning-entities.md">Cloning an entity</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="cloning-entities.md">Cloning an entity</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -116,7 +116,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Removing an entity</h2>
                 <p class="card-text">Explore cloning new entities using a timer, removing entities using a timer, and removing an entity from the scene.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="removing-entities.md">Removing an entity</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="removing-entities.md">Removing an entity</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -126,7 +126,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Keyboard input</h2>
                 <p class="card-text">Discover how to handle holding down a key, clicking a key, and releasing a key.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="keyboard-input.md">Keyboard input</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="keyboard-input.md">Keyboard input</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -136,7 +136,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Mouse input</h2>
                 <p class="card-text">Understand how to manage holding down a mouse button, clicking or releasing a mouse button, and using the mouse wheel.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="mouse-input.md">Mouse input</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="mouse-input.md">Mouse input</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -146,7 +146,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Virtual buttons</h2>
                 <p class="card-text">Learn how to define a virtual key configuration, bind input to the configuration, and use the virtual buttons.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="virtual-buttons.md">Virtual buttons</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="virtual-buttons.md">Virtual buttons</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -156,7 +156,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Linear Interpolation</h2>
                 <p class="card-text">Explore calculating 'lerp' values, lerping between `Vector3` values, and using random values.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="linear-interpolation.md">Linear Interpolation</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="linear-interpolation.md">Linear Interpolation</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -166,7 +166,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Loading content</h2>
                 <p class="card-text">Discover how to load content from code, unload content, and attach models to entities.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="loading-content.md">Loading content</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="loading-content.md">Loading content</a> tutorial</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -176,7 +176,7 @@ All tutorials are accompanied by a YouTube video. You can watch the entire C# Be
                 <h2 class="card-title h5">Instantiating prefabs</h2>
                 <p class="card-text">Learn how to instantiate a prefab, load a prefab from content, and parent a prefab entity.</p>
             </div>
-            <p class="px-3 mb-4">📺 Watch the <a class="astretched-link" href="instantiating-prefabs.md">Instantiating prefabs</a> tutorial</p>
+            <p class="px-3 mb-4">📺 Watch the <a class="stretched-link" href="instantiating-prefabs.md">Instantiating prefabs</a> tutorial</p>
         </div>
     </div>
 </div>
