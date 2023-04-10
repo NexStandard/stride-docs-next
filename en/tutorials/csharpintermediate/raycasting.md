@@ -3,7 +3,7 @@
 This C# Intermediate tutorial covers raycasting.
 
 ## Explanation
-Raycasting is an essential subject in 3d games. With raycasts we can detect if and what kinds of objects are in our line of sight. This can be used for detecting enemies or how far an object really is. 
+Raycasting is an essential subject in 3D games. With raycasts we can detect if and what kinds of objects are in our line of sight. This can be used for detecting enemies or how far an object really is. 
 
 > [!Video https://www.youtube.com/embed/uIM6jxM7OyE]
 
