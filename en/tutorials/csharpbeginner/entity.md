@@ -10,15 +10,8 @@ When a script is attached to an entity in the scene, we can access all propertie
 
 > [!Video https://www.youtube.com/embed/DUmZujopcY8]
 
-<!--## My lovely path
-
-{{ _strideLocalPath }}
-
-{{#_names}}
-  	<p>Name: {{.}}</p>
-{{/_names}}-->
-
 ## Code
-<!--[!code-csharp[Entity]({{ _strideLocalPath }}/GettingTheEntityDemo.cs)]-->
+[!code-csharp[Entity](GettingTheEntityDemo.cs)]
+
 
 [!code-csharp[Entity](../../../../stride/samples/Tutorials/CSharpBeginner/CSharpBeginner/CSharpBeginner.Game/Code/GettingTheEntityDemo.cs)]
