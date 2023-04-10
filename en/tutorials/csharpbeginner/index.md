@@ -3,7 +3,13 @@ These tutorials cover the beginner principles of using C# when working with the 
 
 Note: These tutorials do not serve as an introduction to C# itself. While having some coding experience is helpful, it is not mandatory to get started with these tutorials.
 
-You can create the C# beginner tutorial project by starting the Stride launcher. Create a new project and select the template: **Tutorials** -> **C# beginner**. Each scene is loaded as a child scene and demonstrates a sample script.
+To create the C# beginner tutorial project:
+
+1. Start the Stride launcher
+1. Create a new project
+1. Select the template: Tutorials -> C# beginner
+
+Each scene is loaded as a child scene and demonstrates a sample script.
 
 ## Stride C# beginner YouTube tutorial series
 
