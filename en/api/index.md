@@ -1,2 +1,7 @@
-# PLACEHOLDER
-TODO: Add .NET projects to the *src* folder and run `docfx` to generate **REAL** *API Documentation*!
+# Stride API
+
+These pages contain information about the Stride scripting API, grouped by namespace. 
+
+To use this section, you should be familiar with scripting. 
+
+For information about scripting, see the [Scripting](../manual/scripts/index.html) pages in the manual.

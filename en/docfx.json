@@ -40,7 +40,9 @@
           "tutorials/toc.yml",
           "tutorials/**/*.md",
           "ReleaseNotes/toc.yml",
-          "ReleaseNotes/**/*.md"
+          "ReleaseNotes/**/*.md",
+          "manual/toc.yml",
+          "manual/**/*.md"
         ]
       },
       {
