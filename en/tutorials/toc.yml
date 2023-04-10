@@ -1,6 +1,6 @@
 - name: Tutorials
   href: index.md
-- name: Game studio
+- name: 🛠️ Game studio
   expanded: false
   href: gamestudio/index.md
   items:
@@ -28,8 +28,8 @@
     href: gamestudio/11-physics-intro.md
   - name: Static colliders
     href: gamestudio/12-static-colliders.md
-- name: C# Beginner
-  expanded: true
+- name: 🌱 C# Beginner
+  expanded: false
   href: csharpbeginner/index.md
   items:
   - name: Introduction
@@ -64,7 +64,7 @@
     href: csharpbeginner/loading-content.md
   - name: Instantiating prefabs
     href: csharpbeginner/instantiating-prefabs.md
-- name: C# Intermediate [New]
+- name: 🎓 C# Intermediate ⭐New
   href: csharpintermediate/index.md
   items:
   - name: UI basics
