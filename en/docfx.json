@@ -4,8 +4,28 @@
       "src": [
         {
           "files": [
-            "bin/**/*.dll"
-          ]
+            //"sources/core/Stride.Core/Stride.Core.csproj",
+            "sources/core/Stride.Core.IO/Stride.Core.IO.csproj",
+            "sources/core/Stride.Core.Mathematics/Stride.Core.Mathematics.csproj",
+            "sources/core/Stride.Core.MicroThreading/Stride.Core.MicroThreading.csproj",
+            "sources/core/Stride.Core.Serialization/Stride.Core.Serialization.csproj",
+            "sources/assets/Stride.Core.Assets/Stride.Core.Assets.csproj",
+            "sources/engine/Stride/Stride.csproj",
+            "sources/engine/Stride.Audio/Stride.Audio.csproj",
+            "sources/engine/Stride.Engine/Stride.Engine.csproj",
+            "sources/engine/Stride.Games/Stride.Games.csproj",
+            "sources/engine/Stride.Graphics/Stride.Graphics.csproj",
+            "sources/engine/Stride.Input/Stride.Input.csproj",
+            "sources/engine/Stride.Particles/Stride.Particles.csproj",
+            "sources/engine/Stride.Physics/Stride.Physics.csproj",
+            "sources/engine/Stride.Rendering/Stride.Rendering.csproj",
+            "sources/engine/Stride.Shaders/Stride.Shaders.csproj",
+            "sources/engine/Stride.UI/Stride.UI.csproj",
+            "sources/engine/Stride.VirtualReality/Stride.VirtualReality.csproj",
+            "sources/engine/Stride.Navigation/Stride.Navigation.csproj"
+          ],
+          "src": "../../stride",
+          "filter": "filterConfig.yml"
         }
       ],
       "dest": "api",
@@ -23,9 +43,7 @@
     "globalMetadata": {
       "_appTitle": "Stride Docs",
       "_enableSearch": true,
-      "_appLogoPath": "media/stride-logo-red.svg",
-      "_strideLocalPath": "../../../../stride/samples/Tutorials/CSharpBeginner/CSharpBeginner/CSharpBeginner.Game/Code",
-      "_names": [ "vicancy", "yufeih" ]
+      "_appLogoPath": "media/stride-logo-red.svg"
     },
     "sitemap": {
       "baseUrl": "https://doc.stride3d.net/",
