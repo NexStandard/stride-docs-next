@@ -24,7 +24,7 @@ As you can see, there are many customizations and settings available in the edit
 
 ![Voxel Cone Tracing GI](media/ReleaseNotes-4.0/voxelgi.jpg)
 
-There's a documentation page explaining [how to set up the project with Voxel Cone Tracing GI](../manual/graphics/lights-and-shadows/voxel-cone-tracing-gi.html).
+There's a documentation page explaining [how to set up the project with Voxel Cone Tracing GI](../manual/graphics/lights-and-shadows/voxel-cone-tracing-gi.md).
 
 Here's the original [forum post](https://forums.stride3d.net/t/voxel-gi-implementation/1947) and [pull request](https://github.com/stride3d/stride/pull/583). Thanks again for this great contribution!
 
