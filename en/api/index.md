@@ -4,4 +4,4 @@ These pages contain information about the Stride scripting API, grouped by names
 
 To use this section, you should be familiar with scripting. 
 
-For information about scripting, see the [Scripting](../manual/scripts/index.html) pages in the manual.
+For information about scripting, see the [Scripting](../manual/scripts/index.md) pages in the manual.
