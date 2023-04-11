@@ -20,7 +20,7 @@ By default, Stride disables light shafts in new projects. To enable them:
 
 1. In the **Asset View** (in the bottom pane by default), double-click the **Graphics Compositor** asset.
 
-    ![Graphics Compositor asset](..\graphics-compositor\media\graphics-compositor-asset.png)
+    ![Graphics Compositor asset](../graphics-compositor/media/graphics-compositor-asset.png)
 
     The graphics compositor editor opens.
 

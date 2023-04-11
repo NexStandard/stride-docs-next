@@ -42,7 +42,7 @@ In the **Asset View**, click **Add asset** > **Texture**, then select a template
 
 Alternatively, drag the texture file from Explorer to the Asset View:
 
-![Drap and drop a resource file to the Asset View](../get-started/media/create-assets-drop-resource.png)
+![Drap and drop a resource file to the Asset View](../../get-started/media/create-assets-drop-resource.png)
 
 Then select a texture template (**color**, **grayscale** or **normal map**):
    

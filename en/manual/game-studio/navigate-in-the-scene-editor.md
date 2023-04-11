@@ -30,7 +30,7 @@ Hold the **right mouse button** and the **center mouse button** and move the mou
 ### Dolly
 
 <video controls autoplay loop height="240" width="320">
-                <source src="media/navigate-in-scene-dolly-camera.mp4" type="video/mp4">
+                <source src="media/dolly-camera.mp4" type="video/mp4">
 </video>
 
 To dolly (move the camera forward and backward), use the **mouse wheel**.
@@ -103,7 +103,7 @@ Corner   | Faces the three adjacent faces at a 45° angle
 ## Camera options
 
 > [!Note]
-> This page explains how to use the Scene Editor camera. For information about how to use cameras in your game, see [Graphics — Cameras](../cameras/index.md).
+> This page explains how to use the Scene Editor camera. For information about how to use cameras in your game, see [Graphics — Cameras](../graphics/cameras/index.md).
 
 To display the Scene Editor camera options, click the **camera icon** in the top-right of the Scene Editor.
 
