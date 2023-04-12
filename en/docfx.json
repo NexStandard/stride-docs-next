@@ -29,6 +29,9 @@
         }
       ],
       "dest": "api",
+      "properties": {
+        "TargetFramework": "net6.0"
+      },
       "includePrivateMembers": false,
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
@@ -43,7 +46,8 @@
     "globalMetadata": {
       "_appTitle": "Stride Docs",
       "_enableSearch": true,
-      "_appLogoPath": "media/stride-logo-red.svg"
+      "_appLogoPath": "media/stride-logo-red.svg",
+      "_appFooter": "<p>Hello World</p>"
     },
     "sitemap": {
       "baseUrl": "https://doc.stride3d.net/",
