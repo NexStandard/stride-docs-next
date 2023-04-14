@@ -242,7 +242,6 @@
 # [Video](video/index.md)
 ## [Set up a video](video/set-up-a-video.md)
 ## [Video properties](video/video-properties.md)
-## [Video scripts](video/video-scripts.md)
 ## [Use a video as a skybox](video/use-a-video-as-a-skybox.md)
 
 # [Virtual reality](virtual-reality/index.md)
