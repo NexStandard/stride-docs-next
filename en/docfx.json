@@ -4,63 +4,40 @@
       "src": [
         {
           "files": [
-            "sources/core/Stride.Core/Stride.Core.csproj",
-            "sources/core/Stride.Core.IO/Stride.Core.IO.csproj",
+            //"sources/core/Stride.Core/Stride.Core.csproj",
+            //"sources/core/Stride.Core.IO/Stride.Core.IO.csproj",
+            //"sources/engine/Stride/Stride.csproj",
             "sources/core/Stride.Core.Mathematics/Stride.Core.Mathematics.csproj",
             "sources/core/Stride.Core.MicroThreading/Stride.Core.MicroThreading.csproj",
             "sources/core/Stride.Core.Serialization/Stride.Core.Serialization.csproj",
-            "sources/assets/Stride.Core.Assets/Stride.Core.Assets.csproj",
-            "sources/engine/Stride/Stride.csproj",
-            //"sources/engine/Stride.Audio/Stride.Audio.csproj",
-            //"sources/engine/Stride.Engine/Stride.Engine.csproj",
-            //"sources/engine/Stride.Games/Stride.Games.csproj",
-            //"sources/engine/Stride.Graphics/Stride.Graphics.csproj",
-            //"sources/engine/Stride.Input/Stride.Input.csproj",
-            //"sources/engine/Stride.Particles/Stride.Particles.csproj",
-            //"sources/engine/Stride.Physics/Stride.Physics.csproj",
-            //"sources/engine/Stride.Rendering/Stride.Rendering.csproj",
-            //"sources/engine/Stride.Shaders/Stride.Shaders.csproj",
-            //"sources/engine/Stride.UI/Stride.UI.csproj",
-            //"sources/engine/Stride.VirtualReality/Stride.VirtualReality.csproj",
-            //"sources/engine/Stride.Navigation/Stride.Navigation.csproj"
-
-            //ok - "sources/core/Stride.Core/Stride.Core.csproj",
-            //ok - "sources/core/Stride.Core.IO/Stride.Core.IO.csproj",
-            //ok - "sources/core/Stride.Core.Mathematics/Stride.Core.Mathematics.csproj",
-            //ok - "sources/core/Stride.Core.MicroThreading/Stride.Core.MicroThreading.csproj",
-            //ok - "sources/core/Stride.Core.Serialization/Stride.Core.Serialization.csproj",
-            //ok - "sources/assets/Stride.Core.Assets/Stride.Core.Assets.csproj",
-            //ok - "sources/engine/Stride/Stride.csproj",
-            //ok - "sources/engine/Stride.Audio/Stride.Audio.csproj",
-            //ok - "sources/engine/Stride.Engine/Stride.Engine.csproj",
-            //ok - "sources/engine/Stride.Games/Stride.Games.csproj",
-            //ok - "sources/engine/Stride.Graphics/Stride.Graphics.csproj",
-            //ok - "sources/engine/Stride.Input/Stride.Input.csproj",
-            //ok - "sources/engine/Stride.Particles/Stride.Particles.csproj",
-            //ok - "sources/engine/Stride.Physics/Stride.Physics.csproj",
-            //ok - "sources/engine/Stride.Rendering/Stride.Rendering.csproj",
-            //ok - "sources/engine/Stride.Shaders/Stride.Shaders.csproj",
-            //ok - "sources/engine/Stride.UI/Stride.UI.csproj",
-            //ok - "sources/engine/Stride.VirtualReality/Stride.VirtualReality.csproj",
-            //ok - "sources/engine/Stride.Navigation/Stride.Navigation.csproj"
+            //"sources/assets/Stride.Core.Assets/Stride.Core.Assets.csproj",
+            "sources/engine/Stride.Audio/Stride.Audio.csproj",
+            "sources/engine/Stride.Engine/Stride.Engine.csproj",
+            "sources/engine/Stride.Games/Stride.Games.csproj",
+            "sources/engine/Stride.Graphics/Stride.Graphics.csproj",
+            "sources/engine/Stride.Input/Stride.Input.csproj",
+            "sources/engine/Stride.Particles/Stride.Particles.csproj",
+            "sources/engine/Stride.Physics/Stride.Physics.csproj",
+            "sources/engine/Stride.Rendering/Stride.Rendering.csproj",
+            "sources/engine/Stride.Shaders/Stride.Shaders.csproj",
+            "sources/engine/Stride.UI/Stride.UI.csproj",
+            "sources/engine/Stride.VirtualReality/Stride.VirtualReality.csproj",
+            "sources/engine/Stride.Navigation/Stride.Navigation.csproj"
 
             //"build/Stride.sln"
             //"build/Stride.Runtime.sln"
-            //"cloudcall-api/src/ApiBureau.CloudCall.Api/ApiBureau.CloudCall.Api.csproj",
-            //"bullhorn-api/src/ApiBureau.Bullhorn.Api/ApiBureau.Bullhorn.Api.csproj"
           ],
           "src": "../../stride"
-          //"src": "../../api-bureau"
         }
       ],
       "dest": "api",
       "filter": "filterConfig.yml",
       "properties": {
-        "TargetFramework": "net6.0-windows7.0",
         //"TargetFramework": "net6.0-windows7.0",
+        "TargetFramework": "net6.0",
         "StrideBuildDoc": "true"
       },
-      "references": [ "ServiceWire.dll" ],
+      "references": [ "bin/*.dll" ],
       "includePrivateMembers": false,
       "disableGitFeatures": false,
       "disableDefaultFilter": false,
