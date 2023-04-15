@@ -5,8 +5,8 @@
         {
           "files": [
             //"sources/core/Stride.Core/Stride.Core.csproj",
-            //"sources/core/Stride.Core.IO/Stride.Core.IO.csproj",
-            //"sources/engine/Stride/Stride.csproj",
+            "sources/core/Stride.Core.IO/Stride.Core.IO.csproj",
+            "sources/engine/Stride/Stride.csproj",
             "sources/core/Stride.Core.Mathematics/Stride.Core.Mathematics.csproj",
             "sources/core/Stride.Core.MicroThreading/Stride.Core.MicroThreading.csproj",
             "sources/core/Stride.Core.Serialization/Stride.Core.Serialization.csproj",
