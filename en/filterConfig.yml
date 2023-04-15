@@ -1,4 +1,6 @@
 apiRules:
 - exclude:
-      uidRegex: ^System\.Object
-      type: Type
+    uidRegex: ^Stride\.Graphics\.StandardImageHelper
+- exclude:
+    uidRegex: ^System.Object
+    type: Type
