@@ -17,7 +17,7 @@
             "sources/engine/Stride.Graphics/Stride.Graphics.csproj",
             "sources/engine/Stride.Input/Stride.Input.csproj",
             "sources/engine/Stride.Particles/Stride.Particles.csproj",
-            "sources/engine/Stride.Physics/Stride.Physics.csproj",
+            //"sources/engine/Stride.Physics/Stride.Physics.csproj",
             "sources/engine/Stride.Rendering/Stride.Rendering.csproj",
             "sources/engine/Stride.Shaders/Stride.Shaders.csproj",
             "sources/engine/Stride.UI/Stride.UI.csproj",
