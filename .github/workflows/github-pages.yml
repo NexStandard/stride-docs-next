@@ -27,6 +27,12 @@ jobs:
         repository: stride3d/stride
         token: ${{ secrets.GITHUB_TOKEN }}
         path: stride
+    - name: Copy global.json file
+      run: xcopy stride-docs\global.json . /Y
+    - name: Check the content of the folder
+      run: |
+        echo "Content of folder:"
+        ls -la
     - run: dotnet tool update -g docfx
 #    - run: dotnet tool install -g docfx --version 2.65.1
     - run: docfx stride-docs/en/docfx.json
