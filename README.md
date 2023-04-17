@@ -67,5 +67,24 @@ Prerequisites:
 Make sure you have .NET SDK installed, then open a terminal and enter the following command to install the latest docfx:
 
 ```
-dotnet tool update -g docfx
+dotnet tool install -g docfx
 ```
+
+Or check the inslalled version
+
+```
+docfx --version
+```
+
+is at least `2.65.3`
+
+Go to `stride-docs` folder
+
+run
+
+```
+start.bat
+```
+
+Which will rund this command `docfx en/docfx.json`
+
