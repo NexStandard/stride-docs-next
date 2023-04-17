@@ -4,7 +4,7 @@ on:
 
 jobs:
   publish-docs:
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
       - name: Check .NET Framework version
         run: |
