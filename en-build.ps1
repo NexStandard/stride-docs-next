@@ -21,7 +21,7 @@ if ($API)
 		Write-Host "Failed to restore nuget packages"
 		exit $LastExitCode
 	}
-    
+
     # Build metadata from C# source
     docfx metadata en/docfx.json
 	if ($LastExitCode -ne 0)
@@ -36,7 +36,7 @@ else
     {
         Write-Host "Erasing API documentation..."
         Remove-Item en/api/*yml -recurse
-        Remove-Item en/api/.manifest 
+        Remove-Item en/api/.manifest
     }
 }
 
@@ -51,5 +51,5 @@ if ($LastExitCode -ne 0)
 }
 
 # Copy extra items
-Copy-Item en/ReleaseNotes/ReleaseNotes.md _site/en/ReleaseNotes/
+# Copy-Item en/ReleaseNotes/ReleaseNotes.md _site/en/ReleaseNotes/
 Stop-Transcript
