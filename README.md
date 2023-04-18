@@ -50,7 +50,6 @@ Stride Docs website is _not_ released under a regular cadence; new updates arriv
 
 Our Wiki [Roadmap](https://github.com/VaclavElias/stride-website-next/wiki/Roadmap) communicates upcoming changes to the Stride Docs.-->
 
-
 ## 🌐 .NET Foundation
 
 This project is supported by the [.NET Foundation](http://www.dotnetfoundation.org).
@@ -61,3 +60,39 @@ For more information see the [.NET Foundation Code of Conduct](http://www.dotnet
 ## License
 
 This project is licensed under the [MIT](https://github.com/VaclavElias/stride-website-next/blob/main/LICENSE.md) License.
+
+# Docs
+
+## Installation
+
+Prerequisites:
+
+- Familiarity with the command line
+- Install .NET SDK 6.0 (link) or higher
+
+Make sure you have .NET SDK installed, then open a terminal and enter the following command to install the latest docfx:
+
+```
+dotnet tool install -g docfx
+```
+
+Or check the inslalled version
+
+```
+docfx --version
+```
+
+is at least `2.65.3`
+
+Go to `stride-docs` folder
+
+run
+
+```
+build.bat
+```
+
+Which will rund this command `docfx en/docfx.json`
+
+ http://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x64.exe
+
