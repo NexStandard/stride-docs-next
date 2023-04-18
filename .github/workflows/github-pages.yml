@@ -53,7 +53,7 @@ jobs:
     - name: Run en-build.bat
       run: en-build.bat
       working-directory: stride-docs
-#      shell: pwsh
+      shell: pwsh
 
     
 #    - run: docfx stride-docs/en/docfx.json
