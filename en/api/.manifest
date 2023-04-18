@@ -1,8 +1,5 @@
 {
   "Stride": "Stride.yml",
-  "Stride.Core": "Stride.Core.yml",
-  "Stride.Core.AssemblyProcessedAttribute": "Stride.Core.AssemblyProcessedAttribute.yml",
-  "Stride.Core.AssemblyProcessedAttribute.#ctor": "Stride.Core.AssemblyProcessedAttribute.yml",
   "Stride.Core.Assets": "Stride.Core.Assets.yml",
   "Stride.Core.Assets.Analysis": "Stride.Core.Assets.Analysis.yml",
   "Stride.Core.Assets.Analysis.AssetAnalysis": "Stride.Core.Assets.Analysis.AssetAnalysis.yml",
@@ -1451,8 +1448,6 @@
   "Stride.Core.Assets.Yaml.YamlAssetPathComparer.Default": "Stride.Core.Assets.Yaml.YamlAssetPathComparer.yml",
   "Stride.Core.Assets.Yaml.YamlAssetPathComparer.Equals(Stride.Core.Assets.Yaml.YamlAssetPath,Stride.Core.Assets.Yaml.YamlAssetPath)": "Stride.Core.Assets.Yaml.YamlAssetPathComparer.yml",
   "Stride.Core.Assets.Yaml.YamlAssetPathComparer.GetHashCode(Stride.Core.Assets.Yaml.YamlAssetPath)": "Stride.Core.Assets.Yaml.YamlAssetPathComparer.yml",
-  "Stride.Core.DataSerializers": "Stride.Core.DataSerializers.yml",
-  "Stride.Core.DataSerializers.BulletSharp_NetStandardSerializerFactory": "Stride.Core.DataSerializers.BulletSharp_NetStandardSerializerFactory.yml",
   "Stride.Core.Reflection": "Stride.Core.Reflection.yml",
   "Stride.Core.Reflection.AbstractObjectInstantiator": "Stride.Core.Reflection.AbstractObjectInstantiator.yml",
   "Stride.Core.Reflection.AbstractObjectInstantiator.CreateConcreteInstance(System.Type)": "Stride.Core.Reflection.AbstractObjectInstantiator.yml",
