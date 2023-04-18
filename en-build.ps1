@@ -43,7 +43,7 @@ else
 Write-Host "Generating documentation..."
 
 # Output to both build.log and console
-deps\docfx\docfx.exe build en\docfx.json
+docfx build en\docfx.json
 if ($LastExitCode -ne 0)
 {
 	Write-Host "Failed to build doc"
