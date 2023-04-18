@@ -13,6 +13,9 @@ jobs:
   publish-docs:
     runs-on: windows-2022
     steps:
+    - name: Display .NET Core information
+      run: dotnet --info
+
     - name: Dotnet Setup
       uses: actions/setup-dotnet@v3
       with:
@@ -34,7 +37,7 @@ jobs:
       run: xcopy stride-docs\global.json . /Y
 
     - name: Copy BulletSharp.NetStandard.dll file
-      run: xcopy "stride/deps/BulletPhysics/BulletSharp.NetStandard.dll" "stride-docs/en/bin" /Y
+      run: xcopy "stride\deps\BulletPhysics\BulletSharp.NetStandard.dll" "stride-docs\en\bin" /Y
 
     - name: Check the content of the folder
       run: |
