@@ -41,6 +41,7 @@
             "sources/engine/Stride.Physics/Stride.Physics.csproj"
           ],
           "src": "../../stride",
+          "references": [ "bin/*.dll" ],
           "properties": {
             "TargetFramework": "net6.0-windows7.0",
             "StrideBuildDoc": "true"
