@@ -27,16 +27,27 @@
             //"build/Stride.sln"
             //"build/Stride.Runtime.sln"
           ],
-          "src": "../../stride"
+          "src": "../../stride",
+          "properties": {
+            //"TargetFramework": "net6.0-windows7.0",
+            "TargetFramework": "net6.0",
+            "StrideBuildDoc": "true"
+          }
+        },
+        {
+          "files": [
+            "sources/assets/Stride.Core.Assets/Stride.Core.Assets.csproj",
+            "sources/engine/Stride.Physics/Stride.Physics.csproj"
+          ],
+          "src": "../../stride",
+          "properties": {
+            "TargetFramework": "net6.0-windows7.0",
+            "StrideBuildDoc": "true"
+          }
         }
       ],
       "dest": "api",
       "filter": "filterConfig.yml",
-      "properties": {
-        //"TargetFramework": "net6.0-windows7.0",
-        "TargetFramework": "net6.0",
-        "StrideBuildDoc": "true"
-      },
       "references": [ "bin/*.dll" ],
       "includePrivateMembers": false,
       "disableGitFeatures": false,
