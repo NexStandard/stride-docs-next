@@ -2,9 +2,6 @@ apiRules:
 - exclude:
     uidRegex: ^System.Object
     type: Type
-- exclude:
-    uidRegex: ^BulletSharp
-    type: Type
 #- exclude:
 #    uidRegex: ^Stride
 #    type: Type

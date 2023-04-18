@@ -36,7 +36,7 @@
         //},
         {
           "files": [
-            "deps/BulletPhysics/BulletSharp.NetStandard.dll",
+            //"deps/BulletPhysics/BulletSharp.NetStandard.dll",
             "sources/assets/Stride.Core.Assets/Stride.Core.Assets.csproj",
             "sources/engine/Stride.Physics/Stride.Physics.csproj"
           ],
