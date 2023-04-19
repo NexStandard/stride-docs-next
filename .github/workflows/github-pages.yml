@@ -72,7 +72,7 @@ jobs:
 #      working-directory: stride-docs
 #      shell: pwsh
 
-#    - run: docfx stride-docs/en/docfx.json
+    - run: docfx stride-docs/en/docfx.json
 #      continue-on-error: true
 
     - name: Deploy
