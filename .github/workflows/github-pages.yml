@@ -57,7 +57,7 @@ jobs:
       working-directory: stride-docs
 
     - name: Run en-build.bat
-      run: en-build.bat
+      run: stride-docs/en-build.bat
       working-directory: stride-docs
 #      shell: pwsh
 
