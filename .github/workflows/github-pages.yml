@@ -50,15 +50,23 @@ jobs:
     - run: dotnet tool update -g docfx
 #    - run: dotnet tool install -g docfx --version 2.65.1
 
-    - name: Check the content of the folder
-      run: |
-        echo "Content of folder:"
-        dir
-      working-directory: stride-docs
+#    - name: Check the content of the folder
+#      run: |
+#        echo "Content of folder:"
+#        dir
+#      working-directory: stride-docs
 
-    - name: Run en-build.bat
-      run: ./en-build.bat
-      working-directory: stride-docs
+    - name: Run msbuild
+      run: ./msbuild.exe /t:Restore Stride.sln
+      working-directory: stride/build
+      
+    - name: Run compile
+      run: ./compile.bat
+      working-directory: stride/build
+
+#    - name: Run en-build.bat
+#      run: ./en-build.bat
+#      working-directory: stride-docs
 #      shell: pwsh
 
 #    - run: docfx stride-docs/en/docfx.json
