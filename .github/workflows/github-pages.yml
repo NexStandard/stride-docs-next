@@ -56,8 +56,11 @@ jobs:
 #        dir
 #      working-directory: stride-docs
 
-    - name: Run msbuild
-      run: ./msbuild.exe /t:Restore Stride.sln
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1.3
+
+    - name: Build app for release
+      run: ./msbuild /t:Restore Stride.sln
       working-directory: stride/build
       
     - name: Run compile
