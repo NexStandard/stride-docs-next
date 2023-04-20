@@ -21,7 +21,7 @@ jobs:
       with:
         dotnet-version: 6.x
 
-    - name: Checkout
+    - name: Checkout Stride Docs
       uses: actions/checkout@v3
       with:
         path: stride-docs
@@ -32,6 +32,7 @@ jobs:
         repository: stride3d/stride
         token: ${{ secrets.GITHUB_TOKEN }}
         path: stride
+        lfs: true
 
     - name: Copy global.json file
       run: xcopy stride-docs\global.json . /Y
