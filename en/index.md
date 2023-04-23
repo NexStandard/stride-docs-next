@@ -36,7 +36,7 @@ Welcome to the Stride Documentation. Here, you will find comprehensive informati
                 <h2 class="card-title h5">🔧 API Reference</h2>
                 <p class="card-text">Access Stride's API documentation, which covers methods, properties, and other essential information.</p>
             </div>
-            <p class="px-3 mb-4"><a class="stretched-link" href="ReleaseNotes/index.md">View Stride API Reference</a></p>
+            <p class="px-3 mb-4"><a class="stretched-link" href="api/index.md">View Stride API Reference</a></p>
         </div>
     </div>
 </div>
