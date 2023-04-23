@@ -1,4 +1,4 @@
-# Game studio 🛠️
+# 🛠️ Game studio 
 
 The Stride engine comes with an editor called **Game Studio**. The videos below cover the basics of the UI and how various concepts work inside the editor. 
 
