@@ -1,4 +1,4 @@
-# Stride API
+﻿# Stride API
 
 These pages contain information about the Stride scripting API, grouped by namespace. 
 
