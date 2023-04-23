@@ -1,4 +1,4 @@
-# C# Intermediate 🎓
+# 📈 C# Intermediate
 These tutorials cover various intermediate principles of using C# when working with the Stride game engine.
 
 It is recommended that you complete all the [C# Beginner tutorials](../csharpbeginner/index.md) before moving on to the intermediate tutorials.
@@ -17,7 +17,7 @@ You can view the Completed scenes to see what the end result of each tutorial wi
 
 > [!Video https://www.youtube.com/embed/videoseries?list=PLRZx2y7uC8mOE6_L0ZiFxNBE7HmzU2dP7]
 
-# All tutorials
+## All tutorials
 <div class="row g-4 mb-4">
     <div class="col-md-6">
         <div class="card h-100">

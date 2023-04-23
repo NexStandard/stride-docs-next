@@ -1,4 +1,4 @@
-# C# Beginner 🌱
+# 🌱 C# Beginner
 These tutorials cover the beginner principles of using C# when working with the Stride game engine. Start here if you are new to Stride.
 
 Note: These tutorials do not serve as an introduction to C# itself. While having some coding experience is helpful, it is not mandatory to get started with these tutorials.
