@@ -58,6 +58,14 @@
       "_appLogoPath": "media/stride-logo-red.svg",
       "_appFooter": "<p>Hello World</p>"
     },
+    "fileMetadata": {
+      "_appTitle": {
+        "tutorials/**/*.md": "Stride Tutorials",
+        "manual/**/*.md": "Stride Manual",
+        "ReleaseNotes/**/*.md": "Stride Release Notes",
+        "api/**/*.md": "Stride API"
+      }
+    },
     "sitemap": {
       "baseUrl": "https://doc.stride3d.net/",
       "priority": 0.1,
