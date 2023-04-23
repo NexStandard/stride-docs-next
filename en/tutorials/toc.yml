@@ -1,4 +1,4 @@
-- name: Tutorials
+- name: 🎓 Tutorials
   href: index.md
 - name: 🛠️ Game studio
   expanded: false
@@ -64,7 +64,7 @@
     href: csharpbeginner/loading-content.md
   - name: Instantiating prefabs
     href: csharpbeginner/instantiating-prefabs.md
-- name: 🎓 C# Intermediate ⭐New
+- name: 📈 C# Intermediate ⭐New
   href: csharpintermediate/index.md
   items:
   - name: Introduction
