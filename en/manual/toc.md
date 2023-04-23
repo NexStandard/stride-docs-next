@@ -1,3 +1,4 @@
+# [Manual](index.md)
 
 # [Requirements](requirements/index.md)
 
