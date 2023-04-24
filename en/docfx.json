@@ -4,7 +4,7 @@
       "src": [
         {
           "files": [
-            //"sources/core/Stride.Core/Stride.Core.csproj",
+            "sources/core/Stride.Core/Stride.Core.csproj",
             "sources/core/Stride.Core.IO/Stride.Core.IO.csproj",
             "sources/engine/Stride/Stride.csproj",
             "sources/core/Stride.Core.Mathematics/Stride.Core.Mathematics.csproj",
@@ -56,7 +56,7 @@
       "_appTitle": "Stride Docs",
       "_enableSearch": true,
       "_appLogoPath": "media/stride-logo-red.svg",
-      "_appFooter": "<p>Hello World</p>"
+      "_appFooter2": "<p>Hello World</p>"
     },
     "fileMetadata": {
       "_appTitle": {
