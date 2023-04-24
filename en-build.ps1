@@ -7,26 +7,23 @@ If(Test-Path build.log)
 {
     Remove-Item build.log
 }
+
+# Write the output to build.log file
 Start-Transcript -Path build.log
+
 # Generate API doc
 if ($API)
 {
     Write-Host "Generating API documentation..."
 
-    # Run MSBuild restore
-    $msbuild = & ("${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe") -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe | select-object -first 1
-    & $msbuild ..\stride\build\Stride.sln /t:Restore
-    if ($LastExitCode -ne 0)
-    {
-        Write-Host "Failed to restore nuget packages"
-        exit $LastExitCode
-    }
+    # Build metadata from C# source, docfx runs dotnet restore
 
-    # Build metadata from C# source
     docfx metadata en/docfx.json
+
     if ($LastExitCode -ne 0)
     {
         Write-Host "Failed to generate API metadata"
+
         exit $LastExitCode
     }
 }
@@ -43,7 +40,9 @@ else
 Write-Host "Generating documentation..."
 
 # Output to both build.log and console
+
 docfx build en\docfx.json
+
 if ($LastExitCode -ne 0)
 {
     Write-Host "Failed to build doc"
