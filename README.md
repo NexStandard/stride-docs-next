@@ -82,13 +82,27 @@ Make sure you have .NET SDK installed, then open a terminal and enter the follow
 dotnet tool install -g docfx
 ```
 
-Or check the inslalled version
+Or check the inslalled version is at least `2.66.0`
 
 ```
 docfx --version
 ```
 
-is at least `2.65.3`
+**Other options**
+
+Update to the latest docfx
+
+```
+dotnet tool update -g docfx
+```
+
+Install a specific version of docfx
+
+```
+dotnet tool update -g docfx --version 2.66.0
+```
+
+## Build
 
 Go to `stride-docs` folder
 
