@@ -50,5 +50,6 @@ if ($LastExitCode -ne 0)
 }
 
 # Copy extra items
-# Copy-Item en/ReleaseNotes/ReleaseNotes.md _site/en/ReleaseNotes/
+Copy-Item en/ReleaseNotes/ReleaseNotes.md _site/en/ReleaseNotes/
+
 Stop-Transcript
