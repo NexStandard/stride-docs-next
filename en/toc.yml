@@ -8,3 +8,7 @@
 - name: 🔧 API
   href: api/
   homepage: api/index.md
+- name: Japanse
+  href: /jp/index.html
+- name: English
+  href: /en/index.html
