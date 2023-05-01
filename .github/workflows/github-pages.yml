@@ -63,7 +63,7 @@ jobs:
 #    - name: Build app for release
 #      run: msbuild /t:Restore Stride.sln
 #      working-directory: stride/build
-      
+
 #    - name: Run compile
 #      run: ./compile.bat
 #      working-directory: stride/build
@@ -80,4 +80,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: stride-docs/en/_site
+        publish_dir: stride-docs/_site
