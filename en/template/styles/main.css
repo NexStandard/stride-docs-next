@@ -13,10 +13,10 @@ body {
 }
 
 [data-bs-theme=light] body {
-    background-image: url(/media/bg_light.svg);
+    background-image: url(../media/bg_light.svg);
 }
 
 /* ToDo: JavaScipt needs to be hooked to theme selector to switch logo */
 [data-bs-theme=dark] {
-    --logo: url(/media/stride-logo-dark-theme.svg) no-repeat;
+    --logo: url(../media/stride-logo-dark-theme.svg) no-repeat;
 }
