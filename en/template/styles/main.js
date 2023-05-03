@@ -38,19 +38,31 @@ function waitForNavbarAndAddLanguageNavigation() {
     observer.observe(targetNode, config);
 }
 
-function addLanguageNavigation() {
+function createLanguageLink(language) {
+    const languageLink = document.createElement('a');
+    languageLink.classList.add('dropdown-item');
+    languageLink.href = language.href;
+    languageLink.textContent = language.name;
+    languageLink.role = 'button';
+    languageLink.setAttribute('data-language', language.code);
+    return languageLink;
+}
 
-    //const navElement = document.getElementById('navbar');
-    const navElement = document.querySelector('.navbar-nav');
+function createLanguageItem(language, pattern) {
+    const languageItem = document.createElement('li');
+    const languageLink = createLanguageLink(language);
+    languageItem.appendChild(languageLink);
 
-    if (!navElement) {
-        console.log('Navbar not found');
-        return;
-    }
+    languageLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        const lang = "/" + event.target.getAttribute('data-language') + "/";
+        window.location.href = window.location.href.replace(pattern, lang);
+    });
 
-    //const languageList = document.createElement('ul');
-    //languageList.classList.add('navbar-nav');
+    return languageItem;
+}
 
+function createLanguageDropdown(languages, pattern) {
     const languageDropdown = document.createElement('li');
     languageDropdown.classList.add('nav-item', 'dropdown');
 
@@ -65,26 +77,35 @@ function addLanguageNavigation() {
     const dropdownMenu = document.createElement('ul');
     dropdownMenu.classList.add('dropdown-menu');
 
-    const englishItem = document.createElement('li');
-    const englishLink = document.createElement('a');
-    englishLink.classList.add('dropdown-item');
-    englishLink.href = '#'; // Replace with the link to the English version of the page
-    englishLink.textContent = 'English';
-    englishItem.appendChild(englishLink);
+    languages.forEach(language => {
+        const languageItem = createLanguageItem(language, pattern);
+        dropdownMenu.appendChild(languageItem);
+    });
 
-    const japaneseItem = document.createElement('li');
-    const japaneseLink = document.createElement('a');
-    japaneseLink.classList.add('dropdown-item');
-    japaneseLink.href = '#'; // Replace with the link to the Japanese version of the page
-    japaneseLink.textContent = 'Japanese';
-    japaneseItem.appendChild(japaneseLink);
-
-    dropdownMenu.appendChild(englishItem);
-    dropdownMenu.appendChild(japaneseItem);
     languageDropdown.appendChild(languageDropdownLink);
     languageDropdown.appendChild(dropdownMenu);
-    //languageList.appendChild(languageDropdown);
-    //navElement.appendChild(languageList);
+
+    return languageDropdown;
+}
+
+function addLanguageNavigation() {
+    const navElement = document.querySelector('.navbar-nav');
+
+    if (!navElement) {
+        console.log('Navbar not found');
+        return;
+    }
+
+    const languages = [
+        { name: 'English', code: 'en', href: '#' },
+        { name: 'Japanese', code: 'jp', href: '#' },
+        { name: 'Spanish', code: 'es', href: '#' }
+    ];
+
+    const languageCodes = languages.map(language => language.code).join('|');
+    const pattern = new RegExp(`\\/(?:${languageCodes})\\/`, 'i');
+
+    const languageDropdown = createLanguageDropdown(languages, pattern);
     navElement.appendChild(languageDropdown);
 }
 
@@ -110,12 +131,6 @@ function loadVersions() {
             const selectElement = document.getElementById("stride-current-version");
             selectElement.innerHTML = '';
 
-            // Add the "Latest" option
-            //const latestOption = document.createElement('option');
-            //latestOption.value = 'latest';
-            //latestOption.textContent = 'Latest';
-            //selectElement.appendChild(latestOption);
-
             data.versions.forEach(version => {
                 const url = version;
                 const option = document.createElement('option');
@@ -140,6 +155,7 @@ function loadVersions() {
 
 function redirectToCurrentDocVersion() {
     const selectElement = document.getElementById('stride-current-version');
+
     selectElement.addEventListener('change', function () {
         const hostVersion = window.location.host;
         const pathVersion = window.location.pathname;
@@ -160,7 +176,7 @@ function redirectToCurrentDocVersion() {
                 }
             })
             .catch(error => {
-                console.error('Error checking URL:', error);
+                console.log('Error checking URL:', error);
             })
             .finally(() => {
                 // Go to page
@@ -168,7 +184,6 @@ function redirectToCurrentDocVersion() {
             });
     });
 }
-
 
 function start() {
 
