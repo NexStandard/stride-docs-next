@@ -1,0 +1,13 @@
+[
+  {
+    "language": "en",
+    "name": "English",
+    "enabled": true,
+    "isPrimary": true
+  },
+  {
+    "language": "jp",
+    "name": "Japanese",
+    "enabled": true
+  }
+]
