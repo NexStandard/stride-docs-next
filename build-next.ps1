@@ -17,15 +17,29 @@ if (-not $API)
     Write-Host -ForegroundColor Cyan "Please select an option:"
     Write-Host -ForegroundColor Yellow "  [Y] Include API"
     Write-Host -ForegroundColor Yellow "  [N] Exclude API"
+    Write-Host -ForegroundColor Yellow "  [R] Run local website"
     Write-Host -ForegroundColor Yellow "  [C] Cancel"
-    $userInput = Read-Host -Prompt "Your choice (y/n/c)"
+    $userInput = Read-Host -Prompt "Your choice (y/n/r/c)"
     $API = $userInput -eq "y" -or $userInput -eq "Y"
+    $runLocalWebsite = $userInput -eq "r" -or $userInput -eq "R"
     $cancel = $userInput -eq "c" -or $userInput -eq "C"
 }
 
 if ($cancel)
 {
     Write-Host -ForegroundColor Red "Operation canceled by user."
+    Stop-Transcript
+    exit
+}
+
+if ($runLocalWebsite)
+{
+    Write-Host -ForegroundColor Green "Running local website..."
+    New-Item -ItemType Directory -Force -Path _site | Out-Null
+    Set-Location _site
+    Start-Process -FilePath "http://localhost:8080/en/index.html"
+    docfx serve
+    Set-Location ..
     Stop-Transcript
     exit
 }
