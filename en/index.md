@@ -40,3 +40,6 @@ Welcome to the Stride Documentation. Here, you will find comprehensive informati
         </div>
     </div>
 </div>
+
+> [!NOTE]
+> While the English version of this documentation is actively maintained and updated, please be aware that translations in other languages may not be as up-to-date. We encourage users who are comfortable with English to refer to the original documentation to ensure they have access to the most current information. If you would like to contribute to the translations or report any discrepancies, please visit our GitHub repository or community forums for further details. Your contributions are greatly appreciated!
