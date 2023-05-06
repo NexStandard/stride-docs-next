@@ -2,8 +2,18 @@ const app = {
     iconLinks: [
         {
             icon: 'github',
-            href: 'https://github.com/dotnet/docfx',
+            href: 'https://github.com/stride3d/stride',
             title: 'GitHub'
+        },
+        {
+            icon: 'discord',
+            href: 'https://discord.gg/f6aerfE',
+            title: 'Discord'
+        },
+        {
+            icon: 'twitter',
+            href: 'https://twitter.com/stridedotnet',
+            title: 'Twitter'
         }
     ],
     waitForNavbarAndAddLanguageNavigation: function () {
@@ -105,8 +115,7 @@ const app = {
 
         const languages = [
             { name: 'English', code: 'en', href: '#' },
-            { name: 'Japanese', code: 'jp', href: '#' },
-            { name: 'Spanish', code: 'es', href: '#' }
+            { name: 'Japanese', code: 'jp', href: '#' }
         ];
 
         const languageCodes = languages.map(language => language.code).join('|');
@@ -119,10 +128,10 @@ const app = {
 
         const version = document.getElementById("toc");
         const selectHtml = `
-        <select id="stride-current-version" class="form-select" aria-label="Default select example">
+        <select id="stride-current-version" class="form-select mb-2 form-select-sm" aria-label="Default select for verion">
             <option selected>Latest</option>
-        </select>
-    `;
+        </select>`;
+
         version.insertAdjacentHTML("afterbegin", selectHtml);
     },
     loadVersions: function () {
