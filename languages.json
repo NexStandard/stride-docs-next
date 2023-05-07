@@ -3,11 +3,19 @@
     "language": "en",
     "name": "English",
     "enabled": true,
-    "isPrimary": true
+    "isPrimary": true,
+    "notTranslatedMessage": ""
   },
   {
     "language": "jp",
     "name": "Japanese",
-    "enabled": true
+    "enabled": true,
+    "notTranslatedMessage": ""
+  },
+  {
+    "language": "es",
+    "name": "Spanish",
+    "enabled": true,
+    "notTranslatedMessage": ""
   }
 ]
