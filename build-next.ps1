@@ -2,30 +2,28 @@ param (
     [switch]$API
 )
 
-# Read language configurations from JSON file
-$languages = Get-Content 'languages.json' | ConvertFrom-Json
-
-# Remove build.log file
-If(Test-Path build.log)
-{
-    Remove-Item build.log
+function Read-LanguageConfigurations {
+    return Get-Content 'languages.json' | ConvertFrom-Json
 }
 
-# Write the output to build.log file
-Start-Transcript -Path build.log
+function Remove-BuildLogFile {
+    if (Test-Path build.log) {
+        Remove-Item build.log
+    }
+}
 
-# If $API parameter is not provided, ask the user
-if (-not $API)
-{
+function Start-LogTranscript {
+    Start-Transcript -Path build.log
+}
+
+function GetUserInput {
     Write-Host ""
     Write-Host -ForegroundColor Cyan "Please select an option:"
     Write-Host ""
     Write-Host -ForegroundColor Yellow "  [Y] Include API"
     Write-Host -ForegroundColor Yellow "  [en] Build English documentation"
-    foreach ($lang in $languages)
-    {
-        if ($lang.enabled -and -not $lang.isPrimary)
-        {
+    foreach ($lang in $languages) {
+        if ($lang.enabled -and -not $lang.isPrimary) {
             Write-Host -ForegroundColor Yellow "  [$($lang.language)] Build $($lang.name) documentation"
         }
     }
@@ -34,7 +32,26 @@ if (-not $API)
     Write-Host -ForegroundColor Yellow "  [C] Cancel"
     Write-Host ""
 
-    $userInput = Read-Host -Prompt "Your choice (y/n/r/c/..)"
+    return Read-Host -Prompt "Your choice (y/n/r/c/..)"
+}
+
+function Copy-ExtraItems {
+    Copy-Item en/ReleaseNotes/ReleaseNotes.md _site/en/ReleaseNotes/
+}
+
+# Main script execution starts here
+
+$languages = Read-LanguageConfigurations
+
+Remove-BuildLogFile
+
+Start-LogTranscript
+
+
+# If $API parameter is not provided, ask the user
+if (-not $API)
+{
+    $userInput = GetUserInput
 
     $API = $userInput -eq "y" -or $userInput -eq "Y"
     $enLanguage = $userInput -eq "en"
@@ -95,7 +112,8 @@ else
 }
 
 Write-Host -ForegroundColor Green "Generating documentation..."
-Write-Host -ForegroundColor Magenta "Note that when building docs without API, you will get UidNotFound warnings and invalid references warnings"
+
+Write-Warning "Note that when building docs without API, you will get UidNotFound warnings and invalid references warnings"
 
 
 if ($enLanguage)
@@ -112,8 +130,7 @@ if ($enLanguage)
     }
 }
 
-# Copy extra items
-Copy-Item en/ReleaseNotes/ReleaseNotes.md _site/en/ReleaseNotes/
+Copy-ExtraItems
 
 # Build non-English language if selected
 if ($selectedLanguage -and $selectedLanguage.language -ne 'en') {
