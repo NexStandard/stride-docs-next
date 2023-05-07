@@ -2,6 +2,8 @@ param (
     [switch]$API
 )
 
+# To Do fix, GitHub references, fix sitemap links to latest/en/
+
 function Read-LanguageConfigurations {
     return Get-Content 'languages.json' | ConvertFrom-Json
 }
@@ -39,6 +41,126 @@ function Copy-ExtraItems {
     Copy-Item en/ReleaseNotes/ReleaseNotes.md _site/en/ReleaseNotes/
 }
 
+function HandleCancel {
+    Write-Host -ForegroundColor Red "Operation canceled by user."
+    Stop-Transcript
+    Read-Host -Prompt "Press ENTER key to exit..."
+    exit
+}
+
+function RunLocalWebsite {
+    Write-Host -ForegroundColor Green "Running local website..."
+    Stop-Transcript
+    New-Item -ItemType Directory -Force -Path _site | Out-Null
+    Set-Location _site
+    Start-Process -FilePath "http://localhost:8080/en/index.html"
+    docfx serve
+    Set-Location ..
+    exit
+}
+
+function GenerateAPIDoc {
+    Write-Host -ForegroundColor Green "Generating API documentation..."
+
+    # Build metadata from C# source, docfx runs dotnet restore
+    docfx metadata en/docfx.json
+
+    if ($LastExitCode -ne 0)
+    {
+        Write-Host -ForegroundColor Red "Failed to generate API metadata"
+        exit $LastExitCode
+    }
+}
+
+function EraseAPIDoc {
+    if (Test-Path en/api/.manifest) {
+        Write-Host -ForegroundColor Green "Erasing API documentation..."
+        Remove-Item en/api/*yml -recurse
+        Remove-Item en/api/.manifest
+    }
+}
+
+function BuildEnglishDoc {
+    Write-Host -ForegroundColor Yellow "Start building English documentation."
+
+    # Output to both build.log and console
+    docfx build en\docfx.json
+
+    if ($LastExitCode -ne 0)
+    {
+        Write-Host -ForegroundColor Red "Failed to build English documentation"
+        exit $LastExitCode
+    }
+}
+
+function BuildNonEnglishDoc {
+    param (
+        $selectedLanguage
+    )
+
+    if ($selectedLanguage -and $selectedLanguage.language -ne 'en') {
+
+        Write-Host -ForegroundColor Yellow "Start building $($selectedLanguage.name) documentation."
+
+        $langFolder = "$($selectedLanguage.language)_tmp"
+
+        If(Test-Path $langFolder){
+            Remove-Item $langFolder/* -recurse
+        }
+        Else{
+            New-Item -Path $langFolder -ItemType "directory"
+        }
+
+        Copy-Item en/* -Recurse $langFolder -Force
+
+        $posts = Get-ChildItem $langFolder/manual/*.md -Recurse -Force
+
+        Write-Host "Start write files:"
+
+        Foreach ($post in $posts)
+        {
+            if($post.ToString().Contains("toc.md")) {
+                continue;
+            }
+
+            $data = Get-Content $post
+            $i = 0;
+            Foreach ($line in $data)
+            {
+                $i++
+                if ($line.length -le 0)
+                {
+                    Write-Host $post
+                    $data[$i-1]="<div class='doc-no-translated'/>"
+                    $data | out-file $post
+                    break
+                }
+            }
+        }
+
+        Write-Host "End write files"
+
+        Copy-Item ($selectedLanguage.language + "/index.md") $langFolder -Force
+        Copy-Item ($selectedLanguage.language + "/manual") -Recurse -Destination $langFolder -Force
+
+        Copy-Item en/docfx.json $langFolder -Force
+
+        (Get-Content $langFolder/docfx.json) -replace "_site/en","_site/$($selectedLanguage.language)" | Set-Content $langFolder/docfx.json
+
+        docfx build $langFolder\docfx.json
+
+        Remove-Item $langFolder -recurse
+
+        if ($LastExitCode -ne 0)
+        {
+            Write-Host -ForegroundColor Red "Failed to build $($selectedLanguage.name) documentation"
+            exit $LastExitCode
+        }
+
+        Write-Host -ForegroundColor Green "$($selectedLanguage.name) documentation built."
+    }
+}
+
 # Main script execution starts here
 
 $languages = Read-LanguageConfigurations
@@ -46,7 +168,6 @@ $languages = Read-LanguageConfigurations
 Remove-BuildLogFile
 
 Start-LogTranscript
-
 
 # If $API parameter is not provided, ask the user
 if (-not $API)
@@ -69,46 +190,22 @@ if (-not $API)
 
 if ($cancel)
 {
-    Write-Host -ForegroundColor Red "Operation canceled by user."
-    Stop-Transcript
-    Read-Host -Prompt "Press ENTER key to exit..."
-    exit
+    HandleCancel
 }
 
 if ($runLocalWebsite)
 {
-    Write-Host -ForegroundColor Green "Running local website..."
-    Stop-Transcript
-    New-Item -ItemType Directory -Force -Path _site | Out-Null
-    Set-Location _site
-    Start-Process -FilePath "http://localhost:8080/en/index.html"
-    docfx serve
-    Set-Location ..
-    exit
+    RunLocalWebsite
 }
 
 # Generate API doc
 if ($API)
 {
-    Write-Host -ForegroundColor Green "Generating API documentation..."
-
-    # Build metadata from C# source, docfx runs dotnet restore
-    docfx metadata en/docfx.json
-
-    if ($LastExitCode -ne 0)
-    {
-        Write-Host -ForegroundColor Red "Failed to generate API metadata"
-        exit $LastExitCode
-    }
+    GenerateAPIDoc
 }
 else
 {
-    If(Test-Path en/api/.manifest)
-    {
-        Write-Host -ForegroundColor Green "Erasing API documentation..."
-        Remove-Item en/api/*yml -recurse
-        Remove-Item en/api/.manifest
-    }
+    EraseAPIDoc
 }
 
 Write-Host -ForegroundColor Green "Generating documentation..."
@@ -118,82 +215,14 @@ Write-Warning "Note that when building docs without API, you will get UidNotFoun
 
 if ($enLanguage)
 {
-    Write-Host -ForegroundColor Yellow "Start building English documentation."
-
-    # Output to both build.log and console
-    docfx build en\docfx.json
-
-    if ($LastExitCode -ne 0)
-    {
-        Write-Host -ForegroundColor Red "Failed to build en doc"
-        exit $LastExitCode
-    }
+   BuildEnglishDoc
 }
 
-Copy-ExtraItems
+# Do we need this?
+# Copy-ExtraItems
 
 # Build non-English language if selected
-if ($selectedLanguage -and $selectedLanguage.language -ne 'en') {
-
-    Write-Host -ForegroundColor Yellow "Start building $($selectedLanguage.name) documentation."
-
-    $langFolder = "$($selectedLanguage.language)_tmp"
-
-    If(Test-Path $langFolder){
-        Remove-Item $langFolder/* -recurse
-    }
-    Else{
-        New-Item -Path $langFolder -ItemType "directory"
-    }
-
-    Copy-Item en/* -Recurse $langFolder -Force
-
-    $posts = Get-ChildItem $langFolder/manual/*.md -Recurse -Force
-
-    Write-Host "Start write files:"
-
-    Foreach ($post in $posts)
-    {
-        if($post.ToString().Contains("toc.md")) {
-            continue;
-        }
-
-        $data = Get-Content $post
-        $i = 0;
-        Foreach ($line in $data)
-        {
-            $i++
-            if ($line.length -le 0)
-            {
-                Write-Host $post
-                $data[$i-1]="<div class='doc-no-translated'/>"
-                $data | out-file $post
-                break
-            }
-        }
-    }
-
-    Write-Host "End write files"
-
-    Copy-Item ($selectedLanguage.language + "/index.md") $langFolder -Force
-    Copy-Item ($selectedLanguage.language + "/manual") -Recurse -Destination $langFolder -Force
-
-    Copy-Item en/docfx.json $langFolder -Force
-
-    (Get-Content $langFolder/docfx.json) -replace "_site/en","_site/$($selectedLanguage.language)" | Set-Content $langFolder/docfx.json
-
-    docfx build $langFolder\docfx.json
-
-    Remove-Item $langFolder -recurse
-
-    if ($LastExitCode -ne 0)
-    {
-        Write-Host -ForegroundColor Red "Failed to build $($selectedLanguage.name) documentation"
-        exit $LastExitCode
-    }
-
-    Write-Host -ForegroundColor Green "$($selectedLanguage.name) documentation built."
-}
+BuildNonEnglishDoc -selectedLanguage $selectedLanguage
 
 Stop-Transcript
 
