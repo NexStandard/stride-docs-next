@@ -161,6 +161,20 @@ function BuildNonEnglishDoc {
     }
 }
 
+function BuildAllLanguagesDocs {
+    param (
+        [array]$languages
+    )
+
+    foreach ($lang in $languages) {
+        if ($lang.enabled -and -not $lang.isPrimary) {
+
+            BuildNonEnglishDoc -selectedLanguage $lang
+
+        }
+    }
+}
+
 # Main script execution starts here
 
 $languages = Read-LanguageConfigurations
@@ -213,7 +227,7 @@ Write-Host -ForegroundColor Green "Generating documentation..."
 Write-Warning "Note that when building docs without API, you will get UidNotFound warnings and invalid references warnings"
 
 
-if ($enLanguage)
+if ($enLanguage -or $allLanguages)
 {
    BuildEnglishDoc
 }
@@ -221,8 +235,12 @@ if ($enLanguage)
 # Do we need this?
 # Copy-ExtraItems
 
-# Build non-English language if selected
-BuildNonEnglishDoc -selectedLanguage $selectedLanguage
+# Build non-English language if selected or build all languages if selected
+if ($allLanguages) {
+    BuildAllLanguagesDocs -languages $languages
+} elseif ($selectedLanguage) {
+    BuildNonEnglishDoc -selectedLanguage $selectedLanguage
+}
 
 Stop-Transcript
 
