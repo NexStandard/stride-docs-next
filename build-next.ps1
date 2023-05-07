@@ -17,11 +17,11 @@ Start-Transcript -Path build.log
 # If $API parameter is not provided, ask the user
 if (-not $API)
 {
+    Write-Host ""
     Write-Host -ForegroundColor Cyan "Please select an option:"
+    Write-Host ""
     Write-Host -ForegroundColor Yellow "  [Y] Include API"
-    Write-Host -ForegroundColor Yellow "  [N] Exclude API"
-    Write-Host -ForegroundColor Yellow "  [R] Run local website"
-    Write-Host -ForegroundColor Yellow "  [C] Cancel"
+    Write-Host -ForegroundColor Yellow "  [en] Build English documentation"
     foreach ($lang in $languages)
     {
         if ($lang.enabled -and -not $lang.isPrimary)
@@ -29,9 +29,16 @@ if (-not $API)
             Write-Host -ForegroundColor Yellow "  [$($lang.language)] Build $($lang.name) documentation"
         }
     }
+    Write-Host -ForegroundColor Yellow "  [all] Build documentation in all available languages"
+    Write-Host -ForegroundColor Yellow "  [R] Run local website"
+    Write-Host -ForegroundColor Yellow "  [C] Cancel"
+    Write-Host ""
 
-    $userInput = Read-Host -Prompt "Your choice (y/n/r/c/build)"
+    $userInput = Read-Host -Prompt "Your choice (y/n/r/c/..)"
+
     $API = $userInput -eq "y" -or $userInput -eq "Y"
+    $enLanguage = $userInput -eq "en"
+    $allLanguages = $userInput -eq "all"
     $runLocalWebsite = $userInput -eq "r" -or $userInput -eq "R"
     $cancel = $userInput -eq "c" -or $userInput -eq "C"
 
@@ -47,6 +54,7 @@ if ($cancel)
 {
     Write-Host -ForegroundColor Red "Operation canceled by user."
     Stop-Transcript
+    Read-Host -Prompt "Press ENTER key to exit..."
     exit
 }
 
@@ -87,22 +95,29 @@ else
 }
 
 Write-Host -ForegroundColor Green "Generating documentation..."
+Write-Host -ForegroundColor Magenta "Note that when building docs without API, you will get UidNotFound warnings and invalid references warnings"
 
-# Output to both build.log and console
-docfx build en\docfx.json
 
-if ($LastExitCode -ne 0)
+if ($enLanguage)
 {
-    Write-Host -ForegroundColor Red "Failed to build doc"
-    exit $LastExitCode
+    Write-Host -ForegroundColor Yellow "Start building English documentation."
+
+    # Output to both build.log and console
+    docfx build en\docfx.json
+
+    if ($LastExitCode -ne 0)
+    {
+        Write-Host -ForegroundColor Red "Failed to build en doc"
+        exit $LastExitCode
+    }
 }
 
 # Copy extra items
 Copy-Item en/ReleaseNotes/ReleaseNotes.md _site/en/ReleaseNotes/
 
-
 # Build non-English language if selected
 if ($selectedLanguage -and $selectedLanguage.language -ne 'en') {
+
     Write-Host -ForegroundColor Yellow "Start building $($selectedLanguage.name) documentation."
 
     $langFolder = "$($selectedLanguage.language)_tmp"
@@ -165,4 +180,4 @@ if ($selectedLanguage -and $selectedLanguage.language -ne 'en') {
 
 Stop-Transcript
 
-Read-Host -Prompt "Press any key to exit..."
+Read-Host -Prompt "Press any ENTER to exit..."
