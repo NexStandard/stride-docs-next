@@ -142,8 +142,11 @@ function BuildNonEnglishDoc {
                 if ($line.length -le 0)
                 {
                     Write-Host $post
-                    $data[$i-1]="<div class='doc-no-translated'/>"
-                    $data | out-file $post
+
+                    $data[$i-1]="> [!WARNING]`r`n> Dangerous certain consequences of an action.`r`n"
+
+                    $data | Out-File -Encoding UTF8 $post
+
                     break
                 }
             }
@@ -151,8 +154,19 @@ function BuildNonEnglishDoc {
 
         Write-Host "End write files"
 
-        Copy-Item ($selectedLanguage.language + "/index.md") $langFolder -Force
-        Copy-Item ($selectedLanguage.language + "/manual") -Recurse -Destination $langFolder -Force
+        if (Test-Path ($selectedLanguage.language + "/index.md")) {
+            Copy-Item ($selectedLanguage.language + "/index.md") $langFolder -Force
+        }
+        else {
+            Write-Host -ForegroundColor Yellow "Warning: $($selectedLanguage.language)/index.md not found."
+        }
+
+        if (Test-Path ($selectedLanguage.language + "/manual")) {
+            Copy-Item ($selectedLanguage.language + "/manual") -Recurse -Destination $langFolder -Force
+        }
+        else {
+            Write-Host -ForegroundColor Yellow "Warning: $($selectedLanguage.language)/manual not found."
+        }
 
         Copy-Item en/docfx.json $langFolder -Force
 
