@@ -22,7 +22,6 @@ function GetUserInput {
     Write-Host ""
     Write-Host -ForegroundColor Cyan "Please select an option:"
     Write-Host ""
-    Write-Host -ForegroundColor Yellow "  [Y] Include API"
     Write-Host -ForegroundColor Yellow "  [en] Build English documentation"
     foreach ($lang in $languages) {
         if ($lang.enabled -and -not $lang.isPrimary) {
@@ -30,11 +29,22 @@ function GetUserInput {
         }
     }
     Write-Host -ForegroundColor Yellow "  [all] Build documentation in all available languages"
-    Write-Host -ForegroundColor Yellow "  [R] Run local website"
-    Write-Host -ForegroundColor Yellow "  [C] Cancel"
+    Write-Host -ForegroundColor Yellow "  [r] Run local website"
+    Write-Host -ForegroundColor Yellow "  [c] Cancel"
     Write-Host ""
 
-    return Read-Host -Prompt "Your choice (y/n/r/c/..)"
+    return Read-Host -Prompt "Your choice"
+}
+
+function AskIncludeAPI {
+    Write-Host ""
+    Write-Host -ForegroundColor Cyan "Do you want to include API?"
+    Write-Host ""
+    Write-Host -ForegroundColor Yellow "  [Y] Yes"
+    Write-Host -ForegroundColor Yellow "  [N] No"
+    Write-Host ""
+
+    return (Read-Host -Prompt "Your choice (Y/N)").ToLower() -eq "y"
 }
 
 function Copy-ExtraItems {
@@ -50,6 +60,7 @@ function HandleCancel {
 
 function RunLocalWebsite {
     Write-Host -ForegroundColor Green "Running local website..."
+    Write-Host -ForegroundColor Green "Navigate manually to non English website, if you didn't build English documentation."
     Stop-Transcript
     New-Item -ItemType Directory -Force -Path _site | Out-Null
     Set-Location _site
@@ -188,7 +199,6 @@ if (-not $API)
 {
     $userInput = GetUserInput
 
-    $API = $userInput -eq "y" -or $userInput -eq "Y"
     $enLanguage = $userInput -eq "en"
     $allLanguages = $userInput -eq "all"
     $runLocalWebsite = $userInput -eq "r" -or $userInput -eq "R"
@@ -196,9 +206,15 @@ if (-not $API)
 
     # Check if user input matches any non-English language build
     $selectedLanguage = $languages | Where-Object { $_.language -eq $userInput -and $_.enabled -and -not $_.isPrimary }
+
     if ($selectedLanguage)
     {
         $buildSelectedLanguage = $true
+    }
+
+    # Ask if the user wants to include API
+    if ($enLanguage -or $allLanguages -or $buildSelectedLanguage) {
+        $API = AskIncludeAPI
     }
 }
 
@@ -223,9 +239,9 @@ else
 }
 
 Write-Host -ForegroundColor Green "Generating documentation..."
-
+Write-Host ""
 Write-Warning "Note that when building docs without API, you will get UidNotFound warnings and invalid references warnings"
-
+Write-Host ""
 
 if ($enLanguage -or $allLanguages)
 {
