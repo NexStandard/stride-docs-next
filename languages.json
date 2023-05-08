@@ -10,12 +10,12 @@
     "language": "jp",
     "name": "Japanese",
     "enabled": true,
-    "notTranslatedMessage": ""
+    "notTranslatedMessage": "申し訳ありません。このページの日本語訳はございません。英語で表示いたします。"
   },
   {
     "language": "es",
     "name": "Spanish",
     "enabled": true,
-    "notTranslatedMessage": ""
+    "notTranslatedMessage": "Pido disculpas por las molestias. No hay traducción al español para esta página. Se mostrará en inglés."
   }
 ]
