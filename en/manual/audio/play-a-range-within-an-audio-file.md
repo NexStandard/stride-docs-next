@@ -11,9 +11,9 @@ You can use the following properties, methods, and structures:
 
 | Property, method, or structure | Function |
 |---------|-----------|
-| [Sound.TotalLength](xref:Stride.Audio.Sound.TotalLength) | The total length of the [sound](xref:Stride.Audio.Sound). |
-| [SoundInstance.SetRange(PlayRange)](xref:Stride.Audio.SoundInstance.SetRange(Stride.Audio.PlayRange)) | Sets the time range to play within the audio asset. |
-| [PlayRange](xref:Stride.Audio.PlayRange) | Time information, including the range's starting point and length. |
+| [SoundInstance.TotalLength](xref:Stride.Audio.SoundInstance.TotalLength()) | The total length of the [sound](xref:Stride.Audio.Sound). |
+| [SoundInstance.SetRange(PlayRange)](xref:Stride.Audio.SoundInstance.SetRange(Stride.Media.PlayRange)) | Sets the time range to play within the audio asset. |
+| [PlayRange](xref:Stride.Media.PlayRange) | Time information, including the range's starting point and length. |
 | [SoundInstance.Position](xref:Stride.Audio.SoundInstance.Position) | Gets the current play position as **TimeSpan**. |
 
 For example:
