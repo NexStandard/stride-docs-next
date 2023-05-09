@@ -157,6 +157,7 @@ function BuildNonEnglishDoc {
 
         Write-Host "End write files"
 
+        # overwrite en manual page with translated manual page
         if (Test-Path ($selectedLanguage.language + "/index.md")) {
             Copy-Item ($selectedLanguage.language + "/index.md") $langFolder -Force
         }
@@ -164,7 +165,7 @@ function BuildNonEnglishDoc {
             Write-Host -ForegroundColor Yellow "Warning: $($selectedLanguage.language)/index.md not found. English version will be used."
         }
 
-        # overwrite en manual with translated manual
+        # overwrite en manual pages with translated manual pages
         if (Test-Path ($selectedLanguage.language + "/manual")) {
             Copy-Item ($selectedLanguage.language + "/manual") -Recurse -Destination $langFolder -Force
         }
@@ -172,6 +173,7 @@ function BuildNonEnglishDoc {
             Write-Host -ForegroundColor Yellow "Warning: $($selectedLanguage.language)/manual not found."
         }
 
+        # we copy the docfx.json file from en folder to the selected language folder, so we can keep the same settings and maitain just one docfx.json file
         Copy-Item en/docfx.json $langFolder -Force
 
         (Get-Content $langFolder/docfx.json) -replace "_site/en","_site/$($selectedLanguage.language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
@@ -180,7 +182,7 @@ function BuildNonEnglishDoc {
 
         Remove-Item $langFolder -recurse
 
-        PostProcessingDocFxDocUrl -selectedLanguage $selectedLanguage -posts $posts
+        PostProcessingDocFxDocUrl -selectedLanguage $selectedLanguage
 
         if ($LastExitCode -ne 0)
         {
@@ -210,9 +212,10 @@ function BuildAllLanguagesDocs {
 # GitHub links. This function does that.
 function PostProcessingDocFxDocUrl {
     param (
-        $selectedLanguage,
-        $posts
+        $selectedLanguage
     )
+
+    $posts = Get-ChildItem "$($selectedLanguage.language)/*.md" -Recurse -Force
 
     # Get a list of all HTML files in the _site/<language> directory
     $htmlFiles = Get-ChildItem _site/$($selectedLanguage.language)/*.html -Recurse
@@ -241,8 +244,8 @@ function PostProcessingDocFxDocUrl {
         # Check if the HTML file is from the $posts collection
         if ($relativePostPaths -contains $relativeHtmlPath) {
             # Replace /<language>_tmp/ with /<language>/ in the content
-            $content = $content -replace $pattern, '${1}/' + $selectedLanguage.language + '/${3}'
-            $content = $content -replace $pattern2, '${1}/' + $selectedLanguage.language + '/${3}'
+            $content = $content -replace $pattern, "`${1}/$($selectedLanguage.language)/`${3}"
+            $content = $content -replace $pattern2, "`${1}/$($selectedLanguage.language)/`${3}"
         } else {
             # Replace /<language>_tmp/ with /en/ in the content
             $content = $content -replace $pattern, '${1}/en/${3}'
