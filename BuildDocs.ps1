@@ -5,7 +5,7 @@ param (
 # To Do fix, GitHub references, fix sitemap links to latest/en/
 
 function Read-LanguageConfigurations {
-    return Get-Content 'languages.json' | ConvertFrom-Json
+    return Get-Content 'languages.json' -Encoding UTF8 | ConvertFrom-Json
 }
 
 function Remove-BuildLogFile {
@@ -122,20 +122,22 @@ function BuildNonEnglishDoc {
             New-Item -Path $langFolder -ItemType "directory"
         }
 
-        # Copy all files from en folder to language folder, this way we can keep en files that are not translated
+        # Copy all files from en folder to the selected language folder, this way we can keep en files that are not translated
         Copy-Item en/* -Recurse $langFolder -Force
 
+        # Get all translated files from the selected language folder
         $posts = Get-ChildItem $langFolder/manual/*.md -Recurse -Force
 
         Write-Host "Start write files:"
 
+        # Mark files as not translated if they are not in the toc.md file
         Foreach ($post in $posts)
         {
             if($post.ToString().Contains("toc.md")) {
                 continue;
             }
 
-            $data = Get-Content $post
+            $data = Get-Content $post -Encoding UTF8
             $i = 0;
             Foreach ($line in $data)
             {
@@ -159,7 +161,7 @@ function BuildNonEnglishDoc {
             Copy-Item ($selectedLanguage.language + "/index.md") $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($selectedLanguage.language)/index.md not found."
+            Write-Host -ForegroundColor Yellow "Warning: $($selectedLanguage.language)/index.md not found. English version will be used."
         }
 
         # overwrite en manual with translated manual
