@@ -122,6 +122,7 @@ function BuildNonEnglishDoc {
             New-Item -Path $langFolder -ItemType "directory"
         }
 
+        # Copy all files from en folder to language folder, this way we can keep en files that are not translated
         Copy-Item en/* -Recurse $langFolder -Force
 
         $posts = Get-ChildItem $langFolder/manual/*.md -Recurse -Force
@@ -161,6 +162,7 @@ function BuildNonEnglishDoc {
             Write-Host -ForegroundColor Yellow "Warning: $($selectedLanguage.language)/index.md not found."
         }
 
+        # overwrite en manual with translated manual
         if (Test-Path ($selectedLanguage.language + "/manual")) {
             Copy-Item ($selectedLanguage.language + "/manual") -Recurse -Destination $langFolder -Force
         }
@@ -202,6 +204,8 @@ function BuildAllLanguagesDocs {
     }
 }
 
+# docfx generates GitHub link based on the temp _tmp folder, which we need to correct to correct
+# GitHub links. This function does that.
 function PostProcessingDocFxDocUrl {
     param (
         $selectedLanguage,
@@ -229,19 +233,25 @@ function PostProcessingDocFxDocUrl {
         # Define a regex pattern to match the meta tag with name="docfx:docurl"
         $pattern = '(<meta name="docfx:docurl" content=".*?)(/' + $selectedLanguage.language + '_tmp/)(.*?">)'
 
+        # Define a regex pattern to match the href attribute in the <a> tags
+        $pattern2 = '(<a href=".*?)(/' + $selectedLanguage.language + '_tmp/)(.*?">)'
+
         # Check if the HTML file is from the $posts collection
         if ($relativePostPaths -contains $relativeHtmlPath) {
             # Replace /<language>_tmp/ with /<language>/ in the content
             $content = $content -replace $pattern, '${1}/' + $selectedLanguage.language + '/${3}'
+            $content = $content -replace $pattern2, '${1}/' + $selectedLanguage.language + '/${3}'
         } else {
             # Replace /<language>_tmp/ with /en/ in the content
             $content = $content -replace $pattern, '${1}/en/${3}'
+            $content = $content -replace $pattern2, '${1}/en/${3}'
         }
 
         # Write the updated content back to the HTML file
         $content | Set-Content -Encoding UTF8 $htmlFile
 
         $processedCount++
+
         Write-Progress -Activity "Processing files" -Status "$processedCount of $($htmlFiles.Count) processed" -PercentComplete (($processedCount / $htmlFiles.Count) * 100)
 
     }
