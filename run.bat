@@ -1,1 +1,1 @@
-powershell.exe -ExecutionPolicy Bypass -File "build-next.ps1"
+powershell.exe -ExecutionPolicy Bypass -File "BuildDocs.ps1"

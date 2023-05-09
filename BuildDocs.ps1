@@ -143,7 +143,7 @@ function BuildNonEnglishDoc {
                 {
                     Write-Host $post
 
-                    $data[$i-1]="> [!WARNING]`r`n> Dangerous certain consequences of an action.`r`n"
+                    $data[$i-1]="> [!WARNING]`r`n" + "> " + $selectedLanguage.notTranslatedMessage + "`r`n"
 
                     $data | Out-File -Encoding UTF8 $post
 
