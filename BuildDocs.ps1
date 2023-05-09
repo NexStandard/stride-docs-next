@@ -170,11 +170,13 @@ function BuildNonEnglishDoc {
 
         Copy-Item en/docfx.json $langFolder -Force
 
-        (Get-Content $langFolder/docfx.json) -replace "_site/en","_site/$($selectedLanguage.language)" | Set-Content $langFolder/docfx.json
+        (Get-Content $langFolder/docfx.json) -replace "_site/en","_site/$($selectedLanguage.language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
 
         docfx build $langFolder\docfx.json
 
         Remove-Item $langFolder -recurse
+
+        PostProcessingDocFxDocUrl -selectedLanguage $selectedLanguage -posts $posts
 
         if ($LastExitCode -ne 0)
         {
@@ -198,6 +200,53 @@ function BuildAllLanguagesDocs {
 
         }
     }
+}
+
+function PostProcessingDocFxDocUrl {
+    param (
+        $selectedLanguage,
+        $posts
+    )
+
+    # Get a list of all HTML files in the _site/<language> directory
+    $htmlFiles = Get-ChildItem _site/$($selectedLanguage.language)/*.html -Recurse
+
+    # Get the relative paths of the posts
+    $relativePostPaths = $posts | ForEach-Object { $_.FullName.Replace((Resolve-Path $selectedLanguage.language).Path + '\', '') }
+
+    Write-Host -ForegroundColor Yellow "Post-processing docfx:docurl in $($htmlFiles.Count) files..."
+
+    $processedCount = 0
+
+    foreach ($htmlFile in $htmlFiles) {
+
+        # Get the relative path of the HTML file
+        $relativeHtmlPath = $htmlFile.FullName.Replace((Resolve-Path "_site/$($selectedLanguage.language)").Path + '\', '').Replace('.html', '.md')
+
+        # Read the content of the HTML file
+        $content = Get-Content $htmlFile
+
+        # Define a regex pattern to match the meta tag with name="docfx:docurl"
+        $pattern = '(<meta name="docfx:docurl" content=".*?)(/' + $selectedLanguage.language + '_tmp/)(.*?">)'
+
+        # Check if the HTML file is from the $posts collection
+        if ($relativePostPaths -contains $relativeHtmlPath) {
+            # Replace /<language>_tmp/ with /<language>/ in the content
+            $content = $content -replace $pattern, '${1}/' + $selectedLanguage.language + '/${3}'
+        } else {
+            # Replace /<language>_tmp/ with /en/ in the content
+            $content = $content -replace $pattern, '${1}/en/${3}'
+        }
+
+        # Write the updated content back to the HTML file
+        $content | Set-Content -Encoding UTF8 $htmlFile
+
+        $processedCount++
+        Write-Progress -Activity "Processing files" -Status "$processedCount of $($htmlFiles.Count) processed" -PercentComplete (($processedCount / $htmlFiles.Count) * 100)
+
+    }
+
+    Write-Host -ForegroundColor Green "Post-processing completed."
 }
 
 # Main script execution starts here
