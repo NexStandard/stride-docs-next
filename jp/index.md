@@ -1,9 +1,3 @@
-<style>
-	.sideaffix, .breadcrumb, style+h1 {
-		display: none;
-	}
-</style>
-
 # Stride documentation
 <ul class="stride-documentation-list col-md-8 col-sm-12 col-lg-7">
 	<li>
