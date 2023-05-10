@@ -42,6 +42,7 @@ jobs:
 
     - name: Build documentation
       run: stride-docs/build-all.bat
+      working-directory: stride-docs
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
