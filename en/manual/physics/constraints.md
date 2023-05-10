@@ -1,6 +1,6 @@
 # Constraints
 
-<div class="doc-incomplete"/>
+[!INCLUDE [stride-studio-note](../../includes/under-construction-note.md)]
 
 <span class="label label-doc-level">Advanced</span>
 <span class="label label-doc-audience">Programmer</span>
