@@ -37,44 +37,11 @@ jobs:
     - name: Copy global.json file
       run: xcopy stride-docs\global.json . /Y
 
-#    - name: Copy libbulletc.dll file
-#      run: xcopy "stride\deps\BulletPhysics\dotnet\win-x64\libbulletc.dll" "stride-docs\en\bin\" /Y
-
-#    - name: Copy BulletSharp.NetStandard.dll file
-#      run: xcopy "stride\deps\BulletPhysics\BulletSharp.NetStandard.dll" "stride-docs\en\bin\" /Y
-
-#    - name: Check the content of the folder
-#      run: |
-#        echo "Content of folder:"
-#        dir
-
     - run: dotnet tool update -g docfx
 #    - run: dotnet tool install -g docfx --version 2.65.1
 
-#    - name: Check the content of the folder
-#      run: |
-#        echo "Content of folder:"
-#        dir
-#      working-directory: stride-docs
-
-#    - name: Add msbuild to PATH
-#      uses: microsoft/setup-msbuild@v1.1.3
-
-#    - name: Build app for release
-#      run: msbuild /t:Restore Stride.sln
-#      working-directory: stride/build
-
-#    - name: Run compile
-#      run: ./compile.bat
-#      working-directory: stride/build
-
-#    - name: Run en-build.bat
-#      run: ./en-build.bat
-#      working-directory: stride-docs
-#      shell: pwsh
-
-    - run: docfx stride-docs/en/docfx.json
-#      continue-on-error: true
+    - name: Build documentation
+      run: stride-docs/build-all.bat
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3

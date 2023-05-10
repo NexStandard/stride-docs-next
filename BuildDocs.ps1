@@ -250,7 +250,6 @@ function PostProcessingDocFxDocUrl {
         # Define a regex pattern to match the href attribute in the <a> tags
         $pattern2 = '(<a href=".*?)(/' + $selectedLanguage.language + $TmpDir + '/)(.*?">)'
 
-
         # Check if the HTML file is from the $posts collection
         if ($relativePostPaths -contains $relativeHtmlPath) {
             # Replace /<language>_tmp/ with /<language>/ in the content
@@ -267,8 +266,11 @@ function PostProcessingDocFxDocUrl {
 
         $processedCount++
 
-        Write-Progress -Activity "Processing files" -Status "$processedCount of $($htmlFiles.Count) processed" -PercentComplete (($processedCount / $htmlFiles.Count) * 100)
-
+        # Check if the script is running in an interactive session before writing progress
+        # We don't want to write progress when running in a non-interactive session, such as in a build pipeline
+        if ($host.UI.RawUI) {
+            Write-Progress -Activity "Processing files" -Status "$processedCount of $($htmlFiles.Count) processed" -PercentComplete (($processedCount / $htmlFiles.Count) * 100)
+        }
     }
 
     Write-Host -ForegroundColor Green "Post-processing completed."
