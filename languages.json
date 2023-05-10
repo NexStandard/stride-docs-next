@@ -15,7 +15,7 @@
   {
     "language": "es",
     "name": "Spanish",
-    "enabled": true,
+    "enabled": false,
     "notTranslatedMessage": "Pido disculpas por las molestias. No hay traducción al español para esta página. Se mostrará en inglés."
   }
 ]
