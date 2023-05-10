@@ -41,7 +41,7 @@ jobs:
 #    - run: dotnet tool install -g docfx --version 2.65.1
 
     - name: Build documentation
-      run: stride-docs/build-all.bat
+      run: ./build-all.bat
       working-directory: stride-docs
 
     - name: Deploy
