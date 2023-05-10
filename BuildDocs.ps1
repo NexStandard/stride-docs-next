@@ -1,6 +1,10 @@
 param (
-    [switch]$API
+    [switch]$BuildAll
 )
+
+# Define constants
+$TmpDir = "_tmp"
+$SiteDir = "_site"
 
 # To Do fix, GitHub references, fix sitemap links to latest/en/
 
@@ -48,8 +52,9 @@ function AskIncludeAPI {
 }
 
 function Copy-ExtraItems {
-    Copy-Item en/ReleaseNotes/ReleaseNotes.md _site/en/ReleaseNotes/
+    Copy-Item en/ReleaseNotes/ReleaseNotes.md "$SiteDir/en/ReleaseNotes/"
 }
+
 
 function HandleCancel {
     Write-Host -ForegroundColor Red "Operation canceled by user."
@@ -62,8 +67,8 @@ function RunLocalWebsite {
     Write-Host -ForegroundColor Green "Running local website..."
     Write-Host -ForegroundColor Green "Navigate manually to non English website, if you didn't build English documentation."
     Stop-Transcript
-    New-Item -ItemType Directory -Force -Path _site | Out-Null
-    Set-Location _site
+    New-Item -ItemType Directory -Force -Path $SiteDir | Out-Null
+    Set-Location $SiteDir
     Start-Process -FilePath "http://localhost:8080/en/index.html"
     docfx serve
     Set-Location ..
@@ -113,7 +118,8 @@ function BuildNonEnglishDoc {
 
         Write-Host -ForegroundColor Yellow "Start building $($selectedLanguage.name) documentation."
 
-        $langFolder = "$($selectedLanguage.language)_tmp"
+        $langFolder = "$($selectedLanguage.language)$TmpDir"
+
 
         If(Test-Path $langFolder){
             Remove-Item $langFolder/* -recurse
@@ -176,7 +182,8 @@ function BuildNonEnglishDoc {
         # we copy the docfx.json file from en folder to the selected language folder, so we can keep the same settings and maitain just one docfx.json file
         Copy-Item en/docfx.json $langFolder -Force
 
-        (Get-Content $langFolder/docfx.json) -replace "_site/en","_site/$($selectedLanguage.language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
+        (Get-Content $langFolder/docfx.json) -replace "$SiteDir/en","$SiteDir/$($selectedLanguage.language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
+
 
         docfx build $langFolder\docfx.json
 
@@ -218,7 +225,8 @@ function PostProcessingDocFxDocUrl {
     $posts = Get-ChildItem "$($selectedLanguage.language)/*.md" -Recurse -Force
 
     # Get a list of all HTML files in the _site/<language> directory
-    $htmlFiles = Get-ChildItem _site/$($selectedLanguage.language)/*.html -Recurse
+    $htmlFiles = Get-ChildItem "$SiteDir/$($selectedLanguage.language)/*.html" -Recurse
+
 
     # Get the relative paths of the posts
     $relativePostPaths = $posts | ForEach-Object { $_.FullName.Replace((Resolve-Path $selectedLanguage.language).Path + '\', '') }
@@ -230,16 +238,18 @@ function PostProcessingDocFxDocUrl {
     foreach ($htmlFile in $htmlFiles) {
 
         # Get the relative path of the HTML file
-        $relativeHtmlPath = $htmlFile.FullName.Replace((Resolve-Path "_site/$($selectedLanguage.language)").Path + '\', '').Replace('.html', '.md')
+        $relativeHtmlPath = $htmlFile.FullName.Replace((Resolve-Path "$SiteDir/$($selectedLanguage.language)").Path + '\', '').Replace('.html', '.md')
+
 
         # Read the content of the HTML file
         $content = Get-Content $htmlFile
 
         # Define a regex pattern to match the meta tag with name="docfx:docurl"
-        $pattern = '(<meta name="docfx:docurl" content=".*?)(/' + $selectedLanguage.language + '_tmp/)(.*?">)'
+        $pattern = '(<meta name="docfx:docurl" content=".*?)(/' + $selectedLanguage.language + $TmpDir + '/)(.*?">)'
 
         # Define a regex pattern to match the href attribute in the <a> tags
-        $pattern2 = '(<a href=".*?)(/' + $selectedLanguage.language + '_tmp/)(.*?">)'
+        $pattern2 = '(<a href=".*?)(/' + $selectedLanguage.language + $TmpDir + '/)(.*?">)'
+
 
         # Check if the HTML file is from the $posts collection
         if ($relativePostPaths -contains $relativeHtmlPath) {
@@ -272,8 +282,12 @@ Remove-BuildLogFile
 
 Start-LogTranscript
 
-# If $API parameter is not provided, ask the user
-if (-not $API)
+if ($BuildAll)
+{
+    $allLanguages = $true
+    $API = $true
+}
+else
 {
     $userInput = GetUserInput
 
