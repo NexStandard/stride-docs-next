@@ -113,7 +113,7 @@
         "exclude": [ "_site/**", "obj/**" ]
       }
     ],
-    "dest": "_site",
+    "dest": "../_site/en",
     "globalMetadataFiles": [],
     "markdownEngineProperties": {
       "toc": {
