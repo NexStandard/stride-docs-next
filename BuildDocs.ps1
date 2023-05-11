@@ -185,10 +185,10 @@ function Build-NonEnglishDoc {
 
 function Build-AllLanguagesDocs {
     param (
-        [array]$languages
+        [array]$Languages
     )
 
-    foreach ($lang in $languages) {
+    foreach ($lang in $Languages) {
         if ($lang.enabled -and -not $lang.isPrimary) {
 
             Build-NonEnglishDoc -SelectedLanguage $lang
@@ -330,7 +330,7 @@ if ($enLanguage -or $allLanguages)
 
 # Build non-English language if selected or build all languages if selected
 if ($allLanguages) {
-    Build-AllLanguagesDocs -languages $languages
+    Build-AllLanguagesDocs -Languages $languages
 } elseif ($selectedLanguage) {
     Build-NonEnglishDoc -SelectedLanguage $selectedLanguage
 }
