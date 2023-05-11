@@ -12,7 +12,7 @@ function Read-LanguageConfigurations {
     return Get-Content 'languages.json' -Encoding UTF8 | ConvertFrom-Json
 }
 
-function GetUserInput {
+function Get-UserInput {
     Write-Host ""
     Write-Host -ForegroundColor Cyan "Please select an option:"
     Write-Host ""
@@ -30,7 +30,7 @@ function GetUserInput {
     return Read-Host -Prompt "Your choice"
 }
 
-function AskIncludeAPI {
+function Ask-IncludeAPI {
     Write-Host ""
     Write-Host -ForegroundColor Cyan "Do you want to include API?"
     Write-Host ""
@@ -45,7 +45,7 @@ function Copy-ExtraItems {
     Copy-Item en/ReleaseNotes/ReleaseNotes.md "$SiteDir/en/ReleaseNotes/"
 }
 
-function RunLocalWebsite {
+function Start-LocalWebsite {
     Write-Host -ForegroundColor Green "Running local website..."
     Write-Host -ForegroundColor Green "Navigate manually to non English website, if you didn't build English documentation."
     Stop-Transcript
@@ -57,7 +57,7 @@ function RunLocalWebsite {
     exit
 }
 
-function GenerateAPIDoc {
+function Generate-APIDoc {
     Write-Host -ForegroundColor Green "Generating API documentation..."
 
     # Build metadata from C# source, docfx runs dotnet restore
@@ -70,7 +70,7 @@ function GenerateAPIDoc {
     }
 }
 
-function EraseAPIDoc {
+function Remove-APIDoc {
     if (Test-Path en/api/.manifest) {
         Write-Host -ForegroundColor Green "Erasing API documentation..."
         Remove-Item en/api/*yml -recurse
@@ -78,7 +78,7 @@ function EraseAPIDoc {
     }
 }
 
-function BuildEnglishDoc {
+function Build-EnglishDoc {
     Write-Host -ForegroundColor Yellow "Start building English documentation."
 
     # Output to both build.log and console
@@ -91,7 +91,7 @@ function BuildEnglishDoc {
     }
 }
 
-function BuildNonEnglishDoc {
+function Build-NonEnglishDoc {
     param (
         $SelectedLanguage
     )
@@ -171,7 +171,7 @@ function BuildNonEnglishDoc {
 
         Remove-Item $langFolder -recurse
 
-        PostProcessingDocFxDocUrl -SelectedLanguage $SelectedLanguage
+        PostProcessing-DocFxDocUrl -SelectedLanguage $SelectedLanguage
 
         if ($LastExitCode -ne 0)
         {
@@ -183,7 +183,7 @@ function BuildNonEnglishDoc {
     }
 }
 
-function BuildAllLanguagesDocs {
+function Build-AllLanguagesDocs {
     param (
         [array]$languages
     )
@@ -191,7 +191,7 @@ function BuildAllLanguagesDocs {
     foreach ($lang in $languages) {
         if ($lang.enabled -and -not $lang.isPrimary) {
 
-            BuildNonEnglishDoc -SelectedLanguage $lang
+            Build-NonEnglishDoc -SelectedLanguage $lang
 
         }
     }
@@ -199,7 +199,7 @@ function BuildAllLanguagesDocs {
 
 # docfx generates GitHub link based on the temp _tmp folder, which we need to correct to correct
 # GitHub links. This function does that.
-function PostProcessingDocFxDocUrl {
+function PostProcessing-DocFxDocUrl {
     param (
         $SelectedLanguage
     )
@@ -271,7 +271,7 @@ if ($BuildAll)
 }
 else
 {
-    $userInput = GetUserInput
+    $userInput = Get-UserInput
 
     $enLanguage = $userInput -eq "en"
     $allLanguages = $userInput -eq "all"
@@ -288,7 +288,7 @@ else
 
     # Ask if the user wants to include API
     if ($enLanguage -or $allLanguages -or $buildSelectedLanguage) {
-        $API = AskIncludeAPI
+        $API = Ask-IncludeAPI
     }
 }
 
@@ -302,17 +302,17 @@ if ($cancel)
 
 if ($runLocalWebsite)
 {
-    RunLocalWebsite
+    Start-LocalWebsite
 }
 
 # Generate API doc
 if ($API)
 {
-    GenerateAPIDoc
+    Generate-APIDoc
 }
 else
 {
-    EraseAPIDoc
+    Remove-APIDoc
 }
 
 Write-Host -ForegroundColor Green "Generating documentation..."
@@ -322,7 +322,7 @@ Write-Host ""
 
 if ($enLanguage -or $allLanguages)
 {
-   BuildEnglishDoc
+   Build-EnglishDoc
 }
 
 # Do we need this?
@@ -330,9 +330,9 @@ if ($enLanguage -or $allLanguages)
 
 # Build non-English language if selected or build all languages if selected
 if ($allLanguages) {
-    BuildAllLanguagesDocs -languages $languages
+    Build-AllLanguagesDocs -languages $languages
 } elseif ($selectedLanguage) {
-    BuildNonEnglishDoc -selectedLanguage $selectedLanguage
+    Build-NonEnglishDoc -SelectedLanguage $selectedLanguage
 }
 
 Stop-Transcript
