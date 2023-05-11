@@ -55,14 +55,6 @@ function Copy-ExtraItems {
     Copy-Item en/ReleaseNotes/ReleaseNotes.md "$SiteDir/en/ReleaseNotes/"
 }
 
-
-function HandleCancel {
-    Write-Host -ForegroundColor Red "Operation canceled by user."
-    Stop-Transcript
-    Read-Host -Prompt "Press ENTER key to exit..."
-    exit
-}
-
 function RunLocalWebsite {
     Write-Host -ForegroundColor Green "Running local website..."
     Write-Host -ForegroundColor Green "Navigate manually to non English website, if you didn't build English documentation."
@@ -314,7 +306,10 @@ else
 
 if ($cancel)
 {
-    HandleCancel
+    Write-Host -ForegroundColor Red "Operation canceled by user."
+    Stop-Transcript
+    Read-Host -Prompt "Press ENTER key to exit..."
+    return
 }
 
 if ($runLocalWebsite)
