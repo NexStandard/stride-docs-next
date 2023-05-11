@@ -12,16 +12,6 @@ function Read-LanguageConfigurations {
     return Get-Content 'languages.json' -Encoding UTF8 | ConvertFrom-Json
 }
 
-function Remove-BuildLogFile {
-    if (Test-Path build.log) {
-        Remove-Item build.log
-    }
-}
-
-function Start-LogTranscript {
-    Start-Transcript -Path build.log
-}
-
 function GetUserInput {
     Write-Host ""
     Write-Host -ForegroundColor Cyan "Please select an option:"
@@ -272,9 +262,7 @@ function PostProcessingDocFxDocUrl {
 
 $languages = Read-LanguageConfigurations
 
-Remove-BuildLogFile
-
-Start-LogTranscript
+Start-Transcript -Path ".\build.log"
 
 if ($BuildAll)
 {
