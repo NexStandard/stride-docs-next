@@ -49,7 +49,7 @@ function Start-LocalWebsite {
     Write-Host -ForegroundColor Green "Running local website..."
     Write-Host -ForegroundColor Green "Navigate manually to non English website, if you didn't build English documentation."
     Stop-Transcript
-    New-Item -ItemType Directory -Force -Path $SiteDir | Out-Null
+    New-Item -ItemType Directory -Verbose -Force -Path $SiteDir | Out-Null
     Set-Location $SiteDir
     Start-Process -FilePath "http://localhost:8080/en/index.html"
     docfx serve
@@ -73,8 +73,8 @@ function Generate-APIDoc {
 function Remove-APIDoc {
     if (Test-Path en/api/.manifest) {
         Write-Host -ForegroundColor Green "Erasing API documentation..."
-        Remove-Item en/api/*yml -recurse
-        Remove-Item en/api/.manifest
+        Remove-Item en/api/*yml -recurse -Verbose
+        Remove-Item en/api/.manifest -Verbose
     }
 }
 
@@ -104,10 +104,10 @@ function Build-NonEnglishDoc {
 
 
         if(Test-Path $langFolder){
-            Remove-Item $langFolder/* -recurse
+            Remove-Item $langFolder/* -recurse -Verbose
         }
         else{
-            New-Item -Path $langFolder -ItemType "directory"
+            New-Item -Path $langFolder -ItemType Directory -Verbose
         }
 
         # Copy all files from en folder to the selected language folder, this way we can keep en files that are not translated
@@ -168,7 +168,7 @@ function Build-NonEnglishDoc {
 
         docfx build $langFolder\docfx.json
 
-        Remove-Item $langFolder -recurse
+        Remove-Item $langFolder -Recurse -Verbose
 
         PostProcessing-DocFxDocUrl -SelectedLanguage $SelectedLanguage
 
