@@ -120,7 +120,7 @@ function Build-NonEnglishDoc {
         Copy-Item en/* -Recurse $langFolder -Force
 
         # Get all translated files from the selected language folder
-        $posts = Get-ChildItem $langFolder/manual/*.md -Recurse -Force
+        $posts = Get-ChildItem "$langFolder/$($Settings.ManualFolderName)/*".md -Recurse -Force
 
         Write-Host "Start write files:"
 
@@ -163,7 +163,7 @@ function Build-NonEnglishDoc {
             Copy-Item ($SelectedLanguage.language + "/" + $Settings.ManualFolderName) -Recurse -Destination $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.language)/manual not found."
+            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.language)/$($Settings.ManualFolderName) not found."
         }
 
         # we copy the docfx.json file from en folder to the selected language folder, so we can keep the same settings and maitain just one docfx.json file
