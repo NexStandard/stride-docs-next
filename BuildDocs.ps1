@@ -103,10 +103,10 @@ function Build-NonEnglishDoc {
         $langFolder = "$($SelectedLanguage.language)$TmpDir"
 
 
-        If(Test-Path $langFolder){
+        if(Test-Path $langFolder){
             Remove-Item $langFolder/* -recurse
         }
-        Else{
+        else{
             New-Item -Path $langFolder -ItemType "directory"
         }
 
@@ -119,17 +119,16 @@ function Build-NonEnglishDoc {
         Write-Host "Start write files:"
 
         # Mark files as not translated if they are not in the toc.md file
-        Foreach ($post in $posts)
+        foreach ($post in $posts)
         {
             if($post.ToString().Contains("toc.md")) {
                 continue;
             }
 
             $data = Get-Content $post -Encoding UTF8
-            $i = 0;
-            Foreach ($line in $data)
+            for ($i = 0; $i -lt $data.Length; $i++)
             {
-                $i++
+                $line = $data[$i];
                 if ($line.length -le 0)
                 {
                     Write-Host $post
@@ -209,19 +208,15 @@ function PostProcessing-DocFxDocUrl {
     # Get a list of all HTML files in the _site/<language> directory
     $htmlFiles = Get-ChildItem "$SiteDir/$($SelectedLanguage.language)/*.html" -Recurse
 
-
     # Get the relative paths of the posts
     $relativePostPaths = $posts | ForEach-Object { $_.FullName.Replace((Resolve-Path $SelectedLanguage.language).Path + '\', '') }
 
     Write-Host -ForegroundColor Yellow "Post-processing docfx:docurl in $($htmlFiles.Count) files..."
 
-    $processedCount = 0
-
-    foreach ($htmlFile in $htmlFiles) {
-
+    for ($i = 0; $i -lt $htmlFiles.Count; $i++) {
+        $htmlFile = $htmlFiles[$i]
         # Get the relative path of the HTML file
         $relativeHtmlPath = $htmlFile.FullName.Replace((Resolve-Path "$SiteDir/$($SelectedLanguage.language)").Path + '\', '').Replace('.html', '.md')
-
 
         # Read the content of the HTML file
         $content = Get-Content $htmlFile
@@ -246,12 +241,10 @@ function PostProcessing-DocFxDocUrl {
         # Write the updated content back to the HTML file
         $content | Set-Content -Encoding UTF8 $htmlFile
 
-        $processedCount++
-
         # Check if the script is running in an interactive session before writing progress
         # We don't want to write progress when running in a non-interactive session, such as in a build pipeline
         if ($host.UI.RawUI) {
-            Write-Progress -Activity "Processing files" -Status "$processedCount of $($htmlFiles.Count) processed" -PercentComplete (($processedCount / $htmlFiles.Count) * 100)
+            Write-Progress -Activity "Processing files" -Status "$i of $($htmlFiles.Count) processed" -PercentComplete (($i / $htmlFiles.Count) * 100)
         }
     }
 
