@@ -3,13 +3,19 @@ param (
 )
 
 # Define constants
-$TmpDir = "_tmp"
-$SiteDir = "_site"
+$Settings = [PSCustomObject]@{
+    LanguageJsonPath = ".\languages.json"
+    TempDirectory = "_tmp"
+    SiteDirectory = "_site"
+    HostUrl = "http://localhost:8080/en/index.html"
+    IndexFileName = "index.md"
+    ManualFolderName = "manual"
+}
 
 # To Do fix, GitHub references, fix sitemap links to latest/en/
 
 function Read-LanguageConfigurations {
-    return Get-Content 'languages.json' -Encoding UTF8 | ConvertFrom-Json
+    return Get-Content $Settings.LanguageJsonPath -Encoding UTF8 | ConvertFrom-Json
 }
 
 function Get-UserInput {
@@ -42,16 +48,16 @@ function Ask-IncludeAPI {
 }
 
 function Copy-ExtraItems {
-    Copy-Item en/ReleaseNotes/ReleaseNotes.md "$SiteDir/en/ReleaseNotes/"
+    Copy-Item en/ReleaseNotes/ReleaseNotes.md "$($Settings.SiteDirectory)/en/ReleaseNotes/"
 }
 
 function Start-LocalWebsite {
     Write-Host -ForegroundColor Green "Running local website..."
     Write-Host -ForegroundColor Green "Navigate manually to non English website, if you didn't build English documentation."
     Stop-Transcript
-    New-Item -ItemType Directory -Force -Path $SiteDir | Out-Null
-    Set-Location $SiteDir
-    Start-Process -FilePath "http://localhost:8080/en/index.html"
+    New-Item -ItemType Directory -Verbose -Force -Path $Settings.SiteDirectory | Out-Null
+    Set-Location $Settings.SiteDirectory
+    Start-Process -FilePath $Settings.HostUrl
     docfx serve
     Set-Location ..
     exit
@@ -73,8 +79,8 @@ function Generate-APIDoc {
 function Remove-APIDoc {
     if (Test-Path en/api/.manifest) {
         Write-Host -ForegroundColor Green "Erasing API documentation..."
-        Remove-Item en/api/*yml -recurse
-        Remove-Item en/api/.manifest
+        Remove-Item en/api/*yml -recurse -Verbose
+        Remove-Item en/api/.manifest -Verbose
     }
 }
 
@@ -100,21 +106,21 @@ function Build-NonEnglishDoc {
 
         Write-Host -ForegroundColor Yellow "Start building $($SelectedLanguage.name) documentation."
 
-        $langFolder = "$($SelectedLanguage.language)$TmpDir"
+        $langFolder = "$($SelectedLanguage.language)$($Settings.TempDirectory)"
 
 
         if(Test-Path $langFolder){
-            Remove-Item $langFolder/* -recurse
+            Remove-Item $langFolder/* -recurse -Verbose
         }
         else{
-            New-Item -Path $langFolder -ItemType "directory"
+            New-Item -Path $langFolder -ItemType Directory -Verbose
         }
 
         # Copy all files from en folder to the selected language folder, this way we can keep en files that are not translated
         Copy-Item en/* -Recurse $langFolder -Force
 
         # Get all translated files from the selected language folder
-        $posts = Get-ChildItem $langFolder/manual/*.md -Recurse -Force
+        $posts = Get-ChildItem "$langFolder/$($Settings.ManualFolderName)/*".md -Recurse -Force
 
         Write-Host "Start write files:"
 
@@ -133,7 +139,7 @@ function Build-NonEnglishDoc {
                 {
                     Write-Host $post
 
-                    $data[$i-1]="> [!WARNING]`r`n" + "> " + $SelectedLanguage.notTranslatedMessage + "`r`n"
+                    $data[$i-1]="> [!WARNING]`r`n> " + $SelectedLanguage.notTranslatedMessage + "`r`n"
 
                     $data | Out-File -Encoding UTF8 $post
 
@@ -143,32 +149,32 @@ function Build-NonEnglishDoc {
         }
 
         Write-Host "End write files"
-
+        $indexFile = $Settings.IndexFileName
         # overwrite en manual page with translated manual page
-        if (Test-Path ($SelectedLanguage.language + "/index.md")) {
-            Copy-Item ($SelectedLanguage.language + "/index.md") $langFolder -Force
+        if (Test-Path ($SelectedLanguage.language + "/" + $indexFile)) {
+            Copy-Item ($SelectedLanguage.language + "/" + $indexFile) $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.language)/index.md not found. English version will be used."
+            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.language)/"+ $indexFile +" not found. English version will be used."
         }
 
         # overwrite en manual pages with translated manual pages
-        if (Test-Path ($SelectedLanguage.language + "/manual")) {
-            Copy-Item ($SelectedLanguage.language + "/manual") -Recurse -Destination $langFolder -Force
+        if (Test-Path ($SelectedLanguage.language + "/" + $Settings.ManualFolderName)) {
+            Copy-Item ($SelectedLanguage.language + "/" + $Settings.ManualFolderName) -Recurse -Destination $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.language)/manual not found."
+            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.language)/$($Settings.ManualFolderName) not found."
         }
 
         # we copy the docfx.json file from en folder to the selected language folder, so we can keep the same settings and maitain just one docfx.json file
         Copy-Item en/docfx.json $langFolder -Force
-
+        $SiteDir = $Settings.SiteDirectory
         (Get-Content $langFolder/docfx.json) -replace "$SiteDir/en","$SiteDir/$($SelectedLanguage.language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
 
 
         docfx build $langFolder\docfx.json
 
-        Remove-Item $langFolder -recurse
+        Remove-Item $langFolder -Recurse -Verbose
 
         PostProcessing-DocFxDocUrl -SelectedLanguage $SelectedLanguage
 
@@ -206,7 +212,7 @@ function PostProcessing-DocFxDocUrl {
     $posts = Get-ChildItem "$($SelectedLanguage.language)/*.md" -Recurse -Force
 
     # Get a list of all HTML files in the _site/<language> directory
-    $htmlFiles = Get-ChildItem "$SiteDir/$($SelectedLanguage.language)/*.html" -Recurse
+    $htmlFiles = Get-ChildItem "$($Settings.SiteDirectory)/$($SelectedLanguage.language)/*.html" -Recurse
 
     # Get the relative paths of the posts
     $relativePostPaths = $posts | ForEach-Object { $_.FullName.Replace((Resolve-Path $SelectedLanguage.language).Path + '\', '') }
@@ -216,16 +222,16 @@ function PostProcessing-DocFxDocUrl {
     for ($i = 0; $i -lt $htmlFiles.Count; $i++) {
         $htmlFile = $htmlFiles[$i]
         # Get the relative path of the HTML file
-        $relativeHtmlPath = $htmlFile.FullName.Replace((Resolve-Path "$SiteDir/$($SelectedLanguage.language)").Path + '\', '').Replace('.html', '.md')
+        $relativeHtmlPath = $htmlFile.FullName.Replace((Resolve-Path "$($Settings.SiteDirectory)/$($SelectedLanguage.language)").Path + '\', '').Replace('.html', '.md')
 
         # Read the content of the HTML file
         $content = Get-Content $htmlFile
 
         # Define a regex pattern to match the meta tag with name="docfx:docurl"
-        $pattern = '(<meta name="docfx:docurl" content=".*?)(/' + $SelectedLanguage.language + $TmpDir + '/)(.*?">)'
+        $pattern = '(<meta name="docfx:docurl" content=".*?)(/' + $SelectedLanguage.language + $Settings.TempDirectory+ '/)(.*?">)'
 
         # Define a regex pattern to match the href attribute in the <a> tags
-        $pattern2 = '(<a href=".*?)(/' + $SelectedLanguage.language + $TmpDir + '/)(.*?">)'
+        $pattern2 = '(<a href=".*?)(/' + $SelectedLanguage.language + $Settings.TempDirectory + '/)(.*?">)'
 
         # Check if the HTML file is from the $posts collection
         if ($relativePostPaths -contains $relativeHtmlPath) {
