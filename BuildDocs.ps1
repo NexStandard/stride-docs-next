@@ -264,33 +264,33 @@ Start-Transcript -Path ".\build.log"
 
 if ($BuildAll)
 {
-    $allLanguages = $true
+    $isAllLanguages = $true
     $API = $true
 }
 else
 {
     $userInput = Get-UserInput
 
-    $enLanguage = $userInput -eq "en"
-    $allLanguages = $userInput -eq "all"
-    $runLocalWebsite = $userInput -eq "r" -or $userInput -eq "R"
-    $cancel = $userInput -eq "c" -or $userInput -eq "C"
+    [bool]$isEnLanguage = $userInput -ieq "en"
+    [bool]$isAllLanguages = $userInput -ieq "all"
+    [bool]$shouldRunLocalWebsite = $userInput -ieq "r"
+    [bool]$isCanceled = $userInput -ieq "c"
 
     # Check if user input matches any non-English language build
     $selectedLanguage = $languages | Where-Object { $_.language -eq $userInput -and $_.enabled -and -not $_.isPrimary }
 
     if ($selectedLanguage)
     {
-        $buildSelectedLanguage = $true
+        [bool]$shouldBuildSelectedLanguage = $true
     }
 
     # Ask if the user wants to include API
-    if ($enLanguage -or $allLanguages -or $buildSelectedLanguage) {
+    if ($isEnLanguage -or $isAllLanguages -or $shouldBuildSelectedLanguage) {
         $API = Ask-IncludeAPI
     }
 }
 
-if ($cancel)
+if ($isCanceled)
 {
     Write-Host -ForegroundColor Red "Operation canceled by user."
     Stop-Transcript
@@ -298,7 +298,7 @@ if ($cancel)
     return
 }
 
-if ($runLocalWebsite)
+if ($shouldRunLocalWebsite)
 {
     Start-LocalWebsite
 }
@@ -318,7 +318,7 @@ Write-Host ""
 Write-Warning "Note that when building docs without API, you will get UidNotFound warnings and invalid references warnings"
 Write-Host ""
 
-if ($enLanguage -or $allLanguages)
+if ($isEnLanguage -or $isAllLanguages)
 {
    Build-EnglishDoc
 }
@@ -327,7 +327,7 @@ if ($enLanguage -or $allLanguages)
 # Copy-ExtraItems
 
 # Build non-English language if selected or build all languages if selected
-if ($allLanguages) {
+if ($isAllLanguages) {
     Build-AllLanguagesDocs -Languages $languages
 } elseif ($selectedLanguage) {
     Build-NonEnglishDoc -SelectedLanguage $selectedLanguage
