@@ -108,7 +108,6 @@ function Build-NonEnglishDoc {
 
         $langFolder = "$($SelectedLanguage.language)$($Settings.TempDirectory)"
 
-
         if(Test-Path $langFolder){
             Remove-Item $langFolder/* -recurse -Verbose
         }
@@ -120,7 +119,7 @@ function Build-NonEnglishDoc {
         Copy-Item en/* -Recurse $langFolder -Force
 
         # Get all translated files from the selected language folder
-        $posts = Get-ChildItem "$langFolder/$($Settings.ManualFolderName)/*".md -Recurse -Force
+        $posts = Get-ChildItem "$langFolder/$($Settings.ManualFolderName)/*.md" -Recurse -Force
 
         Write-Host "Start write files:"
 
@@ -139,7 +138,7 @@ function Build-NonEnglishDoc {
                 {
                     Write-Host $post
 
-                    $data[$i-1]="> [!WARNING]`r`n> " + $SelectedLanguage.notTranslatedMessage + "`r`n"
+                    $data[$i]="> [!WARNING]`r`n> " + $SelectedLanguage.notTranslatedMessage + "`r`n"
 
                     $data | Out-File -Encoding UTF8 $post
 
