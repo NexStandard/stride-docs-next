@@ -340,7 +340,8 @@ if ($API)
     $exitCode = Generate-APIDoc
     if($exitCode -ne 0)
     {
-        Write-Error -ForegroundColor Red "Failed to generate API metadata"
+        Write-Error -ForegroundColor Red "Failed to generate API metadata. ExitCode: $exitCode"
+        Stop-Transcript
         return $exitCode
     }
 }
@@ -359,7 +360,8 @@ if ($isEnLanguage -or $isAllLanguages)
    $exitCode = Build-EnglishDoc
    if ($exitCode -ne 0)
    {
-       Write-Error -ForegroundColor Red "Failed to build English documentation"
+       Write-Error -ForegroundColor Red "Failed to build English documentation. ExitCode: $exitCode"
+       Stop-Transcript
        return $exitCode
    }
 }
