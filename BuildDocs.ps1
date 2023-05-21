@@ -96,7 +96,6 @@ function Start-LocalWebsite {
     Start-Process -FilePath $Settings.HostUrl
     docfx serve
     Set-Location ..
-    exit
 }
 
 function Generate-APIDoc {
@@ -297,7 +296,7 @@ function PostProcessing-DocFxDocUrl {
 $languages = Read-LanguageConfigurations
 
 Start-Transcript -Path ".\build.log"
-
+[bool]$isAllLanguages = $false
 if ($BuildAll)
 {
     $isAllLanguages = $true
@@ -308,10 +307,10 @@ else
     $userInput = Get-UserInput
 
     [bool]$isEnLanguage = $userInput -ieq "en"
-    [bool]$isAllLanguages = $userInput -ieq "all"
     [bool]$shouldRunLocalWebsite = $userInput -ieq "r"
     [bool]$isCanceled = $userInput -ieq "c"
-
+    $isAllLanguages = $userInput -ieq "all"
+    
     # Check if user input matches any non-English language build
     $selectedLanguage = $languages | Where-Object { $_.Language -eq $userInput -and $_.Enabled -and -not $_.IsPrimary }
 
@@ -324,20 +323,21 @@ else
     if ($isEnLanguage -or $isAllLanguages -or $shouldBuildSelectedLanguage) {
         $API = Ask-IncludeAPI
     }
+    if ($isCanceled)
+    {
+        Write-Host -ForegroundColor Red "Operation canceled by user."
+        Stop-Transcript
+        Read-Host -Prompt "Press ENTER key to exit..."
+        return
+    }
+    
+    if ($shouldRunLocalWebsite)
+    {
+        Start-LocalWebsite
+        return
+    }
 }
 
-if ($isCanceled)
-{
-    Write-Host -ForegroundColor Red "Operation canceled by user."
-    Stop-Transcript
-    Read-Host -Prompt "Press ENTER key to exit..."
-    return
-}
-
-if ($shouldRunLocalWebsite)
-{
-    Start-LocalWebsite
-}
 
 # Generate API doc
 if ($API)
