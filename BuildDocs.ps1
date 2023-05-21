@@ -107,10 +107,13 @@ function Generate-APIDoc {
 }
 
 function Remove-APIDoc {
-    if (Test-Path en/api/.manifest) {
-        Write-Host -ForegroundColor Green "Erasing API documentation..."
+    Write-Host -ForegroundColor Green "Erasing API documentation..."
+    $APIDocPath = "en/api/.manifest"
+    if (Test-Path $APIDocPath) {
         Remove-Item en/api/*yml -recurse -Verbose
-        Remove-Item en/api/.manifest -Verbose
+        Remove-Item $APIDocPath -Verbose
+    } else{
+        Write-Warning "Could not delete APIDoc. The Path $APIDocPath does not exist or is not valid."
     }
 }
 
@@ -125,6 +128,7 @@ function Build-EnglishDoc {
         Write-Host -ForegroundColor Red "Failed to build English documentation"
         exit $LastExitCode
     }
+    return $LastExitCode
 }
 
 function Build-NonEnglishDoc {
