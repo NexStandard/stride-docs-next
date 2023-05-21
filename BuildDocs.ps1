@@ -220,7 +220,7 @@ function Build-AllLanguagesDocs {
     foreach ($lang in $Languages) {
         if ($lang.Enabled -and -not $lang.IsPrimary) {
 
-            $exitCode =  Build-NonEnglishDoc -SelectedLanguage $lang
+            $exitCode = Build-NonEnglishDoc -SelectedLanguage $lang
 
             if ($exitCode -ne 0)
             {
@@ -343,6 +343,7 @@ if ($API)
     {
         Write-Error -ForegroundColor Red "Failed to generate API metadata. ExitCode: $exitCode"
         Stop-Transcript
+        Read-Host -Prompt "Press any ENTER to exit..."
         return $exitCode
     }
 }
@@ -363,6 +364,7 @@ if ($isEnLanguage -or $isAllLanguages)
    {
        Write-Error -ForegroundColor Red "Failed to build English documentation. ExitCode: $exitCode"
        Stop-Transcript
+       Read-Host -Prompt "Press any ENTER to exit..."
        return $exitCode
    }
 }
