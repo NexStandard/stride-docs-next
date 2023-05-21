@@ -1,21 +1,21 @@
 [
   {
-    "language": "en",
-    "name": "English",
-    "enabled": true,
-    "isPrimary": true,
-    "notTranslatedMessage": ""
+    "Language": "en",
+    "Name": "English",
+    "Enabled": true,
+    "IsPrimary": true,
+    "NotTranslatedMessage": ""
   },
   {
-    "language": "jp",
-    "name": "Japanese",
-    "enabled": true,
-    "notTranslatedMessage": "申し訳ありません。このページの日本語訳はございません。英語で表示いたします。"
+    "Language": "jp",
+    "Name": "Japanese",
+    "Enabled": true,
+    "NotTranslatedMessage": "申し訳ありません。このページの日本語訳はございません。英語で表示いたします。"
   },
   {
-    "language": "es",
-    "name": "Spanish",
-    "enabled": false,
-    "notTranslatedMessage": "Pido disculpas por las molestias. No hay traducción al español para esta página. Se mostrará en inglés."
+    "Language": "es",
+    "Name": "Spanish",
+    "Enabled": false,
+    "NotTranslatedMessage": "Pido disculpas por las molestias. No hay traducción al español para esta página. Se mostrará en inglés."
   }
 ]

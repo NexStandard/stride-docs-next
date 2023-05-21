@@ -24,8 +24,8 @@ function Get-UserInput {
     Write-Host ""
     Write-Host -ForegroundColor Yellow "  [en] Build English documentation"
     foreach ($lang in $languages) {
-        if ($lang.enabled -and -not $lang.isPrimary) {
-            Write-Host -ForegroundColor Yellow "  [$($lang.language)] Build $($lang.name) documentation"
+        if ($lang.Enabled -and -not $lang.IsPrimary) {
+            Write-Host -ForegroundColor Yellow "  [$($lang.Language)] Build $($lang.Name) documentation"
         }
     }
     Write-Host -ForegroundColor Yellow "  [all] Build documentation in all available languages"
@@ -102,11 +102,11 @@ function Build-NonEnglishDoc {
         $SelectedLanguage
     )
 
-    if ($SelectedLanguage -and $SelectedLanguage.language -ne 'en') {
+    if ($SelectedLanguage -and $SelectedLanguage.Language -ne 'en') {
 
-        Write-Host -ForegroundColor Yellow "Start building $($SelectedLanguage.name) documentation."
+        Write-Host -ForegroundColor Yellow "Start building $($SelectedLanguage.Name) documentation."
 
-        $langFolder = "$($SelectedLanguage.language)$($Settings.TempDirectory)"
+        $langFolder = "$($SelectedLanguage.Language)$($Settings.TempDirectory)"
 
         if(Test-Path $langFolder){
             Remove-Item $langFolder/* -recurse -Verbose
@@ -138,7 +138,7 @@ function Build-NonEnglishDoc {
                 {
                     Write-Host $post
 
-                    $data[$i]="> [!WARNING]`r`n> " + $SelectedLanguage.notTranslatedMessage + "`r`n"
+                    $data[$i]="> [!WARNING]`r`n> " + $SelectedLanguage.NotTranslatedMessage + "`r`n"
 
                     $data | Out-File -Encoding UTF8 $post
 
@@ -150,25 +150,25 @@ function Build-NonEnglishDoc {
         Write-Host "End write files"
         $indexFile = $Settings.IndexFileName
         # overwrite en manual page with translated manual page
-        if (Test-Path ($SelectedLanguage.language + "/" + $indexFile)) {
-            Copy-Item ($SelectedLanguage.language + "/" + $indexFile) $langFolder -Force
+        if (Test-Path ($SelectedLanguage.Language + "/" + $indexFile)) {
+            Copy-Item ($SelectedLanguage.Language + "/" + $indexFile) $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.language)/"+ $indexFile +" not found. English version will be used."
+            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.Language)/"+ $indexFile +" not found. English version will be used."
         }
 
         # overwrite en manual pages with translated manual pages
-        if (Test-Path ($SelectedLanguage.language + "/" + $Settings.ManualFolderName)) {
-            Copy-Item ($SelectedLanguage.language + "/" + $Settings.ManualFolderName) -Recurse -Destination $langFolder -Force
+        if (Test-Path ($SelectedLanguage.Language + "/" + $Settings.ManualFolderName)) {
+            Copy-Item ($SelectedLanguage.Language + "/" + $Settings.ManualFolderName) -Recurse -Destination $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.language)/$($Settings.ManualFolderName) not found."
+            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.Language)/$($Settings.ManualFolderName) not found."
         }
 
         # we copy the docfx.json file from en folder to the selected language folder, so we can keep the same settings and maitain just one docfx.json file
         Copy-Item en/docfx.json $langFolder -Force
         $SiteDir = $Settings.SiteDirectory
-        (Get-Content $langFolder/docfx.json) -replace "$SiteDir/en","$SiteDir/$($SelectedLanguage.language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
+        (Get-Content $langFolder/docfx.json) -replace "$SiteDir/en","$SiteDir/$($SelectedLanguage.Language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
 
 
         docfx build $langFolder\docfx.json
@@ -179,11 +179,11 @@ function Build-NonEnglishDoc {
 
         if ($LastExitCode -ne 0)
         {
-            Write-Host -ForegroundColor Red "Failed to build $($SelectedLanguage.name) documentation"
+            Write-Host -ForegroundColor Red "Failed to build $($SelectedLanguage.Name) documentation"
             exit $LastExitCode
         }
 
-        Write-Host -ForegroundColor Green "$($SelectedLanguage.name) documentation built."
+        Write-Host -ForegroundColor Green "$($SelectedLanguage.Name) documentation built."
     }
 }
 
@@ -193,7 +193,7 @@ function Build-AllLanguagesDocs {
     )
 
     foreach ($lang in $Languages) {
-        if ($lang.enabled -and -not $lang.isPrimary) {
+        if ($lang.Enabled -and -not $lang.IsPrimary) {
 
             Build-NonEnglishDoc -SelectedLanguage $lang
 
@@ -208,35 +208,35 @@ function PostProcessing-DocFxDocUrl {
         $SelectedLanguage
     )
 
-    $posts = Get-ChildItem "$($SelectedLanguage.language)/*.md" -Recurse -Force
+    $posts = Get-ChildItem "$($SelectedLanguage.Language)/*.md" -Recurse -Force
 
     # Get a list of all HTML files in the _site/<language> directory
-    $htmlFiles = Get-ChildItem "$($Settings.SiteDirectory)/$($SelectedLanguage.language)/*.html" -Recurse
+    $htmlFiles = Get-ChildItem "$($Settings.SiteDirectory)/$($SelectedLanguage.Language)/*.html" -Recurse
 
     # Get the relative paths of the posts
-    $relativePostPaths = $posts | ForEach-Object { $_.FullName.Replace((Resolve-Path $SelectedLanguage.language).Path + '\', '') }
+    $relativePostPaths = $posts | ForEach-Object { $_.FullName.Replace((Resolve-Path $SelectedLanguage.Language).Path + '\', '') }
 
     Write-Host -ForegroundColor Yellow "Post-processing docfx:docurl in $($htmlFiles.Count) files..."
 
     for ($i = 0; $i -lt $htmlFiles.Count; $i++) {
         $htmlFile = $htmlFiles[$i]
         # Get the relative path of the HTML file
-        $relativeHtmlPath = $htmlFile.FullName.Replace((Resolve-Path "$($Settings.SiteDirectory)/$($SelectedLanguage.language)").Path + '\', '').Replace('.html', '.md')
+        $relativeHtmlPath = $htmlFile.FullName.Replace((Resolve-Path "$($Settings.SiteDirectory)/$($SelectedLanguage.Language)").Path + '\', '').Replace('.html', '.md')
 
         # Read the content of the HTML file
         $content = Get-Content $htmlFile
 
         # Define a regex pattern to match the meta tag with name="docfx:docurl"
-        $pattern = '(<meta name="docfx:docurl" content=".*?)(/' + $SelectedLanguage.language + $Settings.TempDirectory+ '/)(.*?">)'
+        $pattern = '(<meta name="docfx:docurl" content=".*?)(/' + $SelectedLanguage.Language + $Settings.TempDirectory+ '/)(.*?">)'
 
         # Define a regex pattern to match the href attribute in the <a> tags
-        $pattern2 = '(<a href=".*?)(/' + $SelectedLanguage.language + $Settings.TempDirectory + '/)(.*?">)'
+        $pattern2 = '(<a href=".*?)(/' + $SelectedLanguage.Language + $Settings.TempDirectory + '/)(.*?">)'
 
         # Check if the HTML file is from the $posts collection
         if ($relativePostPaths -contains $relativeHtmlPath) {
             # Replace /<language>_tmp/ with /<language>/ in the content
-            $content = $content -replace $pattern, "`${1}/$($SelectedLanguage.language)/`${3}"
-            $content = $content -replace $pattern2, "`${1}/$($SelectedLanguage.language)/`${3}"
+            $content = $content -replace $pattern, "`${1}/$($SelectedLanguage.Language)/`${3}"
+            $content = $content -replace $pattern2, "`${1}/$($SelectedLanguage.Language)/`${3}"
         } else {
             # Replace /<language>_tmp/ with /en/ in the content
             $content = $content -replace $pattern, '${1}/en/${3}'
@@ -277,7 +277,7 @@ else
     [bool]$isCanceled = $userInput -ieq "c"
 
     # Check if user input matches any non-English language build
-    $selectedLanguage = $languages | Where-Object { $_.language -eq $userInput -and $_.enabled -and -not $_.isPrimary }
+    $selectedLanguage = $languages | Where-Object { $_.Language -eq $userInput -and $_.Enabled -and -not $_.IsPrimary }
 
     if ($selectedLanguage)
     {
