@@ -59,8 +59,17 @@ function Get-UserInput {
     Write-Host -ForegroundColor Yellow "  [r] Run local website"
     Write-Host -ForegroundColor Yellow "  [c] Cancel"
     Write-Host ""
+    $validOptions = @('all', 'r', 'c') + $($languages | Select-Object -ExpandProperty Language)
 
-    return Read-Host -Prompt "Your choice"
+    while($true)
+    {
+        $userChoice = Read-Host -Prompt "Your choice"
+        if($validOptions -contains $userChoice)
+        {
+            return $userChoice.ToLower()
+        }
+    }
+    Write-Error "No valid Choice was given." 
 }
 
 function Ask-IncludeAPI {
