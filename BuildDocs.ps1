@@ -1,28 +1,28 @@
 <#
 .SYNOPSIS
-This script builds documentation (manuals, tutorials, release notes) in selected language(s) from the languages.json file and optionally includes API documentation.
+    This script builds documentation (manuals, tutorials, release notes) in selected language(s) from the languages.json file and optionally includes API documentation.
 
 .DESCRIPTION
-The script allows the user to build documentation in English or any other available language specified in the languages.json file. It provides options to build documentation in all available languages, run a local website for the documentation, or cancel the operation. If the user chooses to build the documentation, the script also prompts whether API documentation should be included.
+    The script allows the user to build documentation in English or any other available language specified in the languages.json file. It provides options to build documentation in all available languages, run a local website for the documentation, or cancel the operation. If the user chooses to build the documentation, the script also prompts whether API documentation should be included.
 
 .NOTES
-The documentation files are expected to be in Markdown format (.md). The script uses the DocFX tool to build the documentation and optionally includes API documentation. The script generates the API documentation from C# source files using DocFX metadata and can run a local website using the DocFX serve command. This script can also be run from GitHub Actions.
+    The documentation files are expected to be in Markdown format (.md). The script uses the DocFX tool to build the documentation and optionally includes API documentation. The script generates the API documentation from C# source files using DocFX metadata and can run a local website using the DocFX serve command. This script can also be run from GitHub Actions.
 
 .LINK
-https://github.com/VaclavElias/stride-website-next
-https://github.com/VaclavElias/stride-docs-next/blob/main/languages.json
-https://dotnet.github.io/docfx/index.html
+    https://github.com/VaclavElias/stride-website-next
+    https://github.com/VaclavElias/stride-docs-next/blob/main/languages.json
+    https://dotnet.github.io/docfx/index.html
 
 .PARAMETER BuildAll
-Switch parameter. If provided, the script will build documentation in all available languages and include API documentation.
+    Switch parameter. If provided, the script will build documentation in all available languages and include API documentation.
 
 .EXAMPLE
     .\BuildDocs.ps1 -BuildAll
-In this example, the script will build the documentation in all available languages and include API documentation. Use this in GitHub Actions.
+    In this example, the script will build the documentation in all available languages and include API documentation. Use this in GitHub Actions.
 
 .EXAMPLE
     .\BuildDocs.ps1
-In this example, the script will prompt the user to select an operation and an optional language. If the user chooses to build the documentation, the script will also ask if they want to include API documentation.
+    In this example, the script will prompt the user to select an operation and an optional language. If the user chooses to build the documentation, the script will also ask if they want to include API documentation.
 #>
 
 param (
