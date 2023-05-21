@@ -103,12 +103,7 @@ function Generate-APIDoc {
 
     # Build metadata from C# source, docfx runs dotnet restore
     docfx metadata en/docfx.json
-
-    if ($LastExitCode -ne 0)
-    {
-        Write-Host -ForegroundColor Red "Failed to generate API metadata"
-        exit $LastExitCode
-    }
+    return $LastExitCode
 }
 
 function Remove-APIDoc {
@@ -342,7 +337,12 @@ else
 # Generate API doc
 if ($API)
 {
-    Generate-APIDoc
+    $exitCode = Generate-APIDoc
+    if($exitCode -ne 0)
+    {
+        Write-Error -ForegroundColor Red "Failed to generate API metadata"
+        return $exitCode
+    }
 }
 else
 {
