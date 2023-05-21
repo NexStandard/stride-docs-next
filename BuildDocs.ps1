@@ -206,14 +206,9 @@ function Build-NonEnglishDoc {
         Remove-Item $langFolder -Recurse -Verbose
 
         PostProcessing-DocFxDocUrl -SelectedLanguage $SelectedLanguage
-
-        if ($LastExitCode -ne 0)
-        {
-            Write-Host -ForegroundColor Red "Failed to build $($SelectedLanguage.Name) documentation"
-            exit $LastExitCode
-        }
-
+        
         Write-Host -ForegroundColor Green "$($SelectedLanguage.Name) documentation built."
+        return $LastExitCode
     }
 }
 
@@ -225,8 +220,14 @@ function Build-AllLanguagesDocs {
     foreach ($lang in $Languages) {
         if ($lang.Enabled -and -not $lang.IsPrimary) {
 
-            Build-NonEnglishDoc -SelectedLanguage $lang
+            $exitCode =  Build-NonEnglishDoc -SelectedLanguage $lang
 
+            if ($exitCode -ne 0)
+            {
+                Write-Error -ForegroundColor Red "Failed to build $($SelectedLanguage.Name) documentation. ExitCode: $exitCode"
+                Stop-Transcript
+                return $exitCode
+            }
         }
     }
 }
