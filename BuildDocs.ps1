@@ -123,11 +123,7 @@ function Build-EnglishDoc {
     # Output to both build.log and console
     docfx build en\docfx.json
 
-    if ($LastExitCode -ne 0)
-    {
-        Write-Host -ForegroundColor Red "Failed to build English documentation"
-        exit $LastExitCode
-    }
+
     return $LastExitCode
 }
 
@@ -360,7 +356,12 @@ Write-Host ""
 
 if ($isEnLanguage -or $isAllLanguages)
 {
-   Build-EnglishDoc
+   $exitCode = Build-EnglishDoc
+   if ($exitCode -ne 0)
+   {
+       Write-Error -ForegroundColor Red "Failed to build English documentation"
+       return $exitCode
+   }
 }
 
 # Do we need this?
