@@ -1,28 +1,28 @@
 <#
 .SYNOPSIS
-This script builds documentation (manuals, tutorials, release notes) in selected language(s) from the languages.json file and optionally includes API documentation.
+    This script builds documentation (manuals, tutorials, release notes) in selected language(s) from the languages.json file and optionally includes API documentation.
 
 .DESCRIPTION
-The script allows the user to build documentation in English or any other available language specified in the languages.json file. It provides options to build documentation in all available languages, run a local website for the documentation, or cancel the operation. If the user chooses to build the documentation, the script also prompts whether API documentation should be included.
+    The script allows the user to build documentation in English or any other available language specified in the languages.json file. It provides options to build documentation in all available languages, run a local website for the documentation, or cancel the operation. If the user chooses to build the documentation, the script also prompts whether API documentation should be included.
 
 .NOTES
-The documentation files are expected to be in Markdown format (.md). The script uses the DocFX tool to build the documentation and optionally includes API documentation. The script generates the API documentation from C# source files using DocFX metadata and can run a local website using the DocFX serve command. This script can also be run from GitHub Actions.
+    The documentation files are expected to be in Markdown format (.md). The script uses the DocFX tool to build the documentation and optionally includes API documentation. The script generates the API documentation from C# source files using DocFX metadata and can run a local website using the DocFX serve command. This script can also be run from GitHub Actions.
 
 .LINK
-https://github.com/VaclavElias/stride-website-next
-https://github.com/VaclavElias/stride-docs-next/blob/main/languages.json
-https://dotnet.github.io/docfx/index.html
+    https://github.com/VaclavElias/stride-website-next
+    https://github.com/VaclavElias/stride-docs-next/blob/main/languages.json
+    https://dotnet.github.io/docfx/index.html
 
 .PARAMETER BuildAll
-Switch parameter. If provided, the script will build documentation in all available languages and include API documentation.
+    Switch parameter. If provided, the script will build documentation in all available languages and include API documentation.
 
 .EXAMPLE
     .\BuildDocs.ps1 -BuildAll
-In this example, the script will build the documentation in all available languages and include API documentation. Use this in GitHub Actions.
+    In this example, the script will build the documentation in all available languages and include API documentation. Use this in GitHub Actions.
 
 .EXAMPLE
     .\BuildDocs.ps1
-In this example, the script will prompt the user to select an operation and an optional language. If the user chooses to build the documentation, the script will also ask if they want to include API documentation.
+    In this example, the script will prompt the user to select an operation and an optional language. If the user chooses to build the documentation, the script will also ask if they want to include API documentation.
 #>
 
 param (
@@ -59,8 +59,17 @@ function Get-UserInput {
     Write-Host -ForegroundColor Yellow "  [r] Run local website"
     Write-Host -ForegroundColor Yellow "  [c] Cancel"
     Write-Host ""
+    $validOptions = @('all', 'r', 'c') + $($languages | Select-Object -ExpandProperty Language)
 
-    return Read-Host -Prompt "Your choice"
+    while($true)
+    {
+        $userChoice = Read-Host -Prompt "Your choice"
+        if($validOptions -contains $userChoice)
+        {
+            return $userChoice.ToLower()
+        }
+    }
+    Write-Error "No valid Choice was given." 
 }
 
 function Ask-IncludeAPI {
@@ -87,7 +96,6 @@ function Start-LocalWebsite {
     Start-Process -FilePath $Settings.HostUrl
     docfx serve
     Set-Location ..
-    exit
 }
 
 function Generate-APIDoc {
@@ -95,19 +103,17 @@ function Generate-APIDoc {
 
     # Build metadata from C# source, docfx runs dotnet restore
     docfx metadata en/docfx.json
-
-    if ($LastExitCode -ne 0)
-    {
-        Write-Host -ForegroundColor Red "Failed to generate API metadata"
-        exit $LastExitCode
-    }
+    return $LastExitCode
 }
 
 function Remove-APIDoc {
-    if (Test-Path en/api/.manifest) {
-        Write-Host -ForegroundColor Green "Erasing API documentation..."
+    Write-Host -ForegroundColor Green "Erasing API documentation..."
+    $APIDocPath = "en/api/.manifest"
+    if (Test-Path $APIDocPath) {
         Remove-Item en/api/*yml -recurse -Verbose
-        Remove-Item en/api/.manifest -Verbose
+        Remove-Item $APIDocPath -Verbose
+    } else{
+        Write-Warning "Could not delete APIDoc. The Path $APIDocPath does not exist or is not valid."
     }
 }
 
@@ -117,11 +123,8 @@ function Build-EnglishDoc {
     # Output to both build.log and console
     docfx build en\docfx.json
 
-    if ($LastExitCode -ne 0)
-    {
-        Write-Host -ForegroundColor Red "Failed to build English documentation"
-        exit $LastExitCode
-    }
+
+    return $LastExitCode
 }
 
 function Build-NonEnglishDoc {
@@ -181,7 +184,7 @@ function Build-NonEnglishDoc {
             Copy-Item ($SelectedLanguage.Language + "/" + $indexFile) $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.Language)/"+ $indexFile +" not found. English version will be used."
+            Write-Warning "$($SelectedLanguage.Language)/"+ $indexFile +" not found. English version will be used."
         }
 
         # overwrite en manual pages with translated manual pages
@@ -189,7 +192,7 @@ function Build-NonEnglishDoc {
             Copy-Item ($SelectedLanguage.Language + "/" + $Settings.ManualFolderName) -Recurse -Destination $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.Language)/$($Settings.ManualFolderName) not found."
+            Write-Warning "$($SelectedLanguage.Language)/$($Settings.ManualFolderName) not found."
         }
 
         # we copy the docfx.json file from en folder to the selected language folder, so we can keep the same settings and maitain just one docfx.json file
@@ -203,14 +206,9 @@ function Build-NonEnglishDoc {
         Remove-Item $langFolder -Recurse -Verbose
 
         PostProcessing-DocFxDocUrl -SelectedLanguage $SelectedLanguage
-
-        if ($LastExitCode -ne 0)
-        {
-            Write-Host -ForegroundColor Red "Failed to build $($SelectedLanguage.Name) documentation"
-            exit $LastExitCode
-        }
-
+        
         Write-Host -ForegroundColor Green "$($SelectedLanguage.Name) documentation built."
+        return $LastExitCode
     }
 }
 
@@ -222,8 +220,14 @@ function Build-AllLanguagesDocs {
     foreach ($lang in $Languages) {
         if ($lang.Enabled -and -not $lang.IsPrimary) {
 
-            Build-NonEnglishDoc -SelectedLanguage $lang
+            $exitCode = Build-NonEnglishDoc -SelectedLanguage $lang
 
+            if ($exitCode -ne 0)
+            {
+                Write-Error -ForegroundColor Red "Failed to build $($SelectedLanguage.Name) documentation. ExitCode: $exitCode"
+                Stop-Transcript
+                return $exitCode
+            }
         }
     }
 }
@@ -288,7 +292,7 @@ function PostProcessing-DocFxDocUrl {
 $languages = Read-LanguageConfigurations
 
 Start-Transcript -Path ".\build.log"
-
+[bool]$isAllLanguages = $false
 if ($BuildAll)
 {
     $isAllLanguages = $true
@@ -299,10 +303,10 @@ else
     $userInput = Get-UserInput
 
     [bool]$isEnLanguage = $userInput -ieq "en"
-    [bool]$isAllLanguages = $userInput -ieq "all"
     [bool]$shouldRunLocalWebsite = $userInput -ieq "r"
     [bool]$isCanceled = $userInput -ieq "c"
-
+    $isAllLanguages = $userInput -ieq "all"
+    
     # Check if user input matches any non-English language build
     $selectedLanguage = $languages | Where-Object { $_.Language -eq $userInput -and $_.Enabled -and -not $_.IsPrimary }
 
@@ -315,25 +319,33 @@ else
     if ($isEnLanguage -or $isAllLanguages -or $shouldBuildSelectedLanguage) {
         $API = Ask-IncludeAPI
     }
+    if ($isCanceled)
+    {
+        Write-Host -ForegroundColor Red "Operation canceled by user."
+        Stop-Transcript
+        Read-Host -Prompt "Press ENTER key to exit..."
+        return
+    }
+    
+    if ($shouldRunLocalWebsite)
+    {
+        Start-LocalWebsite
+        return
+    }
 }
 
-if ($isCanceled)
-{
-    Write-Host -ForegroundColor Red "Operation canceled by user."
-    Stop-Transcript
-    Read-Host -Prompt "Press ENTER key to exit..."
-    return
-}
-
-if ($shouldRunLocalWebsite)
-{
-    Start-LocalWebsite
-}
 
 # Generate API doc
 if ($API)
 {
-    Generate-APIDoc
+    $exitCode = Generate-APIDoc
+    if($exitCode -ne 0)
+    {
+        Write-Error -ForegroundColor Red "Failed to generate API metadata. ExitCode: $exitCode"
+        Stop-Transcript
+        Read-Host -Prompt "Press any ENTER to exit..."
+        return $exitCode
+    }
 }
 else
 {
@@ -347,7 +359,14 @@ Write-Host ""
 
 if ($isEnLanguage -or $isAllLanguages)
 {
-   Build-EnglishDoc
+   $exitCode = Build-EnglishDoc
+   if ($exitCode -ne 0)
+   {
+       Write-Error -ForegroundColor Red "Failed to build English documentation. ExitCode: $exitCode"
+       Stop-Transcript
+       Read-Host -Prompt "Press any ENTER to exit..."
+       return $exitCode
+   }
 }
 
 # Do we need this?
