@@ -184,7 +184,7 @@ function Build-NonEnglishDoc {
             Copy-Item ($SelectedLanguage.Language + "/" + $indexFile) $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.Language)/"+ $indexFile +" not found. English version will be used."
+            Write-Warning "$($SelectedLanguage.Language)/"+ $indexFile +" not found. English version will be used."
         }
 
         # overwrite en manual pages with translated manual pages
@@ -192,7 +192,7 @@ function Build-NonEnglishDoc {
             Copy-Item ($SelectedLanguage.Language + "/" + $Settings.ManualFolderName) -Recurse -Destination $langFolder -Force
         }
         else {
-            Write-Host -ForegroundColor Yellow "Warning: $($SelectedLanguage.Language)/$($Settings.ManualFolderName) not found."
+            Write-Warning "$($SelectedLanguage.Language)/$($Settings.ManualFolderName) not found."
         }
 
         # we copy the docfx.json file from en folder to the selected language folder, so we can keep the same settings and maitain just one docfx.json file
