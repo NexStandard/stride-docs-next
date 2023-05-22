@@ -69,7 +69,7 @@ function Get-UserInput {
             return $userChoice.ToLower()
         }
     }
-    Write-Error "No valid Choice was given." 
+    Write-Error "No valid Choice was given."
 }
 
 function Ask-IncludeAPI {
@@ -103,7 +103,12 @@ function Generate-APIDoc {
 
     # Build metadata from C# source, docfx runs dotnet restore
     docfx metadata en/docfx.json
-    return $LastExitCode
+
+    if ($LastExitCode -ne 0)
+    {
+        Write-Host -ForegroundColor Red "Failed to generate API metadata"
+        exit $LastExitCode
+    }
 }
 
 function Remove-APIDoc {
@@ -123,8 +128,11 @@ function Build-EnglishDoc {
     # Output to both build.log and console
     docfx build en\docfx.json
 
-
-    return $LastExitCode
+    if ($LastExitCode -ne 0)
+    {
+        Write-Host -ForegroundColor Red "Failed to build English documentation"
+        exit $LastExitCode
+    }
 }
 
 function Build-NonEnglishDoc {
@@ -206,9 +214,14 @@ function Build-NonEnglishDoc {
         Remove-Item $langFolder -Recurse -Verbose
 
         PostProcessing-DocFxDocUrl -SelectedLanguage $SelectedLanguage
-        
+
+        if ($LastExitCode -ne 0)
+        {
+            Write-Host -ForegroundColor Red "Failed to build $($SelectedLanguage.Name) documentation"
+            exit $LastExitCode
+        }
+
         Write-Host -ForegroundColor Green "$($SelectedLanguage.Name) documentation built."
-        return $LastExitCode
     }
 }
 
@@ -220,14 +233,8 @@ function Build-AllLanguagesDocs {
     foreach ($lang in $Languages) {
         if ($lang.Enabled -and -not $lang.IsPrimary) {
 
-            $exitCode = Build-NonEnglishDoc -SelectedLanguage $lang
+            Build-NonEnglishDoc -SelectedLanguage $lang
 
-            if ($exitCode -ne 0)
-            {
-                Write-Error -ForegroundColor Red "Failed to build $($SelectedLanguage.Name) documentation. ExitCode: $exitCode"
-                Stop-Transcript
-                return $exitCode
-            }
         }
     }
 }
@@ -306,7 +313,7 @@ else
     [bool]$shouldRunLocalWebsite = $userInput -ieq "r"
     [bool]$isCanceled = $userInput -ieq "c"
     $isAllLanguages = $userInput -ieq "all"
-    
+
     # Check if user input matches any non-English language build
     $selectedLanguage = $languages | Where-Object { $_.Language -eq $userInput -and $_.Enabled -and -not $_.IsPrimary }
 
@@ -326,7 +333,7 @@ else
         Read-Host -Prompt "Press ENTER key to exit..."
         return
     }
-    
+
     if ($shouldRunLocalWebsite)
     {
         Start-LocalWebsite
@@ -338,14 +345,7 @@ else
 # Generate API doc
 if ($API)
 {
-    $exitCode = Generate-APIDoc
-    if($exitCode -ne 0)
-    {
-        Write-Error -ForegroundColor Red "Failed to generate API metadata. ExitCode: $exitCode"
-        Stop-Transcript
-        Read-Host -Prompt "Press any ENTER to exit..."
-        return $exitCode
-    }
+    Generate-APIDoc
 }
 else
 {
@@ -359,14 +359,7 @@ Write-Host ""
 
 if ($isEnLanguage -or $isAllLanguages)
 {
-   $exitCode = Build-EnglishDoc
-   if ($exitCode -ne 0)
-   {
-       Write-Error -ForegroundColor Red "Failed to build English documentation. ExitCode: $exitCode"
-       Stop-Transcript
-       Read-Host -Prompt "Press any ENTER to exit..."
-       return $exitCode
-   }
+   Build-EnglishDoc
 }
 
 # Do we need this?
