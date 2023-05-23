@@ -102,7 +102,7 @@ function Generate-APIDoc {
     Write-Host -ForegroundColor Green "Generating API documentation..."
 
     # Build metadata from C# source, docfx runs dotnet restore
-    docfx metadata en/docfx.json
+    docfx metadata en/docfx.json | Write-Host
     return $LastExitCode
 }
 
@@ -341,7 +341,7 @@ if ($API)
     $exitCode = Generate-APIDoc
     if($exitCode -ne 0)
     {
-        Write-Error -ForegroundColor Red "Failed to generate API metadata. ExitCode: $exitCode"
+        Write-Error "Failed to generate API metadata. ExitCode: $exitCode"
         Stop-Transcript
         Read-Host -Prompt "Press any ENTER to exit..."
         return $exitCode
