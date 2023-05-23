@@ -142,7 +142,7 @@ function Build-NonEnglishDoc {
             Remove-Item $langFolder/* -recurse -Verbose
         }
         else{
-            New-Item -Path $langFolder -ItemType Directory -Verbose
+            $discard = New-Item -Path $langFolder -ItemType Directory -Verbose
         }
 
         # Copy all files from en folder to the selected language folder, this way we can keep en files that are not translated
@@ -201,7 +201,7 @@ function Build-NonEnglishDoc {
         (Get-Content $langFolder/docfx.json) -replace "$SiteDir/en","$SiteDir/$($SelectedLanguage.Language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
 
 
-        docfx build $langFolder\docfx.json
+        docfx build $langFolder\docfx.json | Write-Host
 
         Remove-Item $langFolder -Recurse -Verbose
 
@@ -224,7 +224,7 @@ function Build-AllLanguagesDocs {
 
             if ($exitCode -ne 0)
             {
-                Write-Error -ForegroundColor Red "Failed to build $($SelectedLanguage.Name) documentation. ExitCode: $exitCode"
+                Write-Error "Failed to build $($SelectedLanguage.Name) documentation. ExitCode: $exitCode"
                 Stop-Transcript
                 return $exitCode
             }
