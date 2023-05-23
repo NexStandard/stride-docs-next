@@ -121,7 +121,7 @@ function Build-EnglishDoc {
     Write-Host -ForegroundColor Yellow "Start building English documentation."
 
     # Output to both build.log and console
-    docfx build en\docfx.json
+    docfx build en\docfx.json | Write-Host
 
 
     return $LastExitCode
@@ -362,7 +362,7 @@ if ($isEnLanguage -or $isAllLanguages)
    $exitCode = Build-EnglishDoc
    if ($exitCode -ne 0)
    {
-       Write-Error -ForegroundColor Red "Failed to build English documentation. ExitCode: $exitCode"
+       Write-Error "Failed to build English documentation. ExitCode: $exitCode"
        Stop-Transcript
        Read-Host -Prompt "Press any ENTER to exit..."
        return $exitCode
