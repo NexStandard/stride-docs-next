@@ -109,12 +109,10 @@ Go to `stride-docs` folder
 run
 
 ```
-build.bat
+run.bat
 ```
 
-Which will rund this command `docfx en/docfx.json`
-
- http://download.microsoft.com/download/2/E/6/2E61CFA4-993B-4DD4-91DA-3737CD5CD6E3/vcredist_x64.exe
+- en and jp docs only, without API - 3 minutes
 
  ## Post-Release Features
 
