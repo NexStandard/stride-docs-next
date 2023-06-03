@@ -1,4 +1,4 @@
-$path = 'd:\Projects\GitHub\stride-docs-next\_site\4.1\jp\' # specify your directory path
+$path = 'd:\Projects\GitHub\stride-docs-live-fix\' # specify your directory path
 
 $replacements = @{
     '//stride3d.net/css/site.css' = '/css/site.css';
