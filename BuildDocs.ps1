@@ -103,7 +103,7 @@ function Generate-APIDoc {
 
     # Build metadata from C# source, docfx runs dotnet restore
     docfx metadata en/docfx.json | Write-Host
-    
+
     return $LastExitCode
 }
 
