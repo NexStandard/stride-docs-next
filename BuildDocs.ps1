@@ -124,11 +124,7 @@ function Build-EnglishDoc {
     # Output to both build.log and console
     docfx build en\docfx.json | Write-Host
 
-    if ($LastExitCode -ne 0)
-    {
-        Write-Host -ForegroundColor Red "Failed to build English documentation"
-        exit $LastExitCode
-    }
+    return $LastExitCode
 }
 
 function Build-NonEnglishDoc {
@@ -211,13 +207,9 @@ function Build-NonEnglishDoc {
 
         PostProcessing-DocFxDocUrl -SelectedLanguage $SelectedLanguage
 
-        if ($LastExitCode -ne 0)
-        {
-            Write-Host -ForegroundColor Red "Failed to build $($SelectedLanguage.Name) documentation"
-            exit $LastExitCode
-        }
-
         Write-Host -ForegroundColor Green "$($SelectedLanguage.Name) documentation built."
+
+        return $LastExitCode
     }
 }
 
