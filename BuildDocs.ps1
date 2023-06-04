@@ -198,8 +198,9 @@ function Build-NonEnglishDoc {
         # we copy the docfx.json file from en folder to the selected language folder, so we can keep the same settings and maitain just one docfx.json file
         Copy-Item en/docfx.json $langFolder -Force
         $SiteDir = $Settings.SiteDirectory
-        (Get-Content $langFolder/docfx.json) -replace "$SiteDir/en","$SiteDir/$($SelectedLanguage.Language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
 
+        # we replace the en folder with the selected language folder in the docfx.json file
+        (Get-Content $langFolder/docfx.json) -replace "$SiteDir/en","$SiteDir/$($SelectedLanguage.Language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
 
         docfx build $langFolder\docfx.json | Write-Host
 
