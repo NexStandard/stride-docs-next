@@ -204,7 +204,9 @@ function Build-NonEnglishDoc {
 
         docfx build $langFolder\docfx.json | Write-Host
 
-        Remove-Item $langFolder -Recurse -Verbose
+        if (!$BuildAll) {
+            Remove-Item $langFolder -Recurse -Verbose
+        }
 
         PostProcessing-DocFxDocUrl -SelectedLanguage $SelectedLanguage
 
@@ -234,7 +236,7 @@ function Build-AllLanguagesDocs {
     }
 }
 
-# docfx generates GitHub link based on the temp _tmp folder, which we need to correct to correct
+# docfx generates GitHub link based on the temp _tmp folder, which we need to fix to correct
 # GitHub links. This function does that.
 function PostProcessing-DocFxDocUrl {
     param (
