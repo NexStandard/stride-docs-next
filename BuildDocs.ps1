@@ -149,28 +149,28 @@ function Build-NonEnglishDoc {
         Copy-Item en/* -Recurse $langFolder -Force
 
         # Get all translated files from the selected language folder
-        $posts = Get-ChildItem "$langFolder/$($Settings.ManualFolderName)/*.md" -Recurse -Force
+        $files = Get-ChildItem "$langFolder/$($Settings.ManualFolderName)/*.md" -Recurse -Force
 
         Write-Host "Start write files:"
 
         # Mark files as not translated if they are not in the toc.md file
-        foreach ($post in $posts)
+        foreach ($file in $files)
         {
-            if($post.ToString().Contains("toc.md")) {
+            if($file.ToString().Contains("toc.md")) {
                 continue;
             }
 
-            $data = Get-Content $post -Encoding UTF8
+            $data = Get-Content $file -Encoding UTF8
             for ($i = 0; $i -lt $data.Length; $i++)
             {
                 $line = $data[$i];
                 if ($line.length -le 0)
                 {
-                    Write-Host $post
+                    Write-Host $file
 
                     $data[$i]="> [!WARNING]`r`n> " + $SelectedLanguage.NotTranslatedMessage + "`r`n"
 
-                    $data | Out-File -Encoding UTF8 $post
+                    $data | Out-File -Encoding UTF8 $file
 
                     break
                 }
@@ -179,6 +179,7 @@ function Build-NonEnglishDoc {
 
         Write-Host "End write files"
         $indexFile = $Settings.IndexFileName
+
         # overwrite en manual page with translated manual page
         if (Test-Path ($SelectedLanguage.Language + "/" + $indexFile)) {
             Copy-Item ($SelectedLanguage.Language + "/" + $indexFile) $langFolder -Force
@@ -197,6 +198,7 @@ function Build-NonEnglishDoc {
 
         # we copy the docfx.json file from en folder to the selected language folder, so we can keep the same settings and maitain just one docfx.json file
         Copy-Item en/docfx.json $langFolder -Force
+
         $SiteDir = $Settings.SiteDirectory
 
         # we replace the en folder with the selected language folder in the docfx.json file
@@ -243,13 +245,13 @@ function PostProcessing-DocFxDocUrl {
         $SelectedLanguage
     )
 
-    $posts = Get-ChildItem "$($SelectedLanguage.Language)/*.md" -Recurse -Force
+    $translatedFiles = Get-ChildItem "$($SelectedLanguage.Language)/*.md" -Recurse -Force
 
     # Get a list of all HTML files in the _site/<language> directory
     $htmlFiles = Get-ChildItem "$($Settings.SiteDirectory)/$($SelectedLanguage.Language)/*.html" -Recurse
 
-    # Get the relative paths of the posts
-    $relativePostPaths = $posts | ForEach-Object { $_.FullName.Replace((Resolve-Path $SelectedLanguage.Language).Path + '\', '') }
+    # Get the relative paths of the translated files
+    $relativeTranslatedFilesPaths = $translatedFiles | ForEach-Object { $_.FullName.Replace((Resolve-Path $SelectedLanguage.Language).Path + '\', '') }
 
     Write-Host -ForegroundColor Yellow "Post-processing docfx:docurl in $($htmlFiles.Count) files..."
 
@@ -267,8 +269,9 @@ function PostProcessing-DocFxDocUrl {
         # Define a regex pattern to match the href attribute in the <a> tags
         $pattern2 = '(<a href=".*?)(/' + $SelectedLanguage.Language + $Settings.TempDirectory + '/)(.*?">)'
 
-        # Check if the HTML file is from the $posts collection
-        if ($relativePostPaths -contains $relativeHtmlPath) {
+        # Check if the HTML file is from the $translatedFiles collection, if so, we will update the path to the
+        # existing file in GitHub
+        if ($relativeTranslatedFilesPaths -contains $relativeHtmlPath) {
             # Replace /<language>_tmp/ with /<language>/ in the content
             $content = $content -replace $pattern, "`${1}/$($SelectedLanguage.Language)/`${3}"
             $content = $content -replace $pattern2, "`${1}/$($SelectedLanguage.Language)/`${3}"
