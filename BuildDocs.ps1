@@ -37,6 +37,7 @@ $Settings = [PSCustomObject]@{
     HostUrl = "http://localhost:8080/en/index.html"
     IndexFileName = "index.md"
     ManualFolderName = "manual"
+    DocsUrl = "https://doc.stride3d.net"
 }
 
 # To Do fix, GitHub references, fix sitemap links to latest/en/
@@ -294,6 +295,23 @@ function PostProcessing-DocFxDocUrl {
     Write-Host -ForegroundColor Green "Post-processing completed."
 }
 
+function PostProcessing-FixingSitemap {
+    Write-Host -ForegroundColor Yellow "Post-processing sitemap.xml, adding latest/en to url"
+
+    $sitemapFile = "$($Settings.SiteDirectory)/en/sitemap.xml"
+
+    # Read the content of the sitemap.xml file with UTF8 encoding
+    $content = Get-Content $sitemapFile -Encoding UTF8
+
+    # Replace DocsUrl with DocsUrl + latest/en
+    $content = $content -replace $Settings.DocsUrl, "$($Settings.DocsUrl)/latest/en"
+
+    # Write the updated content back to the sitemap.xml file with UTF8 encoding
+    $content | Set-Content -Encoding UTF8 $sitemapFile
+
+    Write-Host -ForegroundColor Green "Post-processing completed."
+}
+
 # Main script execution starts here
 
 $languages = Read-LanguageConfigurations
@@ -367,6 +385,7 @@ Write-Host ""
 if ($isEnLanguage -or $isAllLanguages)
 {
    $exitCode = Build-EnglishDoc
+
    if ($exitCode -ne 0)
    {
        Write-Error "Failed to build English documentation. ExitCode: $exitCode"
@@ -374,6 +393,8 @@ if ($isEnLanguage -or $isAllLanguages)
        Read-Host -Prompt "Press any ENTER to exit..."
        return $exitCode
    }
+
+   PostProcessing-FixingSitemap
 }
 
 # Do we need this?
