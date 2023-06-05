@@ -1,7 +1,7 @@
 # Navigate in the Scene Editor
 
-<span class="label label-doc-level">Beginner</span>
-<span class="label label-doc-audience">Level designer</span>
+<span class="badge text-bg-primary">Beginner</span>
+<span class="badge text-bg-success">Level designer</span>
 
 You can move around the scene and change the perspective of the editor camera. The XYZ axes in the bottom left show your orientation in 3D space.
 

@@ -1,7 +1,7 @@
 # Use sprites
 
-<span class="label label-doc-level">Intermediate</span>
-<span class="label label-doc-audience">Programmer</span>
+<span class="badge text-bg-primary">Intermediate</span>
+<span class="badge text-bg-success">Programmer</span>
 
 To add a sprite to a scene, add a **sprite component** to an entity. Afterwards, you can control the sprite with a script.
 

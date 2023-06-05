@@ -1,7 +1,7 @@
 # Procedural animation
 
-<span class="label label-doc-level">Intermediate</span>
-<span class="label label-doc-audience">Programmer</span>
+<span class="badge text-bg-primary">Intermediate</span>
+<span class="badge text-bg-success">Programmer</span>
 
 **Procedural animation** is an alternative method of animation. Instead of creating animations yourself, you can use engine components to animate 3D models at runtime. 
 

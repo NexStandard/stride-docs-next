@@ -1,7 +1,7 @@
 # Raycasting
 
-<span class="label label-doc-level">Intermediate</span>
-<span class="label label-doc-audience">Programmer</span>
+<span class="badge text-bg-primary">Intermediate</span>
+<span class="badge text-bg-success">Programmer</span>
 
 **Raycasting** traces an invisible line through the scene to find intersecting [colliders](colliders.md). This is useful, for example, to check which objects are in a gun's line of fire, or are under the mouse cursor when the user clicks.
 
