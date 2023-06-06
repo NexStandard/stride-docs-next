@@ -1,6 +1,6 @@
-﻿# Stride documentation
+# Stride documentation
 
-Welcome to the Stride Documentation. Here, you will find comprehensive information about Stride, including tutorials, manuals, and API references.
+Welcome to the Stride Documentation, your gateway to mastering this powerful game engine. This resource is packed with detailed tutorials, in-depth manuals, and comprehensive API references. Whether you're new to Stride or looking to hone your skills, you'll find everything you need right here. Get ready to bring your game development visions to life with Stride. Dive in, and let's create something extraordinary!
 
 <div class="row g-4 mb-4">
     <div class="col-md-6">
@@ -42,4 +42,4 @@ Welcome to the Stride Documentation. Here, you will find comprehensive informati
 </div>
 
 > [!NOTE]
-> While the English version of this documentation is actively maintained and updated, please be aware that translations in other languages may not be as up-to-date. We encourage users who are comfortable with English to refer to the original documentation to ensure they have access to the most current information. If you would like to contribute to the translations or report any discrepancies, please visit our GitHub repository or community forums for further details. Your contributions are greatly appreciated!
+> Please note that while our English documentation is actively updated, translations may not always be current. We recommend English-literate users to refer to the original for the latest information. To help with translations or report discrepancies, please see our GitHub or community forums. Your input is invaluable!
