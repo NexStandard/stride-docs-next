@@ -1,6 +1,6 @@
 # Stride documentation
 
-Welcome to the Stride Documentation, your gateway to mastering this powerful game engine. This resource is packed with detailed tutorials, in-depth manuals, and comprehensive API references. Whether you're new to Stride or looking to hone your skills, you'll find everything you need right here. Get ready to bring your game development visions to life with Stride. Dive in, and let's create something extraordinary!
+Welcome to the Stride documentation, your gateway to mastering this powerful game engine. This resource is packed with detailed tutorials, in-depth manuals, and comprehensive API references. Whether you're new to Stride or looking to hone your skills, you'll find everything you need right here. Get ready to bring your game development visions to life with Stride. Dive in, and let's create something extraordinary!
 
 <div class="row g-4 mb-4">
 	<div class="col-md-6">
