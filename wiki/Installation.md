@@ -1,0 +1,83 @@
+This guide will walk you through the steps to install the Stride docs on your local machine for development purposes. Although we use the Windows operating system for development, the steps should be similar for other operating systems.
+
+[Minor updates](Content#small-updates) can be made directly on GitHub. However, for [more significant updates](Content#major-updates) that affect multiple pages, we recommend using a local development environment so you can see the impact of your changes beforehand. This is because we use the **docfx** static site generator, and in some cases, all pages need to be regenerated. This approach helps you assess your changes before submitting a pull request.
+
+This guide assumes you have a basic understanding of the technologies used in the Stride docs.
+
+# Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Installation Steps](#installation-steps)
+- [Running the Development Server](#running-the-development-server)
+
+# Prerequisites
+
+Before updating the Stride docs, ensure you are familiar with the following prerequisites:
+
+1. Familiarity with the command line
+1. **.NET SDK 6.0 or higher:** You can download the installer from the [.NET SDK website](https://dotnet.microsoft.com/en-us/download)
+   - If .NET SDK is already installed, ensure you have version 6.0 or higher. You can check your version by running `dotnet --info` in a terminal.
+1. **Git installed:** You will need Git for version control. If you don't have Git installed, you can download it from the [Git website](https://git-scm.com/downloads)
+1. **Development IDE of choice:** Choose an Integrated Development Environment (IDE) that you're comfortable with for development. Although there are various popular choices, such as Visual Studio, Visual Studio Code, and others, this guide will focus on using **Visual Studio**, as it is the primary IDE for the Stride project, and as of writing, we use **Visual Studio 2022**. You can download the free Community edition from the [Visual Studio website](https://visualstudio.microsoft.com/downloads/)
+
+# Installation Steps
+
+1. ❓You might want to create an issue so we can track your contribution and avoid duplicate work. If you're unsure whether your contribution is needed, feel free to create an issue and ask
+1. 🍴 Fork the repository by navigating to the [Stride docs repository](https://github.com/stride3d/stride-docs) and clicking the **Fork** button in the top-right corner
+1. 📥 Clone your forked repository using the following command, replacing `your-username` with your GitHub username: `git clone https://github.com/your-username/stride-docs.git`
+   - 💡**Tip:** It's a good idea to create a new branch for each feature or bug fix you work on. This helps keep your forked repository organized and makes it easier to manage multiple pull requests
+1. 📁 Go to the project folder `cd stride-docs`
+1. 🚀 Let's start with the **docfx**
+
+Enter the following command to install the latest docfx
+
+```
+dotnet tool install -g docfx
+```
+
+Or check the inslalled version is at least `2.66.0`
+
+```
+docfx --version
+```
+
+**Other options**
+
+Update to the latest docfx
+
+```
+dotnet tool update -g docfx
+```
+
+Install a specific version of docfx
+
+```
+dotnet tool update -g docfx --version 2.66.0
+```
+
+# Running the Development Server
+
+We have created a power shell script with a context menu where you can select language, API build and run the development server.
+
+1. 🚀 Run `run.bat` in the command line to start the script
+1. 📋 You should see this self explanatory menu
+    ```
+    Please select an option:
+
+      [en] Build English documentation
+      [jp] Build Japanese documentation
+      [all] Build documentation in all available languages
+      [r] Run local website
+      [c] Cancel
+
+    Your choice:
+    ```
+1. 🌐 If you select `[r]`, the docs site will open automatically in your browser `http://localhost:8080/en/index.html`
+     - if you build non-English docs, you have to change the language in the URL manually
+1. 💻 Open the project in Visual Studio by opening the `Stride.Docs.sln` solution file, or use the IDE of your choice 
+1. 🔄 Once you save the updated file, you have to manually refresh the browser to see the changes
+1. 😃 Happy coding!
+
+*ToDo: Attach a screenshot of the command line output*
+
+Let's [update the content](Content) now!
