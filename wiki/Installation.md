@@ -1,4 +1,4 @@
-This guide will walk you through the steps to install the Stride docs on your local machine for development purposes. Although we use the Windows operating system for development, the steps should be similar for other operating systems.
+This guide will walk you through the steps to install the Stride docs website on your local machine for development purposes. Although we use the Windows operating system for development, the steps should be similar for other operating systems.
 
 [Minor updates](Content#small-updates) can be made directly on GitHub. However, for [more significant updates](Content#major-updates) that affect multiple pages, we recommend using a local development environment so you can see the impact of your changes beforehand. This is because we use the **docfx** static site generator, and in some cases, all pages need to be regenerated. This approach helps you assess your changes before submitting a pull request.
 
@@ -57,10 +57,10 @@ dotnet tool update -g docfx --version 2.66.0
 
 # Running the Development Server
 
-We have created a power shell script with a context menu where you can select language, API build and run the development server.
+We've created a PowerShell script with a context menu where you can select the language, include the API build, and run the development server.
 
 1. 🚀 Run `run.bat` in the command line to start the script
-1. 📋 You should see this self explanatory menu
+1. 📋 You will see the following self-explanatory menu:
     ```
     Please select an option:
 
@@ -72,12 +72,12 @@ We have created a power shell script with a context menu where you can select la
 
     Your choice:
     ```
-1. 🌐 If you select `[r]`, the docs site will open automatically in your browser `http://localhost:8080/en/index.html`
-     - if you build non-English docs, you have to change the language in the URL manually
+1. 🌐 Choose to build the documentation in the language of your preference
+   - Select `[n]` for no API build
+1. 🖥️ If you select `[r]`, the documentation site will open automatically in your browser `http://localhost:8080/en/index.html`
+     - If you built the documentation in a language other than English, you'll need to manually change the language in the URL
 1. 💻 Open the project in Visual Studio by opening the `Stride.Docs.sln` solution file, or use the IDE of your choice 
-1. 🔄 Once you save the updated file, you have to manually refresh the browser to see the changes
+1. 🔄 After saving the updated file, you'll need to manually refresh your browser to view the changes
 1. 😃 Happy coding!
-
-*ToDo: Attach a screenshot of the command line output*
 
 Let's [update the content](Content) now!
