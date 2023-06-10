@@ -4,6 +4,10 @@
   - [Small Updates](#small-updates)
   - [Major Updates](#major-updates)
   - [Updating Wiki](#updating-wiki)
+- [Manual](#manual)
+  - [Creating New Page](#creating-new-manual-page)
+- [Tutorial](#tutorial)
+  - [Creating New Tutorial](#creating-new-tutorial-page)
 - [Creating New Post](#creating-new-post)
   - [Post Naming Convention](#post-naming-convention)
   - [Post Front Matter](#post-front-matter)
@@ -28,7 +32,7 @@ If you want to contribute and update the website, please follow the instructions
 
 Small updates can be done directly in the GitHub web interface, for bigger updates the local development environment is required, which is described in the [Installation](Installation) section.
 
-You can use any text editor to make changes. If you are using **Visual Studio**, you can open `Stride.Web.sln` solution file in the root of the repository and start making your updates directly from this IDE.
+You can use any text editor to make changes. If you are using **Visual Studio**, you can open `Stride.Docs.sln` solution file in the root of the repository and start making your updates directly from this IDE.
 
 You are always welcome to create an issue to discuss your changes before you start working on them. 
 
@@ -40,17 +44,15 @@ Creating an issue is not required for small updates, but it is recommended to le
 
 We can define small updates as changes to the content of the website:
 
-- Update the content of an existing page
-- Update the content of an existing blog post
-- Add a [new page](#creating-new-page) or [blog post](#creating-new-post)
+- Update the content of an existing page (manual, tutorial or release note)
+- Add a [new manual](#creating-new-manual) or [tutorial](#creating-new-tutorial)
 - Fix a typo
-- Update the navigation or footer
 
 ### Steps
 
 **Note:** This guide assumes you are already familiar with updating files in GitHub.
 
-1. Go to the [Stride Website GitHub](https://github.com/VaclavElias/stride-website-next) repository.
+1. Go to the [Stride Docs GitHub](https://github.com/stride3d/stride-docs) repository.
 1. Locate the file you wish to edit.
 1. Click the `Edit this file` (pencil) icon in the top right corner.
 1. If prompted, fork the repository by clicking `Fork this repository`.
@@ -62,12 +64,11 @@ We can define small updates as changes to the content of the website:
 
 ## Major Updates
 
-[Creating an issue](https://github.com/stride3d/stride-website/issues) is **required** for major updates, so that others can comment on your changes and provide feedback.
+[Creating an issue](https://github.com/stride3d/stride-docs/issues) is **required** for major updates, so that others can comment on your changes and provide feedback.
 
 We can define bigger updates as changes to the design of the website, where you would like to see the impact of your changes beforehand to assess the desired result:
 
-- Add new Eleventy shortcodes and Liquid includes
-- Update Bootstrap library or other libraries
+- Update docfx version
 - Update layouts
 
 You would start with the local development environment, which is described in the [Installation](Installation) section.
@@ -78,11 +79,20 @@ Then you would make your changes and test them locally. Once you are happy with 
 
 While wiki pages can be updated directly in the GitHub web interface, this feature is restricted only to contributors who can edit the wiki directly. We have decided to move our wiki pages to a regular folder in this repository called `wiki`, allowing us to use the same process as we do for the website content. If any changes are made directly on the wiki pages, they will be overwritten by the next wiki deployment.
 
-Wiki pages are deployed through a separate GitHub action, `stride-web-wiki.yml`, which is triggered by updates in the `wiki` folder or can be triggered manually. The `wiki` folder is ignored by the Eleventy build process, ensuring that the wiki pages are not deployed to the website. Additionally, any pushes to the `wiki` folder will not trigger the website deployment.
+Wiki pages are deployed through a separate GitHub action, `stride-docs-wiki.yml`, which is triggered by updates in the `wiki` folder or can be triggered manually. The `wiki` folder is ignored by the docfx build process, ensuring that the wiki pages are not deployed to the website. Additionally, any pushes to the `wiki` folder will not trigger the website deployment.
 
 You can update the wiki pages as any other content pages, by following the steps in the [Small Updates](#small-updates) section.
 
 ⚠️**Important:** If you are updating any headers in the wiki pages, please make sure to update the *Table of Contents* at the top of the page, [Home](Home) page and `_Sidebar.md`. Also, you might need to search for all the links to the updated header and update them as well.
+
+# Manual
+
+These pages contain information about how to use Stride, an open-source C# game engine.
+
+## Creating New Manual Page
+
+1. Create a new file in the `manual` folder, in the already existing folders (e.g. animation, audio, ..) or create a new folder in the `manual` folder.
+
 
 # Creating New Post
 

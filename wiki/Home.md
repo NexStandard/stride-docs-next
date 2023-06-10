@@ -1,12 +1,12 @@
 Welcome to the Stride Docs Wiki.
 
-This wiki serves as a comprehensive guide to help you navigate and contribute to the **Stride docs**.
+This wiki serves as a comprehensive guide to help you navigate and contribute to the **Stride docs** website.
 
-If you're looking to make minor changes, such as adding or updating a manual, tutorial or page, or fixing a typo, you can jump straight to the [Content Updates](Content#content-updates) section.
+If you're looking to make minor changes, such as adding or updating a manual, tutorial or page, or fixing a typo, feel free to jump straight to the [Content Updates](Content#content-updates) section.
 
-For more extensive updates 🤯🤦‍♂️ and a deeper understanding of the docs website project, we recommend exploring all the sections provided. Happy browsing and contributing!
+For more extensive updates 🤯🤦‍♂️ or for a deeper understanding of the docs website project, we recommend exploring all the sections provided. Happy browsing and contributing!
 
-Technologies we use to build our website:
+Here are the technologies we use to build our website:
 
 - [docfx](https://dotnet.github.io/docfx/index.html) (static site generator)
 - Markdown
@@ -29,10 +29,10 @@ Technologies we use to build our website:
     - [Small Updates](Content#small-updates)
     - [Major Updates](Content#major-updates)
     - [Updating Wiki](Content#updating-wiki)
-  - [Manual](Content#creating-new-post)
-    - [Creating New Page](Content#creating-new-post)
-  - [Tutorial](Content#creating-new-post)
-    - [Creating New Tutorial](Content#creating-new-post)
+  - [Manual](Content#manual)
+    - [Creating New Page](Content#creating-new-manual-page)
+  - [Tutorial](Content#tutorial)
+    - [Creating New Tutorial](Content#creating-new-tutorial-page)
   - [Creating New Post](Content#creating-new-post)
     - [Post Naming Convention](Content#post-naming-convention)
     - [Post Front Matter](Content#post-front-matter)

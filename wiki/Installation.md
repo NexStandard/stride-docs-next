@@ -2,7 +2,7 @@ This guide will walk you through the steps to install the Stride docs website on
 
 [Minor updates](Content#small-updates) can be made directly on GitHub. However, for [more significant updates](Content#major-updates) that affect multiple pages, we recommend using a local development environment so you can see the impact of your changes beforehand. This is because we use the **docfx** static site generator, and in some cases, all pages need to be regenerated. This approach helps you assess your changes before submitting a pull request.
 
-This guide assumes you have a basic understanding of the technologies used in the Stride docs.
+This guide assumes you have a basic understanding of the technologies used in the Stride docs website.
 
 # Table of Contents
 
@@ -35,7 +35,7 @@ Enter the following command to install the latest docfx
 dotnet tool install -g docfx
 ```
 
-Or check the inslalled version is at least `2.66.0`
+Or check the inslalled version is at least `2.67.0`
 
 ```
 docfx --version
@@ -52,7 +52,7 @@ dotnet tool update -g docfx
 Install a specific version of docfx
 
 ```
-dotnet tool update -g docfx --version 2.66.0
+dotnet tool update -g docfx --version 2.67.0
 ```
 
 # Running the Development Server
