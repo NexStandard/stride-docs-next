@@ -92,89 +92,17 @@ These pages contain information about how to use Stride, an open-source C# game 
 ## Creating New Manual Page
 
 1. Create a new file in the `manual` folder, in the already existing folders (e.g. animation, audio, ..) or create a new folder in the `manual` folder.
+   - If you created a new folder, make sue that you create also index.md file in this folder.
+1. Use any existing page as a template for the new page.
+1. Update `toc.md` file in the `manual` folder to include the new page or folder. The `toc.md` file contains the table of contents for the manual pages, which is displayed on the left side of the manual pages.
+
+## Naming Convention
+
+Observe existing pages and folders for the naming convention.
+
+## Media
 
 
-# Creating New Post
-
-To create a new blog post, you can follow one of these methods:
-
-1. Copy an existing post and update the front matter and content. This is the fastest way to get started with a new post.
-1. Alternatively, create a new file in the `posts` folder, ensuring that the file name follows the appropriate naming convention.
-
-Either method will allow you to create a new blog post, so choose the one that best suits your needs.
-
-## Post Naming Convention
-
-`YYYY-MM-DD-post-title.md`
-
-Replace `YYYY-MM-DD` with the date of the post and `post-title` with the title of the post.
-
-## Post Front Matter
-
-The file should start with the following front matter:
-
-```yaml
----
-title: 'Post title'
-# author's id, defined in the _data/site.json
-author: vaclav
-# optional, if not set, the default tags will be used, tags are merged with the default tags
-# you can find all tags in the live site in the /tags/ page
-tags: ['Announcement']
-# optional, if not set, the default image will be used
-# use webp format for best performance, images should be located in the /images/blog/YYYY-MM-DD-post-title folder
-image: /images/blog/2023-04/new-home-page.webp
-# optional, if true, the post will be featured in the popular section
-pupular: true
-# permlink is automatically generated based on the file name, but you can override it here
-permalink: /blog/2023-04/my-custom-link/ # this is a custom link
----
-```
-
-Default front matter, which is used for all posts, can be found in the `posts/posts.json` file.
-
-```json
-{
-  "layout": "post",
-  "eleventyComputed": {
-    "year": "{{ page.date | date: '%Y' }}",
-    "modified": "Last Modified"
-  },
-  "permalink": "/blog/{{ page.fileSlug }}/",
-  "tags": [ "blog", "search" ]
-}
-```
-
-## Post Content
-
-Check the previous posts for an example of the post content. Ideally you should use the same format as the previous posts to preserve the consistency of the blog.
-
-You can use shortcodes and includes which are described in the [Shortcodes and Includes](#shortcodes-and-includes) section.
-
-You can also use majority of the Bootstrap classes in your content if you combine HTML and Markdown.
-
-💡**Tip:** We have a folder called `_drafts` where you can store your drafts. These files are not published. Once you are ready to publish your post, you can move it to the `posts` folder.
-
-## Excerpt
-
-The excerpt is the first paragraph of the post. Separated from the rest of the content by three dashes `---`. The excerpt is used in the blog post list, meta description and in the RSS feed.
-
-**Example**
-
-```yaml
----
-title: 'Stride 4.1 is Now Live'
-author: aggror
-tags: ['Tutorials','Release', 'Graphics']
----
-
-Stride contributors are proud to announce a new release now running on .NET 6 supporting the latest C# 10. That means you can now head to the download page and start developing your games using the latest .NET technologies.
-
----
-
-Additional content goes here...
-
-```
 
 # Creating New Page
 
