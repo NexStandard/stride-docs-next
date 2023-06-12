@@ -102,117 +102,63 @@ Observe existing pages and folders for the naming convention.
 
 ## Media
 
+You can observe that existing folders might have a `media` folder. This folder contains images and videos used in the manual pages. You can use this folder or create a new one in your folder. If possible make sure that images are `.webp` format and videos are `.mp4` format.
 
+# Tutorial
 
-# Creating New Page
+These pages contain tutorials on how to use Stride, an open-source C# game engine.
 
-To create a new page, create a new file in the root folder or create a new folder and add an `index.md` file to it. You can use any templating language supported by Eleventy. We use Markup, html, nunjacks.
+## Creating New Tutorial Page
 
-## Page Front Matter
+1. Create a new tutorial folder in the `tutorial` folder.
+1. Create a new index.md file in this folder. Observe existing tutorials for the content of this file.
+1. Create markdown files for each step of the tutorial. Observe existing tutorials structure for the content of these files.
+1. Update `toc.md` file in the `tutorial` folder to include the new tutorial folder. The `toc.md` file contains the table of contents for the tutorial pages, which is displayed on the left side of the tutorial pages.
 
-The page front matter works the same way as the post front matter. The only difference is that the `layout` property is required.
+## Naming Convention
 
-**Example:** file `features.html`
+Observe existing pages and folders for the naming convention.
 
-```yaml
----
-layout: default
-title: Features
-description: 'Stride supports an extensive list of features: Scene Editor, Physically Based Rendering, Particles, UI Editor, Prefabs, DX12 & Vulkan, C# Scripting, etc...'
-# permlink is automatically generated based on the file name, but you can override it here
-permalink: /my-features/ # otherwise it would be /features/
----
-```
+## Media
+
+You can observe that existing tutorials have a `media` folder. This folder contains images. If possible make sure that images are `.webp` format. The videos should be uploaded to YouTube and embedded in the tutorial pages.
 
 # Shortcodes and Includes
 
-ToDo: Add link to live examples
+Read docfx documentation about [shortcodes and inludes](https://dotnet.github.io/docfx/docs/markdown.html?tabs=linux%2Cdotnet). Some of them are briefly described below.
 
 ## Alert
 
-To add an alert, use the following include, where:
-
-- `type` is one of the following: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `light`, `dark`. Using these types will automatically include a relevant icon
-- `icon` is a Font Awesome icon, which is optional. You can use any free icon, e.g., fa-check.
-- `title` is the title of the alert
-
 ```liquid
-# This will render as a green box without the icon
-{% include _alert.html type:'success' icon:'' title:'No icon: Stride contributors are proud to announce a new release now running on .NET 6 supporting the latest C# 10.' %}
+> [!NOTE]
+> Information the user should notice even if skimming.
 
-# This will render as a green box with a check icon
-{% include _alert.html type:'success' title:'No icon: Stride contributors are proud to announce a new release now running on .NET 6 supporting the latest C# 10.' %}
+> [!TIP]
+> Optional information to help a user be more successful.
 
-# This will render as a green box with a custom icon
-{% include _alert.html type:'success' icon:'fa-face-smile' title:'No icon: Stride contributors are proud to announce a new release now running on .NET 6 supporting the latest C# 10.' %}
-```
+> [!IMPORTANT]
+> Essential information required for user success.
 
-## Alert Banner
+> [!CAUTION]
+> Negative potential consequences of an action.
 
-A global alert banner can be used for promotional purposes. The banner can be activated in `site.json`.
-
-```json
-"alert-banner": true
-```
-
-The HTML can be updated in the `/_includes/alert-banner.html` file.
-
-## Image
-
-Add responsive images using shortcodes. Be sure to include a descriptive title, as it will improve your post's search engine visibility. Also, if possible, use the **webp** format for images, which can also be used for transparent images. This will improve the performance of your site.
-
-To add a responsive image, use the following shortcode:
-
-`{% img 'title' 'url' %}`
-
-Replace `title` with a descriptive title for the image and `url` with the image URL. This shortcode renders as:
-
-```html
-<img alt="title" src="url" class="img-fluid mb-2" loading="lazy" data-src="url">
-```
-
-To add a responsive image with a clickable link that opens the image in full size, use the following shortcode:
-
-`{% img-click 'title' 'url' %}`
-
-Replace `title` with a descriptive title for the image and `url` with the image URL. This shortcode renders as:
-
-```html
-<a href="url" title="title" class="mb-2"><img alt="title" src="url" class="img-fluid" loading="lazy" data-src="url"></a>
-```
-
-To add a responsive image with a clickable link that directs users to a custom destination, use the following shortcode:
-
-`{% img-click 'title' 'url' 'destinationUrl' %}`
-
-Replace `title` with a descriptive title for the image, `url` with the image URL, and `destinationUrl` with the target URL when the image is clicked. This shortcode renders as:
-
-```html
-<a href="destinationUrl" title="title" class="mb-2"><img alt="title" src="url" class="img-fluid" loading="lazy" data-src="url"></a>
+> [!WARNING]
+> Dangerous certain consequences of an action.
 ```
 
 ## Video
 
 We should consider hosting our videos on YouTube whenever possible. 
 
-To embed a **YouTube video**, use the following shortcode:
+You can embed a video by using the following Markdown syntax:
 
-`{% youtube 'id' %}`
+`> [!Video embed_link]`
 
-Replace `id` with the YouTube video ID. This shortcode renders as:
+Replace `embed_link` with the YouTube video link. This shortcode renders as:
 
-```html
-<div class="ratio ratio-16x9 mb-2"><iframe src="https://www.youtube.com/embed/id" title="YouTube video" allowfullscreen></iframe></div>
-```
-
-To embed a **YouTube playlist**, use the following shortcode:
-
-`{% youtube-playlist 'id' %}`
-
-Replace `id` with the YouTube playlist ID. This shortcode renders as:
-
-```html
-<div class="ratio ratio-16x9 mb-2"><iframe src="https://www.youtube.com/embed/videoseries?list=id" title="YouTube video" allowfullscreen></iframe></div>
+Example:
+```md
+> [!Video https://www.youtube.com/embed/-IXw64hZAqg]
 ```
 
 To embed a video hosted elsewhere, use the following shortcode:
