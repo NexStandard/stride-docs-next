@@ -117,43 +117,49 @@ run.bat
  ## Post-Release Features
  - Dark Theme by Default
 
+## Documentation Build Workflow
+
 ``` mermaid
 graph TB
     A[Read-LanguageConfigurations]
-    X1[BuildAll]
-    B[Get-UserInput]
-    C[Ask-IncludeAPI]
-    D[Copy-ExtraItems]
-    E[Start-LocalWebsite]
-    F[Generate-APIDoc]
+    B1{BuildAll}
+    C1[Get-UserInput]
+    E1{Ask-IncludeAPI}
+    F[Start-LocalWebsite]
+    D1[Generate-APIDoc]
+    X2[Cancel]
     G[Remove-APIDoc]
     H[Build-EnglishDoc]
     I[Build-NonEnglishDoc]
     J[Build-AllLanguagesDocs]
     K[PostProcessing-DocFxDocUrl]
     L[PostProcessing-FixingSitemap]
+    D[Copy-ExtraItems]
+    X3{isEnLanguage or isAllLanguages}
+    X4{isAllLanguages}
+    Q[End]
 
-    A --> X1{BuildAll}
-    X1 -->|Yes| F
-    X1 -->|No| B
-    B --> C{Ask-IncludeAPI}
-    B --> E
-    B --> X2[Cancel]
-    E --> End
+    A --> B1
+    B1 -->|Yes| D1
+    B1 -->|No| C1
+    C1 --> E1
+    C1 --> F
+    C1 --> X2
+    F --> End
     X2 --> End[End]
-    C -->|Yes| F
-    C -->|No| G
-    G --> X3{isEnLanguage or isAllLanguages}
-    F --> X3
+    E1 -->|Yes| D1
+    E1 -->|No| G
+    G --> X3
+    D1 --> X3
     X3 -->|Yes| H
     X3 -->|No| X4
     H --> DocFX{{DocFX}} --> L --> D
-    D --> X4{isAllLanguages}
+    D --> X4
     X4 -->|Yes| J
     X4 -->|No| I
     J --> I
     I --> M{{DocFX}}
     M --> K
-    K --> N[End]
+    K --> Q
 ```
 
