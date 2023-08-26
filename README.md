@@ -123,7 +123,6 @@ run.bat
 - "BuildAll - No" is used for local development with an interactive command-line UI.
 
 ``` mermaid
-
 %% Define styles
 
 %% Main Graph
@@ -176,7 +175,5 @@ graph TB
     X --> Y
     Y --> Z
     end
-
-%% Subgraphs
 ```
 
