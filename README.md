@@ -122,14 +122,14 @@ run.bat
 ``` mermaid
 graph TB
     A[Read-LanguageConfigurations]
-    B1{BuildAll}
-    C1[Get-UserInput]
-    D1[Generate-APIDoc]
-    E1{Ask-IncludeAPI}
+    B{BuildAll}
+    C[Get-UserInput]
+    D[Generate-APIDoc]
+    E{Ask-IncludeAPI}
     End[End]
     F[Start-LocalWebsite]
-    G1[Cancel]
-    H1[Remove-APIDoc]
+    G[Cancel]
+    H[Remove-APIDoc]
     M{isEnLanguage or isAllLanguages}
     N[Build-EnglishDoc]
     O[PostProcessing-FixingSitemap]
@@ -140,18 +140,18 @@ graph TB
     Y[PostProcessing-DocFxDocUrl]
     Z[End]
 
-    A --> B1
-    B1 -->|Yes| D1
-    B1 -->|No| C1
-    C1 --> E1
-    C1 --> F
-    C1 --> G1
+    A --> B
+    B -->|Yes| D
+    B -->|No| C
+    C --> E
+    C --> F
+    C --> G
     F --> End
-    G1 --> End
-    E1 -->|Yes| D1
-    E1 -->|No| H1
-    H1 --> M
-    D1 --> M
+    G --> End
+    E -->|Yes| D
+    E -->|No| H
+    H --> M
+    D --> M
     M -->|Yes| N
     M -->|No| R
     N --> DocFX{{DocFX}} --> O --> P
