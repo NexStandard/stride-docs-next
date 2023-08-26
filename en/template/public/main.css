@@ -1,6 +1,10 @@
 /* Copyright (c) Microsoft Corporation. All Rights Reserved. Licensed under the MIT License. See License.txt in the project root for license information. */
 
 /* Checkout https://getbootstrap.com/docs/5.3/customize/color/ for more customization options */
+:root {
+    --stride-red: #FC365B;
+    --stride-red-web: #da0830;
+}
 
 body {
     --bs-link-color-rgb: 66, 184, 131 !important;
@@ -12,6 +16,13 @@ body {
     height: 37px;
 }
 
+.filter input, .search input {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-size: .875rem;
+    border-radius: var(--bs-border-radius-sm);
+}
+
 [data-bs-theme=light] body {
     background-image: url(../media/bg_light.svg);
 }
@@ -19,4 +30,8 @@ body {
 /* ToDo: JavaScipt needs to be hooked to theme selector to switch logo */
 [data-bs-theme=dark] {
     --logo: url(../media/stride-logo-dark-theme.svg) no-repeat;
+}
+
+footer .link-danger {
+    color: var(--stride-red-web);
 }
