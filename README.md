@@ -181,13 +181,18 @@ graph TB
 
     A --> X1{BuildAll}
     X1 -->|No| B
-    B --> C
-    B --> X2[Cancel]
+    X1 -->|Yes| F
+    B --> C{Ask-IncludeAPI}
     B --> E
-    C --> D
-    D --> E
-    E --> F
-    F --> G
+    B --> X2[Cancel]
+    E --> End
+    X2 --> End[End]
+    C -->|Yes| F
+    C -->|No| G
+    G --> X3{isEnLanguage or isAllLanguages}
+    F --> X3
+    X3 -->|Yes| H
+    X3 -->|No| X4{isAllLanguages}
     G --> H
     H --> I
     I --> J
