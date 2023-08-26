@@ -34,8 +34,8 @@ jobs:
         path: stride
         lfs: true
 
-    - name: Copy global.json file
-      run: xcopy stride-docs\global.json . /Y
+    # - name: Copy global.json file
+    #   run: xcopy stride-docs\global.json . /Y
 
     - run: dotnet tool update -g docfx
 #    - run: dotnet tool install -g docfx --version 2.65.1
