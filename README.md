@@ -177,8 +177,6 @@ graph TB
     J[Build-AllLanguagesDocs]
     K[PostProcessing-DocFxDocUrl]
     L[PostProcessing-FixingSitemap]
-    DocFX{{DocFX}}
-   
 
     A --> X1{BuildAll}
     X1 -->|Yes| F
@@ -194,10 +192,13 @@ graph TB
     F --> X3
     X3 -->|Yes| H
     X3 -->|No| X4
-    H --> DocFX --> L --> D
+    H --> DocFX{{DocFX}} --> L --> D
     D --> X4{isAllLanguages}
     X4 -->|Yes| J
     X4 -->|No| I
     J --> I
+    I --> M{{DocFX}}
+    M --> K
+    K --> N[End]
 ```
 
