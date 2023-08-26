@@ -193,10 +193,7 @@ graph TB
     F --> X3
     X3 -->|Yes| H
     X3 -->|No| X4{isAllLanguages}
-    G --> H
-    H --> I
-    I --> J
-    J --> K
-    K --> L
+    H --> L
+    L --> X4
 ```
 
