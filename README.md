@@ -123,7 +123,13 @@ run.bat
 - "BuildAll - No" is used for local development with an interactive command-line UI.
 
 ``` mermaid
+
+%% Define styles
+
+%% Main Graph
 graph TB
+
+%% Nodes
     A[Read-LanguageConfigurations]
     B{BuildAll}
     C[Get-UserInput]
@@ -143,16 +149,20 @@ graph TB
     Y[PostProcessing-DocFxDocUrl]
     Z[End]
 
+%% Edges
     A --> B
     B -->|Yes| D
     B -->|No| C
+    subgraph User Interaction
     C --> E
     C --> F
     C --> G
+    end
     F --> End
     G --> End
     E -->|Yes| D
     E -->|No| H
+    subgraph Documentation Generation
     H --> M
     D --> M
     M -->|Yes| N
@@ -165,5 +175,8 @@ graph TB
     T --> X{{DocFX}}
     X --> Y
     Y --> Z
+    end
+
+%% Subgraphs
 ```
 
