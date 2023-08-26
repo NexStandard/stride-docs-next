@@ -115,78 +115,65 @@ run.bat
 - en and jp docs only, without API - 3 minutes
 
  ## Post-Release Features
-
  - Dark Theme by Default
 
-```mermaid
-flowchart LR
+## Documentation Build Workflow
 
-  subgraph Build Documentation Process
-    param[Parameters] --> constants[Define Constants]
-    constants --> readLang[Read Language Configurations]
-    readLang --> userInput[Get User Input]
-    userInput --> askApi[Ask Include API]
-    userInput --> startLocal[Start Local Website]
-    askApi --> copyExtra[Copy Extra Items]
-    askApi --> genApi[Generate API Documentation]
-    askApi --> removeApi[Remove API Documentation]
-    askApi --> buildEng[Build English Documentation]
-    askApi --> buildNonEng[Build Non-English Documentation]
-    buildNonEng --> postProcess[Post Processing DocFxDocUrl]
-    buildNonEng --> postProcessFix[PostProcessing FixingSitemap]
-    buildNonEng --> buildAllLang[Build All Languages Docs]
-  end
-
-  subgraph Functions
-    readLang[Read Language Configurations]
-    userInput[Get User Input]
-    askApi[Ask Include API]
-    copyExtra[Copy Extra Items]
-    startLocal[Start Local Website]
-    genApi[Generate API Documentation]
-    removeApi[Remove API Documentation]
-    buildEng[Build English Documentation]
-    buildNonEng[Build Non-English Documentation]
-    postProcess[Post Processing DocFxDocUrl]
-    postProcessFix[PostProcessing FixingSitemap]
-  end
-
-  subgraph Parameters
-    param[Parameters]
-  end
-
-  subgraph BuildAll Process
-    buildAllLang[Build All Languages Docs]
-  end
-
-
-```
+- "BuildAll - Yes" is used for CI/CD.
+- "BuildAll - No" is used for local development with an interactive command-line UI.
 
 ``` mermaid
-graph TB
-    A[Read-LanguageConfigurations]
-    B[Get-UserInput]
-    C[Ask-IncludeAPI]
-    D[Copy-ExtraItems]
-    E[Start-LocalWebsite]
-    F[Generate-APIDoc]
-    G[Remove-APIDoc]
-    H[Build-EnglishDoc]
-    I[Build-NonEnglishDoc]
-    J[Build-AllLanguagesDocs]
-    K[PostProcessing-DocFxDocUrl]
-    L[PostProcessing-FixingSitemap]
+%% Define styles
 
+%% Main Graph
+graph TB
+
+%% Nodes
+    A[Read-LanguageConfigurations]
+    B{BuildAll}
+    C[Get-UserInput]
+    D[Generate-APIDoc]
+    E{Ask-IncludeAPI}
+    End[End]
+    F[Start-LocalWebsite]
+    G[Cancel]
+    H[Remove-APIDoc]
+    M{isEnLanguage or isAllLanguages}
+    N[Build-EnglishDoc]
+    O[PostProcessing-FixingSitemap]
+    P[Copy-ExtraItems]
+    R{isAllLanguages}
+    S[Build-AllLanguagesDocs]
+    T[Build-NonEnglishDoc]
+    Y[PostProcessing-DocFxDocUrl]
+    Z[End]
+
+%% Edges
     A --> B
-    B --> C
-    C --> D
-    D --> E
-    E --> F
-    F --> G
-    G --> H
-    H --> I
-    I --> J
-    J --> K
-    K --> L
+    B -->|Yes| D
+    B -->|No| C
+    subgraph User Interaction
+    C --> E
+    C --> F
+    C --> G
+    end
+    F --> End
+    G --> End
+    E -->|Yes| D
+    E -->|No| H
+    subgraph Documentation Generation
+    H --> M
+    D --> M
+    M -->|Yes| N
+    M -->|No| R
+    N --> DocFX{{DocFX}} --> O --> P
+    P --> R
+    R -->|Yes| S
+    R -->|No| T
+    S --> T
+    T --> X{{DocFX}}
+    X --> Y
+    Y --> Z
+    end
 ```
 
