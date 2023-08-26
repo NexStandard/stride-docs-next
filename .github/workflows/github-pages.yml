@@ -1,12 +1,12 @@
 name: Build Stride Docs - Staging - GitHub
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - 'README.md'
-      - 'wiki/**'
-      - '.github/**'
+  # push:
+  #   branches:
+  #     - main
+  #   paths-ignore:
+  #     - 'README.md'
+  #     - 'wiki/**'
+  #     - '.github/**'
   workflow_dispatch:
 
 jobs:
