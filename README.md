@@ -119,8 +119,8 @@ run.bat
 
 ## Documentation Build Workflow
 
-- BuildAll - Yes - is used for CI/CD
-- BuildAll - No - is used for local development with interactive command line UI
+- "BuildAll - Yes" is used for CI/CD.
+- "BuildAll - No" is used for local development with an interactive command-line UI.
 
 ``` mermaid
 graph TB
