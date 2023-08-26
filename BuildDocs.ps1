@@ -32,6 +32,7 @@ param (
 # Define constants
 $Settings = [PSCustomObject]@{
     LanguageJsonPath = ".\languages.json"
+    LogPath = ".\build.log"
     TempDirectory = "_tmp"
     SiteDirectory = "_site"
     HostUrl = "http://localhost:8080/en/index.html"
@@ -123,7 +124,7 @@ function Build-EnglishDoc {
     Write-Host -ForegroundColor Yellow "Start building English documentation."
 
     # Output to both build.log and console
-    docfx build en\docfx.json | Write-Host
+    docfx build en/docfx.json | Write-Host
 
     return $LastExitCode
 }
@@ -205,7 +206,7 @@ function Build-NonEnglishDoc {
         # we replace the en folder with the selected language folder in the docfx.json file
         (Get-Content $langFolder/docfx.json) -replace "$SiteDir/en","$SiteDir/$($SelectedLanguage.Language)" | Set-Content -Encoding UTF8 $langFolder/docfx.json
 
-        docfx build $langFolder\docfx.json | Write-Host
+        docfx build $langFolder/docfx.json | Write-Host
 
         if (!$BuildAll) {
             Remove-Item $langFolder -Recurse -Verbose
@@ -316,8 +317,10 @@ function PostProcessing-FixingSitemap {
 
 $languages = Read-LanguageConfigurations
 
-Start-Transcript -Path ".\build.log"
+Start-Transcript -Path $Settings.LogPath
+
 [bool]$isAllLanguages = $false
+
 if ($BuildAll)
 {
     $isAllLanguages = $true
@@ -343,22 +346,18 @@ else
     # Ask if the user wants to include API
     if ($isEnLanguage -or $isAllLanguages -or $shouldBuildSelectedLanguage) {
         $API = Ask-IncludeAPI
-    }
-    if ($isCanceled)
+    } elseif ($isCanceled)
     {
         Write-Host -ForegroundColor Red "Operation canceled by user."
         Stop-Transcript
         Read-Host -Prompt "Press ENTER key to exit..."
         return
-    }
-
-    if ($shouldRunLocalWebsite)
+    } elseif ($shouldRunLocalWebsite)
     {
         Start-LocalWebsite
         return
     }
 }
-
 
 # Generate API doc
 if ($API)
@@ -395,10 +394,10 @@ if ($isEnLanguage -or $isAllLanguages)
    }
 
    PostProcessing-FixingSitemap
-}
 
-# Do we need this?
-# Copy-ExtraItems
+   # Do we need this?
+   # Copy-ExtraItems
+}
 
 # Build non-English language if selected or build all languages if selected
 if ($isAllLanguages) {
