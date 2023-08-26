@@ -124,42 +124,43 @@ graph TB
     A[Read-LanguageConfigurations]
     B1{BuildAll}
     C1[Get-UserInput]
-    E1{Ask-IncludeAPI}
-    F[Start-LocalWebsite]
     D1[Generate-APIDoc]
-    X2[Cancel]
-    G[Remove-APIDoc]
-    H[Build-EnglishDoc]
-    I[Build-NonEnglishDoc]
-    J[Build-AllLanguagesDocs]
-    K[PostProcessing-DocFxDocUrl]
-    L[PostProcessing-FixingSitemap]
-    D[Copy-ExtraItems]
-    X3{isEnLanguage or isAllLanguages}
-    X4{isAllLanguages}
-    Q[End]
+    E1{Ask-IncludeAPI}
+    End[End]
+    F[Start-LocalWebsite]
+    G1[Cancel]
+    H1[Remove-APIDoc]
+    M{isEnLanguage or isAllLanguages}
+    N[Build-EnglishDoc]
+    O[PostProcessing-FixingSitemap]
+    P[Copy-ExtraItems]
+    R{isAllLanguages}
+    S[Build-AllLanguagesDocs]
+    T[Build-NonEnglishDoc]
+    Y[PostProcessing-DocFxDocUrl]
+    Z[End]
 
     A --> B1
     B1 -->|Yes| D1
     B1 -->|No| C1
     C1 --> E1
     C1 --> F
-    C1 --> X2
+    C1 --> G1
     F --> End
-    X2 --> End[End]
+    G1 --> End
     E1 -->|Yes| D1
-    E1 -->|No| G
-    G --> X3
-    D1 --> X3
-    X3 -->|Yes| H
-    X3 -->|No| X4
-    H --> DocFX{{DocFX}} --> L --> D
-    D --> X4
-    X4 -->|Yes| J
-    X4 -->|No| I
-    J --> I
-    I --> M{{DocFX}}
-    M --> K
-    K --> Q
+    E1 -->|No| H1
+    H1 --> M
+    D1 --> M
+    M -->|Yes| N
+    M -->|No| R
+    N --> DocFX{{DocFX}} --> O --> P
+    P --> R
+    R -->|Yes| S
+    R -->|No| T
+    S --> T
+    T --> X{{DocFX}}
+    X --> Y
+    Y --> Z
 ```
 
