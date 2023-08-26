@@ -165,6 +165,7 @@ flowchart LR
 ``` mermaid
 graph TB
     A[Read-LanguageConfigurations]
+    X1[BuildAll]
     B[Get-UserInput]
     C[Ask-IncludeAPI]
     D[Copy-ExtraItems]
@@ -176,9 +177,13 @@ graph TB
     J[Build-AllLanguagesDocs]
     K[PostProcessing-DocFxDocUrl]
     L[PostProcessing-FixingSitemap]
+   
 
-    A --> B
+    A --> X1{BuildAll}
+    X1 -->|No| B
     B --> C
+    B --> X2[Cancel]
+    B --> E
     C --> D
     D --> E
     E --> F
