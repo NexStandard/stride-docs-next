@@ -1,4 +1,5 @@
 const app = {
+    languageDropdownCreated: false,
     iconLinks: [
         {
             icon: 'github',
@@ -27,14 +28,19 @@ const app = {
         }
 
         // Callback function to execute when the desired element is injected
-        const callback = (mutationsList, observer) => {
+        const callback = async (mutationsList, observer) => {
             for (const mutation of mutationsList) {
                 if (mutation.type === 'childList') {
                     const navElement = document.querySelector('.navbar-nav');
                     if (navElement) {
 
                         // Call your function to add the language navigation
-                        this.addLanguageNavigation();
+                        try {
+                            await this.addLanguageNavigation();
+                            console.log('Language navigation added successfully');
+                        } catch (err) {
+                            console.log('Failed to add language navigation:', err);
+                        }
 
                         // Disconnect the observer once the element is found
                         observer.disconnect();
@@ -105,7 +111,10 @@ const app = {
 
         return languageDropdown;
     },
-    addLanguageNavigation: function () {
+    addLanguageNavigation: async function () {
+
+        if (this.languageDropdownCreated) return;
+
         const navElement = document.querySelector('.navbar-nav');
 
         if (!navElement) {
@@ -113,16 +122,42 @@ const app = {
             return;
         }
 
-        const languages = [
-            { Name: 'English', Code: 'en', Href: '#' },
-            { Name: 'Japanese', Code: 'jp', Href: '#' }
-        ];
+        // Build the dynamic URL for languages.json
+        const currentURL = new URL(window.location.href);
+        const urlSegments = currentURL.pathname.split('/');
+        const baseURL = `${currentURL.origin}/${urlSegments[1]}/${urlSegments[2]}/languages.json`;
 
-        const languageCodes = languages.map(language => language.Code).join('|');
+        // Fetching the JSON from the URL
+        let languages;
+
+        try {
+            const response = await fetch(baseURL);
+
+            if (!response.ok) {
+                console.error('Failed to fetch languages.json');
+
+                return;
+            }
+
+            languages = await response.json();
+
+        } catch (error) {
+
+            console.error(`Error fetching languages: ${error}`);
+
+            return;
+        }
+
+        const enabledLanguages = languages.filter(language => language.Enabled);
+
+        if (enabledLanguages.length === 1) return;
+
+        const languageCodes = enabledLanguages.map(language => language.Code).join('|');
         const pattern = new RegExp(`\\/(?:${languageCodes})\\/`, 'i');
 
-        const languageDropdown = this.createLanguageDropdown(languages, pattern);
+        const languageDropdown = this.createLanguageDropdown(enabledLanguages, pattern);
         navElement.appendChild(languageDropdown);
+        this.languageDropdownCreated = true;
     },
     addVersionNavigation: function () {
 
