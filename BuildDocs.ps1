@@ -104,6 +104,8 @@ function Start-LocalWebsite {
 function Generate-APIDoc {
     Write-Host -ForegroundColor Green "Generating API documentation..."
 
+    Write-Host ""
+
     # Build metadata from C# source, docfx runs dotnet restore
     docfx metadata en/docfx.json | Write-Host
 
@@ -304,6 +306,7 @@ function PostProcessing-DocFxDocUrl {
     Write-Host -ForegroundColor Green "Post-processing completed."
 }
 
+# we need to update all urls to /latest/en
 function PostProcessing-FixingSitemap {
     Write-Host -ForegroundColor Yellow "Post-processing sitemap.xml, adding latest/en to url"
     Write-Host ""
