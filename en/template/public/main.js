@@ -58,10 +58,10 @@ const app = {
 
         const languageLink = document.createElement('a');
         languageLink.classList.add('dropdown-item');
-        languageLink.href = language.href;
-        languageLink.textContent = language.name;
+        languageLink.href = language.Href;
+        languageLink.textContent = language.Name;
         languageLink.role = 'button';
-        languageLink.setAttribute('data-language', language.code);
+        languageLink.setAttribute('data-language', language.Code);
         return languageLink;
 
     },
@@ -114,11 +114,11 @@ const app = {
         }
 
         const languages = [
-            { name: 'English', code: 'en', href: '#' },
-            { name: 'Japanese', code: 'jp', href: '#' }
+            { Name: 'English', Code: 'en', Href: '#' },
+            { Name: 'Japanese', Code: 'jp', Href: '#' }
         ];
 
-        const languageCodes = languages.map(language => language.code).join('|');
+        const languageCodes = languages.map(language => language.Code).join('|');
         const pattern = new RegExp(`\\/(?:${languageCodes})\\/`, 'i');
 
         const languageDropdown = this.createLanguageDropdown(languages, pattern);
