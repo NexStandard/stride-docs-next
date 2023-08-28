@@ -100,6 +100,7 @@
         "files": [
           ".nojekyll",
           "CNAME",
+          "languages.json",
           "favicon.ico",
           "favicon.png",
           "images/**",
@@ -115,7 +116,6 @@
         "exclude": [ "_site/**", "obj/**" ]
       }
     ],
-    "dest": "../_site/en",
     "globalMetadataFiles": [],
     "markdownEngineProperties": {
       "toc": {
