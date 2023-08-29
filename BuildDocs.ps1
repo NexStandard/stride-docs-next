@@ -35,7 +35,7 @@ param (
 $Settings = [PSCustomObject]@{
     Version = "4.1"
     SiteDirectory = "_site/4.1"
-    HostUrl = "http://localhost:8080/4.1/en/index.html"
+    LocalTestHostUrl = "http://localhost:8080/4.1/en/index.html"
     LanguageJsonPath = "en\languages.json"
     LogPath = ".\build.log"
     TempDirectory = "_tmp"
@@ -99,7 +99,7 @@ function Start-LocalWebsite {
     Stop-Transcript
     New-Item -ItemType Directory -Verbose -Force -Path $Settings.LocalWebDirectory | Out-Null
     Set-Location $Settings.LocalWebDirectory
-    Start-Process -FilePath $Settings.HostUrl
+    Start-Process -FilePath $Settings.LocalTestHostUrl
     docfx serve
     Set-Location ..
 }
