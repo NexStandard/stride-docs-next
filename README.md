@@ -141,6 +141,7 @@ graph TB
     M{isEnLanguage or isAllLanguages}
     N[Build-EnglishDoc]
     O[PostProcessing-FixingSitemap]
+    O1[PostProcessing-Fixing404AbsolutePath]
     P[Copy-ExtraItems]
     R{isAllLanguages}
     S[Build-AllLanguagesDocs]
@@ -166,7 +167,7 @@ graph TB
     D --> M
     M -->|Yes| N
     M -->|No| R
-    N --> DocFX{{DocFX}} --> O --> P
+    N --> DocFX{{DocFX}} --> O --> O1--> P
     P --> R
     R -->|Yes| S
     R -->|No| T
