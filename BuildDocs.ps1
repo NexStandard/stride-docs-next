@@ -33,12 +33,13 @@ param (
 
 # Define constants
 $Settings = [PSCustomObject]@{
+    Version = "4.1"
+    SiteDirectory = "_site/4.1"
+    HostUrl = "http://localhost:8080/4.1/en/index.html"
     LanguageJsonPath = "en\languages.json"
     LogPath = ".\build.log"
     TempDirectory = "_tmp"
     LocalWebDirectory = "_site"
-    SiteDirectory = "_site/4.1"
-    HostUrl = "http://localhost:8080/4.1/en/index.html"
     IndexFileName = "index.md"
     ManualFolderName = "manual"
     DocsUrl = "https://doc.stride3d.net"
@@ -333,7 +334,31 @@ function PostProcessing-FixingSitemap {
     # Write the updated content back to the sitemap.xml file with UTF8 encoding
     $content | Set-Content -Encoding UTF8 $sitemapFile
 
-    Write-Host -ForegroundColor Green "Post-processing completed."
+    Write-Host -ForegroundColor Green "Post-processing sitemap.xml completed."
+    Write-Host ""
+}
+
+function PostProcessing-Fixing404AbsolutePath {
+    Write-Host -ForegroundColor Yellow "Post-processing 404.html, adding version/en to url"
+    Write-Host ""
+
+    $file404 = "$($Settings.SiteDirectory)/en/404.html"
+
+    $content = Get-Content $file404 -Encoding UTF8
+
+    $keysToReplace = @("favicon.ico", "public/docfx.min.css", "public/main.css", "toc.html", "media/stride-logo-red.svg")
+
+    foreach ($key in $keysToReplace) {
+        $replacement = "/$($Settings.Version)/en/$key"
+        $content = $content -replace $key, $replacement
+    }
+
+    $content = $content -replace "./public/main.js", "/$($Settings.Version)/en/public/main.js"
+    $content = $content -replace "./public/docfx.min.js", "/$($Settings.Version)/en/public/docfx.min.js"
+
+    $content | Set-Content -Encoding UTF8 $file404
+
+    Write-Host -ForegroundColor Green "Post-processing 404.html completed."
     Write-Host ""
 }
 
@@ -418,6 +443,8 @@ if ($isEnLanguage -or $isAllLanguages)
    }
 
    PostProcessing-FixingSitemap
+
+   PostProcessing-Fixing404AbsolutePath
 
    # Do we need this?
    # Copy-ExtraItems
