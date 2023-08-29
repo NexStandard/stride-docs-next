@@ -10,7 +10,9 @@
 
 .LINK
     https://github.com/VaclavElias/stride-website-next
-    https://github.com/VaclavElias/stride-docs-next/blob/main/languages.json
+.LINK
+    https://github.com/VaclavElias/stride-docs-next/blob/main/en/languages.json
+.LINK
     https://dotnet.github.io/docfx/index.html
 
 .PARAMETER BuildAll
@@ -250,9 +252,18 @@ function Build-AllLanguagesDocs {
     }
 }
 
-# docfx generates GitHub link based on the temp _tmp folder, which we need to fix to correct
-# GitHub links. This function does that.
 function PostProcessing-DocFxDocUrl {
+<#
+.SYNOPSIS
+    DocFX generates GitHub link based on the temp _tmp folder, which we need to fix to correct GitHub links. This function performs the needed adjustments.
+
+.DESCRIPTION
+    This function takes a selected language as input and iterates through the relevant HTML and markdown files. It corrects the meta tag "docfx:docurl" and anchor tags to reflect the correct GitHub URL by replacing the temporary folder path.
+
+.NOTES
+    1. This function assumes that the folder structure and naming conventions meet the specified conditions.
+    2. Progress is displayed interactively, and is suppressed in non-interactive sessions such as CI/CD pipelines.
+#>
     param (
         $SelectedLanguage
     )
