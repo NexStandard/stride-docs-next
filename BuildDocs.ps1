@@ -32,14 +32,18 @@ param (
 )
 
 # Define constants
+$Version = "4.1" # Make sure you update also versions.json
+$SiteDirectory = "_site/$Version"
+$LocalTestHostUrl = "http://localhost:8080/$Version/en/index.html"
+
 $Settings = [PSCustomObject]@{
-    Version = "4.1"
-    SiteDirectory = "_site/4.1"
-    LocalTestHostUrl = "http://localhost:8080/4.1/en/index.html"
+    Version = $Version
+    SiteDirectory = $SiteDirectory
+    LocalTestHostUrl = $LocalTestHostUrl
     LanguageJsonPath = "en\languages.json"
     LogPath = ".\build.log"
     TempDirectory = "_tmp"
-    LocalWebDirectory = "_site"
+    WebDirectory = "_site"
     IndexFileName = "index.md"
     ManualFolderName = "manual"
     DocsUrl = "https://doc.stride3d.net"
@@ -90,15 +94,40 @@ function Ask-IncludeAPI {
 }
 
 function Copy-ExtraItems {
-    Copy-Item en/ReleaseNotes/ReleaseNotes.md "$($Settings.SiteDirectory)/en/ReleaseNotes/"
+
+    Write-Host -ForegroundColor Yellow "Copying versions.json into $($Settings.WebDirectory)/"
+    Write-Host ""
+    Copy-Item versions.json "$($Settings.WebDirectory)/"
+
+
+    Write-Host -ForegroundColor Yellow "Copying web.config into $($Settings.WebDirectory)/"
+    Write-Host ""
+    Copy-Item web.config "$($Settings.WebDirectory)/"
+
+    Write-Host -ForegroundColor Yellow "Updating web.config"
+    Write-Host ""
+
+    $webConfig = "$($Settings.WebDirectory)/web.config"
+
+    $content = Get-Content $webConfig -Encoding UTF8
+
+    $content = $content -replace "%deployment_version%", $Settings.Version
+
+    $content | Set-Content -Encoding UTF8 $webConfig
+
+    Write-Host -ForegroundColor Green "Updating web.config completed."
+    Write-Host ""
+
+    # Do we need this?
+    # Copy-Item en/ReleaseNotes/ReleaseNotes.md "$($Settings.SiteDirectory)/en/ReleaseNotes/"
 }
 
 function Start-LocalWebsite {
     Write-Host -ForegroundColor Green "Running local website..."
     Write-Host -ForegroundColor Green "Navigate manually to non English website, if you didn't build English documentation."
     Stop-Transcript
-    New-Item -ItemType Directory -Verbose -Force -Path $Settings.LocalWebDirectory | Out-Null
-    Set-Location $Settings.LocalWebDirectory
+    New-Item -ItemType Directory -Verbose -Force -Path $Settings.WebDirectory | Out-Null
+    Set-Location $Settings.WebDirectory
     Start-Process -FilePath $Settings.LocalTestHostUrl
     docfx serve
     Set-Location ..
@@ -116,6 +145,7 @@ function Generate-APIDoc {
 }
 
 function Remove-APIDoc {
+    Write-Host ""
     Write-Host -ForegroundColor Green "Erasing API documentation..."
     $APIDocPath = "en/api/.manifest"
     if (Test-Path $APIDocPath) {
@@ -446,8 +476,7 @@ if ($isEnLanguage -or $isAllLanguages)
 
    PostProcessing-Fixing404AbsolutePath
 
-   # Do we need this?
-   # Copy-ExtraItems
+   Copy-ExtraItems
 }
 
 # Build non-English language if selected or build all languages if selected
