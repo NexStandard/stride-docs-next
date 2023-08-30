@@ -1,41 +1,66 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP app to Azure Web App - stride-docs-test
+name: Build Stride Docs for Azure Web App stride-docs-test
 
 on:
   # push:
   #   branches:
   #     - main
+  #   paths-ignore:
+  #     - 'README.md'
+  #     - 'wiki/**'
+  #     - '.github/**'
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: windows-2022
 
     steps:
-      - uses: actions/checkout@v2
+    - name: Dotnet Setup
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.x
 
-      - name: Setup MSBuild path
-        uses: microsoft/setup-msbuild@v1.0.2
+    - name: Checkout Stride Docs
+      uses: actions/checkout@v3
+      with:
+        path: stride-docs
 
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.0.5
+    - name: Checkout Stride (note the LFS)
+      uses: actions/checkout@v3
+      with:
+        repository: stride3d/stride
+        token: ${{ secrets.GITHUB_TOKEN }}
+        path: stride
+        lfs: true
 
-      - name: Restore NuGet packages
-        run: nuget restore
+    - name: Install DocFX
+      run: dotnet tool update -g docfx
+#      - run: dotnet tool install -g docfx --version 2.65.1
 
-      - name: Publish to folder
-        run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+    - name: Build documentation
+      run: ./build-all.bat
+      working-directory: stride-docs
 
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: ASP-app
-          path: '/published/**'
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v3
+      with:
+        name: DocFX-app
+        path: ./_site
+
+    # - name: Publish to folder
+    #   run: msbuild /nologo /verbosity:m /t:Build /t:pipelinePreDeployCopyAllFilesToOneFolder /p:_PackageTempDir="\published\"
+
+    # - name: Upload artifact for deployment job
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: ASP-app
+    #     path: '/published/**'
 
   deploy:
-    runs-on: windows-latest
+    runs-on: windows-2022
     needs: build
     environment:
       name: 'Production'
@@ -43,9 +68,9 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
-          name: ASP-app
+          name: DocFX-app
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
