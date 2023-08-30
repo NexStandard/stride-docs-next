@@ -1,3 +1,5 @@
+# This script was used to fix the links in the old Stride documentation after the main Stride Website update so there are no dependencies
+
 # specify your directory path
 $path = 'd:\Projects\GitHub\stride-docs-live-fix-2\'
 
