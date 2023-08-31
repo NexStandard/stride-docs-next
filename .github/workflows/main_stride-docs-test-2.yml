@@ -67,7 +67,7 @@ jobs:
           name: DocFX-app
 
       - name: Decompress artifact
-        run: 7z x DocFX-app.zip -o ./stride-docs/_site
+        run: 7z x "DocFX-app.zip -o./stride-docs/_site"
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
