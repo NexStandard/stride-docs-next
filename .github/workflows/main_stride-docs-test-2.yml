@@ -28,21 +28,21 @@ jobs:
       with:
         path: stride-docs
 
-#     - name: Checkout Stride (note the LFS)
-#       uses: actions/checkout@v3
-#       with:
-#         repository: stride3d/stride
-#         token: ${{ secrets.GITHUB_TOKEN }}
-#         path: stride
-#         lfs: true
+    - name: Checkout Stride (note the LFS)
+      uses: actions/checkout@v3
+      with:
+        repository: stride3d/stride
+        token: ${{ secrets.GITHUB_TOKEN }}
+        path: stride
+        lfs: true
 
-#     - name: Install DocFX
-#       run: dotnet tool update -g docfx
-# #      - run: dotnet tool install -g docfx --version 2.65.1
+    - name: Install DocFX
+      run: dotnet tool update -g docfx
+#      - run: dotnet tool install -g docfx --version 2.65.1
 
-#     - name: Build documentation
-#       run: ./build-all.bat
-#       working-directory: stride-docs
+    - name: Build documentation
+      run: ./build-all.bat
+      working-directory: stride-docs
 
     - name: Compress artifact
       run: 7z a -r DocFX-app.zip ./stride-docs/en/*
@@ -66,17 +66,17 @@ jobs:
         with:
           name: DocFX-app
 
-      - name: List current directory
-        run: ls
+      # - name: List current directory
+      #   run: ls
 
       - name: Decompress artifact
         run: 7z x DocFX-app.zip "-o./stride-docs/_site"
 
-      # - name: Deploy to Azure Web App
-      #   id: deploy-to-webapp
-      #   uses: azure/webapps-deploy@v2
-      #   with:
-      #     app-name: 'stride-docs-test'
-      #     slot-name: 'Production'
-      #     publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_32FCD402B970463A9143B24C9B225749 }}
-      #     package: ./stride-docs/_site
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'stride-docs-test'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_32FCD402B970463A9143B24C9B225749 }}
+          package: ./stride-docs/_site
