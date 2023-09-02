@@ -382,6 +382,7 @@ function PostProcessing-Fixing404AbsolutePath {
 
     $content = $content -replace "./public/main.js", "/$($Settings.Version)/en/public/main.js"
     $content = $content -replace "./public/docfx.min.js", "/$($Settings.Version)/en/public/docfx.min.js"
+    $content = $content -replace '<a class="navbar-brand" href="index.html">', '<a class="navbar-brand" href="/">'
 
     $content | Set-Content -Encoding UTF8 $file404
 
