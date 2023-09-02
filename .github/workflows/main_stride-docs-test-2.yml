@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build Stride Docs v2 for Azure Web App stride-docs-test
+name: Build Stride Docs (Fast Track) for Azure Web App stride-docs-test
 
 on:
   # push:
@@ -14,8 +14,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-deploy:
     runs-on: windows-2022
+    environment:
+      name: 'Production'
 
     steps:
     - name: Dotnet Setup
@@ -44,38 +46,10 @@ jobs:
       run: ./build-all.bat
       working-directory: stride-docs
 
-    - name: Compress artifact
-      run: 7z a -r DocFX-app.zip ./stride-docs/_site/*
-
-    - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v3
+    - name: Deploy to Azure Web App
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
       with:
-        name: DocFX-app
-        path: DocFX-app.zip
-
-  deploy:
-    runs-on: windows-2022
-    needs: build
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v3
-        with:
-          name: DocFX-app
-
-      # - name: List current directory
-      #   run: ls
-
-      - name: Decompress artifact
-        run: 7z x DocFX-app.zip "-o./stride-docs/_site"
-
-      - name: Deploy to Azure Web App
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
           app-name: 'stride-docs-test'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_32FCD402B970463A9143B24C9B225749 }}
