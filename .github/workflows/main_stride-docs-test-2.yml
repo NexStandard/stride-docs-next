@@ -45,7 +45,7 @@ jobs:
       working-directory: stride-docs
 
     - name: Compress artifact
-      run: 7z a -r DocFX-app.zip ./stride-docs/en/*
+      run: 7z a -r DocFX-app.zip ./stride-docs/_site/*
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
