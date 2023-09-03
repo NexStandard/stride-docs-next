@@ -9,8 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\github-pages.yml = .github\workflows\github-pages.yml
 		.github\workflows\main-folder-check.yml = .github\workflows\main-folder-check.yml
-		.github\workflows\main_stride-docs-test-2.yml = .github\workflows\main_stride-docs-test-2.yml
-		.github\workflows\main_stride-docs-test.yml = .github\workflows\main_stride-docs-test.yml
+		.github\workflows\stride-docs-staging-azure.yml = .github\workflows\stride-docs-staging-azure.yml
+		.github\workflows\stride-docs-staging-fast-track-azure.yml = .github\workflows\stride-docs-staging-fast-track-azure.yml
+		.github\workflows\stride-docs-wiki.yml = .github\workflows\stride-docs-wiki.yml
 	EndProjectSection
 EndProject
 Global
