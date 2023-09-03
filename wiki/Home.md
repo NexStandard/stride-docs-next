@@ -20,7 +20,11 @@ Here are the technologies we use to build our website:
 
 ## Table of Contents
 
-- [How Stride Docs Work](How-Stride-Docs-Work)
+- [Understanding the Stride Documentation Generation Pipeline](Understanding-the-Stride-Documentation-Generation-Pipeline)
+  - [Introduction](Understanding-the-Stride-Documentation-Generation-Pipeline#introduction)
+  - [A Simplified Overview](Understanding-the-Stride-Documentation-Generation-Pipeline#a-simplified-overview)
+  - [Docs Build Workflow](Understanding-the-Stride-Documentation-Generation-Pipeline#docs-build-workflow)
+  - [Workflow Diagram](Understanding-the-Stride-Documentation-Generation-Pipeline#workflow-diagram)
 - [Installation](Installation)
   - [Prerequisites](Installation#prerequisites)
   - [Installation Steps](Installation#installation-steps)
