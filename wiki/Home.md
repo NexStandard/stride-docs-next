@@ -1,6 +1,6 @@
 Welcome to the Stride Docs Wiki.
 
-This wiki serves as a comprehensive guide to help you navigate and contribute to the **Stride docs** website.
+This wiki serves as a comprehensive guide to help you navigate and contribute to the **Stride Docs** website.
 
 If you're looking to make minor changes, such as adding or updating a manual, tutorial or page, or fixing a typo, feel free to jump straight to the [Content Updates](Content#content-updates) section.
 
@@ -20,6 +20,7 @@ Here are the technologies we use to build our website:
 
 ## Table of Contents
 
+- [How Stride Docs Work](How-Stride-Docs-Work)
 - [Installation](Installation)
   - [Prerequisites](Installation#prerequisites)
   - [Installation Steps](Installation#installation-steps)

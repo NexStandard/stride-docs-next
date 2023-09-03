@@ -1,4 +1,5 @@
-- [Home](https://github.com/VaclavElias/stride-website-next/wiki)
+- [Home](https://github.com/VaclavElias/stride-docs-next/wiki)
+- [How Stride Docs Work](How-Stride-Docs-Work)
 - [Installation](Installation)
   - [Prerequisites](Installation#prerequisites)
   - [Installation Steps](Installation#installation-steps)
