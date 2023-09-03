@@ -9,6 +9,7 @@ on:
   #     - main
   #   paths-ignore:
   #     - 'README.md'
+  #     - 'BuildDocs.ps1'
   #     - 'wiki/**'
   #     - .gitignore
   #     - '.github/**'
