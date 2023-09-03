@@ -96,7 +96,6 @@ function Copy-ExtraItems {
     Write-Host ""
     Copy-Item versions.json "$($Settings.WebDirectory)/"
 
-
     Write-Host -ForegroundColor Yellow "Copying web.config into $($Settings.WebDirectory)/"
     Write-Host ""
     Copy-Item web.config "$($Settings.WebDirectory)/"
