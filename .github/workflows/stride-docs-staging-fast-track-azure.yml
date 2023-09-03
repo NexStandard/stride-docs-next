@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build Stride Docs (Fast Track) for Azure Web App stride-docs-test
+name: Build Stride Docs (Fast Track) for Azure Web App Staging
 
 on:
   # push:
@@ -10,6 +10,7 @@ on:
   #   paths-ignore:
   #     - 'README.md'
   #     - 'wiki/**'
+  #     - .gitignore
   #     - '.github/**'
   workflow_dispatch:
 
