@@ -54,7 +54,7 @@ Here are the technologies we use to build our website:
 - [New Language](New-Language)
    - [Adding a New Language](New-Language#adding-a-new-language)
 - [Roadmap](Roadmap)
-- [docfx](docfx)
+- [DocFX](DocFX)
   - [Packages and Dependencies](Eleventy#packages-and-dependencies)
   - [Configuration](Eleventy#configuration)
   - [Global Data](Eleventy#global-data)
